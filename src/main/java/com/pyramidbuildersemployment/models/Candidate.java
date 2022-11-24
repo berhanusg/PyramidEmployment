@@ -48,9 +48,35 @@ public class Candidate {
         this.email ="";
         this.telephone ="";
         this.education_level="";
-
-
     }
+
+    
+
+    public Candidate(long id, String firstname, String middlename, String lastname, String gender, String telephone,
+            String email, String education_level) {
+        this.id = id;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.telephone = telephone;
+        this.email = email;
+        this.education_level = education_level;
+    }
+
+
+
+    public Candidate(String firstname, String middlename, String lastname, String gender, String telephone,
+            String email, String education_level) {
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.telephone = telephone;
+        this.email = email;
+        this.education_level = education_level;
+    }
+
 
 
     private long  getId(){
@@ -119,7 +145,7 @@ public class Candidate {
 
     }
 
-    public long getAddressById() {
+    public long getCandidateById() {
         return id;
     }
 

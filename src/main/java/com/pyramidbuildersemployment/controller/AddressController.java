@@ -2,6 +2,7 @@ package  com.pyramidbuildersemployment.controller;
 
 import java.util.List;
 
+import com.pyramidbuildersemployment.repository.service.AddressServiceRepoImplement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,61 +14,53 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.pyramidbuildersemployment.models.Address;
 
-import com.pyramidbuildersemployment.service.AddressService;
- import com.pyramidbuildersemployment.models.Address;
- 
- 
-
- 
 
 @RestController
-@CrossOrigin
 @RequestMapping("/Address")
 
 class AddressController {
     
-    private AddressService addressService;
+    private AddressServiceRepoImplement addressServiceRepoImplement;
    
-	public AddressController(AddressService addressService) {
-		this.addressService = addressService;
+	public AddressController(AddressServiceRepoImplement addressServiceRepoimplement) {
+		this.addressServiceRepoImplement = addressServiceRepoimplement;
 	}
     
-    @GetMapping() // change this whatever you want the path to be
-	public List<AddressService> getAllAddress() {
-		return addressService.getAllAddress();
-	}
+    @GetMapping("/all") // change this whatever you want the path to be
+	public ResponseEntity<List<Address>>getZAllAddresses() {
+		List<Address> address = addressServiceRepoImplement.findAllAddresses();
+			return  new ResponseEntity<>(address, HttpStatus.OK);
+		}
 
     
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Address> getAddressById(@PathVariable long id) {
-		Address address = addressService.getAddressById(id);
+	public ResponseEntity<Address> getAddressById(@PathVariable("id") long id) throws Throwable {
+		Address address = addressServiceRepoImplement.findAddressBYId(id);
+		return new ResponseEntity<>(address, HttpStatus.OK);
 
-		if (address != null) {
-			// send a 200 status code with the user object as the response body
-			return ResponseEntity.ok(address);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+//		if(address == null) {
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			// send a 200 status code with the user object as the response body
+//			return ResponseEntity.ok(address);
+//		}
 
 	}
 
     @PostMapping()
 	public ResponseEntity<Address> registerAddress(@RequestBody Address address) {
 
-	    address = addressService.saveAll(address);
+	    address = addressServiceRepoImplement.addAddress(address);
 		   return ResponseEntity.status(HttpStatus.CREATED).body(address);
 
 	}
 
     @PutMapping(path = "/{id}")
 	public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable long id) {
-		// System.out.println("test");
-		// return new ResponseEntity<Customer>(customerService.updateCustomer(customer),
-		// HttpStatus.OK);
-
 		if (address.getAddressById() == id) {
-			address = addressService.updateAddress(address);
+			address = addressServiceRepoImplement.updateAddress(address);
 			if (address != null) {
 				return ResponseEntity.ok(address);
 			} else {
@@ -82,7 +75,7 @@ class AddressController {
 	public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
 		// delete address from DB
-		addressService.deleteAddress(id);
+		addressServiceRepoImplement.deleteAddress(id);
 
 		return new ResponseEntity<String>("Address deleted successfully!.", HttpStatus.OK);
 	}

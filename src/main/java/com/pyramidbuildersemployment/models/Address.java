@@ -1,4 +1,5 @@
 package com.pyramidbuildersemployment.models;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,12 +15,12 @@ import javax.persistence.Table;
 
 @Entity 
 @Table (name = "tbladdress")
-public class Address {
+public class Address implements Serializable {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="id", nullable =false, updatable =false)
+    private long id;
     
     @ManyToOne
 	@JoinColumn(name = "candidateid")
@@ -56,14 +57,36 @@ public class Address {
        
 
     }
-    
+    public Address(long id, List<Candidate> candidate,List<HiringCompany> hrCompany, String street,String city, String state, String zip, String country ){
+
+        super();
+        this.id=0;
+        this.candidate =new ArrayList<>();
+        this.hiringcompanyid=new ArrayList<>();
+        this.street =street;
+        this.city = city;
+        this.state=state;
+        this.zip = zip;
+        this.country =country;
+    }
  
+    
+    public Address(List<Candidate> candidate, List<HiringCompany> hiringcompanyid, String street, String city,
+            String state, String zip, String country) {
+        this.candidate = candidate;
+        this.hiringcompanyid = hiringcompanyid;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.country = country;
+    }
     // //private long  getId(){
     // //return id;
     // //}
     // private void setId(long id){
     //     this.id = id;
-    // }  
+    // }
     public List<Candidate> getCandidate() {
             return candidate;
     }

@@ -1,5 +1,10 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface JobRepoInterface {
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface JobRepoInterface extends CrudRepository {
     
 }

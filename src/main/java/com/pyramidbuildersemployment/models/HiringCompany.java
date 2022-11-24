@@ -34,6 +34,28 @@ public class HiringCompany {
 
     }
 
+    
+    public HiringCompany(long id, String contactpersonfname, String contactpersonlname, String hiringcompanyemail,
+            String webSite, String hiringCompanyName) {
+        this.id = id;
+        this.contactpersonfname = contactpersonfname;
+        this.contactpersonlname = contactpersonlname;
+        this.hiringcompanyemail = hiringcompanyemail;
+        this.webSite = webSite;
+        this.hiringCompanyName = hiringCompanyName;
+    }
+
+
+    public HiringCompany(String contactpersonfname, String contactpersonlname, String hiringcompanyemail,
+            String webSite, String hiringCompanyName) {
+        this.contactpersonfname = contactpersonfname;
+        this.contactpersonlname = contactpersonlname;
+        this.hiringcompanyemail = hiringcompanyemail;
+        this.webSite = webSite;
+        this.hiringCompanyName = hiringCompanyName;
+    }
+
+
     private String getcontactpersonfname(){
 
         return contactpersonfname;

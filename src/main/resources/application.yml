@@ -24,8 +24,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
-     ddl-auto:
-#      create-drop
+     ddl-auto:update
+
+#      create-drop -update
 
 # Default actuator gives us the health endpoint, we will add a few others
 # Default actuator gives us the health endpoint, we will add a few others
