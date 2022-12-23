@@ -15,20 +15,20 @@ import javax.persistence.Table;
 
 @Entity 
 @Table (name = "tbladdress")
-public class Address implements Serializable {
+public class Address  {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id", nullable =false, updatable =false)
     private long id;
     
-    @ManyToOne
-	@JoinColumn(name = "candidateid")
-	private List<Candidate> candidate;
+    //@ManyToOne
+	//@JoinColumn(name = "candidateid")
+	//private List<Candidate> candidate;
 
-    @ManyToOne
-	@JoinColumn(name = "hiringcompanyid")
-	private List<HiringCompany> hiringcompanyid;
+    //@ManyToOne
+	//@JoinColumn(name = "hiringcompanyid")
+	//private List<HiringCompany> hiringcompanyid;
     
     @Column(name = "street")
 	private String street;
@@ -42,115 +42,175 @@ public class Address implements Serializable {
     @Column(name = "country")
 	private String country;
 
-    private List<HiringCompany> hiringCompany;
-    
-    public Address(){
-
-        super();
-        this.id=0;
-        this.candidate =new ArrayList<>();
-        this.hiringcompanyid=new ArrayList<>();
-        this.street ="";
-        this.city ="";
-        this.state="";
-        this.country ="";
-       
-
+    public Address() {
     }
-    public Address(long id, List<Candidate> candidate,List<HiringCompany> hrCompany, String street,String city, String state, String zip, String country ){
 
-        super();
-        this.id=0;
-        this.candidate =new ArrayList<>();
-        this.hiringcompanyid=new ArrayList<>();
-        this.street =street;
-        this.city = city;
-        this.state=state;
-        this.zip = zip;
-        this.country =country;
-    }
- 
-    
-    public Address(List<Candidate> candidate, List<HiringCompany> hiringcompanyid, String street, String city,
-            String state, String zip, String country) {
-        this.candidate = candidate;
-        this.hiringcompanyid = hiringcompanyid;
+    public Address(long id, String street, String city, String state, String zip, String country) {
+        this.id = id;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
         this.country = country;
     }
-    // //private long  getId(){
-    // //return id;
-    // //}
-    // private void setId(long id){
-    //     this.id = id;
-    // }
-    public List<Candidate> getCandidate() {
-            return candidate;
-    }
-    public void setCandidate(List<Candidate> candidate) {
-            this.candidate = candidate;
+
+    public long getId() {
+        return id;
     }
 
-    public void setHiringCompany(List<HiringCompany> hiringCompany) {
-            this.hiringcompanyid = hiringCompany;
+    public void setId(long id) {
+        this.id = id;
     }
-    public List<HiringCompany> getHiringCompanies() {
-            return hiringCompany;
-    }
-    
-    private String getstreet(){
+
+    public String getStreet() {
         return street;
     }
-    private void setStreet( String street)
-    {
-        this.street = street;
 
+    public void setStreet(String street) {
+        this.street = street;
     }
-    private String getCity(){
+
+    public String getCity() {
         return city;
     }
-    private void setCity( String city)
-    {
-        this.street = city;
 
+    public void setCity(String city) {
+        this.city = city;
     }
-    private String getState(){
+
+    public String getState() {
         return state;
     }
-    private void setState( String state)
-    {
-        this.state = state;
 
+    public void setState(String state) {
+        this.state = state;
     }
-    private String getZip(){
+
+    public String getZip() {
         return zip;
     }
-    private void setZip( String zip)
-    {
-        this.zip = zip;
 
+    public void setZip(String zip) {
+        this.zip = zip;
     }
-    private String getCountry(){
+
+    public String getCountry() {
         return country;
     }
-    private void setCountry( String country)
-    {
+
+    public void setCountry(String country) {
         this.country = country;
-
     }
 
+    //private List<HiringCompany> hiringCompany;
 
-    public long getAddressById() {
-        return 0;
-    }
-
-
-
-      
-     
+//    public Address(){
+//
+//        super();
+//        this.id=0;
+//        this.candidate =new ArrayList<>();
+//        this.hiringcompanyid=new ArrayList<>();
+//        this.street ="";
+//        this.city ="";
+//        this.state="";
+//        this.country ="";
+//
+//
+//    }
+//    public Address(long id, List<Candidate> candidate,List<HiringCompany> hrCompany, String street,String city, String state, String zip, String country ){
+//
+//        super();
+//        this.id=0;
+//        this.candidate =new ArrayList<>();
+//        this.hiringcompanyid=new ArrayList<>();
+//        this.street =street;
+//        this.city = city;
+//        this.state=state;
+//        this.zip = zip;
+//        this.country =country;
+//    }
+//
+//
+//    public Address(List<Candidate> candidate, List<HiringCompany> hiringcompanyid, String street, String city,
+//            String state, String zip, String country) {
+//        this.candidate = candidate;
+//        this.hiringcompanyid = hiringcompanyid;
+//        this.street = street;
+//        this.city = city;
+//        this.state = state;
+//        this.zip = zip;
+//        this.country = country;
+//    }
+//    // //private long  getId(){
+//    // //return id;
+//    // //}
+//    // private void setId(long id){
+//    //     this.id = id;
+//    // }
+//    public List<Candidate> getCandidate() {
+//            return candidate;
+//    }
+//    public void setCandidate(List<Candidate> candidate) {
+//            this.candidate = candidate;
+//    }
+//
+//    public void setHiringCompany(List<HiringCompany> hiringCompany) {
+//            this.hiringcompanyid = hiringCompany;
+//    }
+//    public List<HiringCompany> getHiringCompanies() {
+//            return hiringCompany;
+//    }
+//
+//    private String getstreet(){
+//        return street;
+//    }
+//    private void setStreet( String street)
+//    {
+//        this.street = street;
+//
+//    }
+//    private String getCity(){
+//        return city;
+//    }
+//    private void setCity( String city)
+//    {
+//        this.street = city;
+//
+//    }
+//    private String getState(){
+//        return state;
+//    }
+//    private void setState( String state)
+//    {
+//        this.state = state;
+//
+//    }
+//    private String getZip(){
+//        return zip;
+//    }
+//    private void setZip( String zip)
+//    {
+//        this.zip = zip;
+//
+//    }
+//    private String getCountry(){
+//        return country;
+//    }
+//    private void setCountry( String country)
+//    {
+//        this.country = country;
+//
+//    }
+//
+//
+//    public long getAddressById() {
+//        return 0;
+//    }
+//
+//
+//
+//
+//
     
     
 }

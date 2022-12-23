@@ -2,10 +2,10 @@ package  com.pyramidbuildersemployment.controller;
 
 import java.util.List;
 
-import com.pyramidbuildersemployment.repository.service.AddressServiceRepoImplement;
+import com.pyramidbuildersemployment.service.AddressServiceRepoImplement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,15 +21,16 @@ import com.pyramidbuildersemployment.models.Address;
 @RequestMapping("/Address")
 
 class AddressController {
-    
-    private AddressServiceRepoImplement addressServiceRepoImplement;
+
+	@Autowired
+	private AddressServiceRepoImplement addressServiceRepoImplement;
    
 	public AddressController(AddressServiceRepoImplement addressServiceRepoimplement) {
 		this.addressServiceRepoImplement = addressServiceRepoimplement;
 	}
     
     @GetMapping("/all") // change this whatever you want the path to be
-	public ResponseEntity<List<Address>>getZAllAddresses() {
+	public ResponseEntity<List<Address>>getAllAddresses() {
 		List<Address> address = addressServiceRepoImplement.findAllAddresses();
 			return  new ResponseEntity<>(address, HttpStatus.OK);
 		}
@@ -59,7 +60,7 @@ class AddressController {
 
     @PutMapping(path = "/{id}")
 	public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable long id) {
-		if (address.getAddressById() == id) {
+		if (address.getId() == id) {
 			address = addressServiceRepoImplement.updateAddress(address);
 			if (address != null) {
 				return ResponseEntity.ok(address);
