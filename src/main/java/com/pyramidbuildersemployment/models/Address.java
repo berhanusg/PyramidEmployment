@@ -1,16 +1,8 @@
 package com.pyramidbuildersemployment.models;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity 
 @Table (name = "tbladdress")
@@ -26,8 +18,8 @@ public class Address {
 	private List<Candidate> candidate;
 
     @ManyToOne
-	@JoinColumn(name = "hiringcompanyid")
-	private List<HiringCompany> hiringcompanyid;
+    @JoinColumn(name = "hiring_company_id")
+    private ArrayList<HiringCompany> hiringcompanyid;
     
     @Column(name = "street")
 	private String street;
@@ -41,14 +33,14 @@ public class Address {
     @Column(name = "country")
 	private String country;
 
-    private List<HiringCompany> hiringCompany;
+   // private List<HiringCompany> hiringCompany;
     
     public Address(){
 
         super();
         this.id=0;
         this.candidate =new ArrayList<>();
-        this.hiringcompanyid=new ArrayList<>();
+        this.hiringcompanyid = new ArrayList<HiringCompany>();
         this.street ="";
         this.city ="";
         this.state="";
@@ -71,11 +63,12 @@ public class Address {
             this.candidate = candidate;
     }
 
-    public void setHiringCompany(List<HiringCompany> hiringCompany) {
+    public void setHiringCompany(ArrayList<HiringCompany> hiringCompany) {
             this.hiringcompanyid = hiringCompany;
     }
     public List<HiringCompany> getHiringCompanies() {
-            return hiringCompany;
+        List<HiringCompany> hiringCompanyid = null;
+        return hiringCompanyid;
     }
     
     private String getstreet(){

@@ -1,5 +1,5 @@
 package  com.pyramidbuildersemployment.controller;
 
-public class JobController {
+public class JobListingController {
     
 }

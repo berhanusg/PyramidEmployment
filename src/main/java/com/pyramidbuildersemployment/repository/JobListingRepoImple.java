@@ -1,5 +1,5 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface JobRepoInterface {
+public class JobListingRepoImple {
     
 }

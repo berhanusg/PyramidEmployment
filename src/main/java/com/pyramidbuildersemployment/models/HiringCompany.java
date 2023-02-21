@@ -1,12 +1,15 @@
 package com.pyramidbuildersemployment.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 @Table(name ="Hiringcompany")
 public class HiringCompany {
 
+    @OneToMany(mappedBy = "hiringCompany")
+    private List<Address> addresses;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
