@@ -1,8 +1,10 @@
 package com.pyramidbuildersemployment.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.*;
-
+@Data
 @Entity
 @Table (name= "tblexperience")
 public class Experience {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiring Company Registration</title>
+</head>
+<body>
+<h1>Hiring Company Registration</h1>
+<form th:action="@{/hiring-companies}" method="post">
+    <label for="hiringCompanyName">Company Name:</label>
+    <input type="text" id="hiringCompanyName" name="hiringCompanyName" th:field="*{hiringCompanyName}"/><br/>
+
+    <label for="contactpersonfname">First Name:</label>
+    <input type="text" id="contactpersonfname" name="contactpersonfname" th:field="*{contactpersonfname}"/><br/>
+
+    <label for="contactpersonlname">Last Name:</label>
+    <input type="text" id="contactpersonlname" name="contactpersonlname" th:field="*{contactpersonlname}"/><br/>
+
+    <label for="hiringcompanyemail">Email:</label>
+    <input type="email" id="hiringcompanyemail" name="hiringcompanyemail" th:field="*{hiringcompanyemail}"/><br/>
+
+    <label for="webSite">Website:</label>
+    <input type="text" id="webSite" name="webSite" th:field="*{webSite}"/><br/>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

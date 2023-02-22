@@ -3,26 +3,19 @@ package com.pyramidbuildersemployment.service;
 import java.util.List;
 
 import com.pyramidbuildersemployment.models.Address;
+import org.springframework.data.crossstore.ChangeSetPersister;
 
-public class AddressService {
+public interface AddressService {
 
-    public List<AddressService> getAllAddress() {
-        return null;
-    }
+     List<Address> getAllAddress();
 
-    public Address getAddressById(long id) {
-        return null;
-    }
 
-    public Address saveAll(Address address) {
-        return null;
-    }
+     Address getAddressById(long id) throws ChangeSetPersister.NotFoundException;
 
-    public Address updateAddress(Address address) {
-        return null;
-    }
+     Address saveAll(Address address);
 
-    public void deleteAddress(long id) {
-    }
-    
+    Address updateAddress(Address address);
+
+
+     void deleteAddress(long id);
 }

@@ -1,9 +1,11 @@
 package com.pyramidbuildersemployment.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @Entity
 @Table(name = "tblcandidate")
 public class Candidate {
@@ -119,9 +121,11 @@ public class Candidate {
 
     }
 
-    public long getAddressById() {
+    public long getCandidateById() {
         return id;
     }
 
-}
+
+    }
+
 

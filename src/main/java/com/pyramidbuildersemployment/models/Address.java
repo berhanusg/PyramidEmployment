@@ -1,10 +1,13 @@
 package com.pyramidbuildersemployment.models;
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
-@Entity 
+@Data
+@Entity
 @Table (name = "tbladdress")
 public class Address {
 

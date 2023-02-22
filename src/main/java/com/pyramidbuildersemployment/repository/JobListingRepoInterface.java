@@ -1,5 +1,9 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface JobListingRepoInterface {
+import com.pyramidbuildersemployment.models.HiringCompany;
+import com.pyramidbuildersemployment.models.JobListing;
+import org.springframework.data.repository.CrudRepository;
+
+public interface JobListingRepoInterface extends CrudRepository<JobListing, Long > {
     
 }

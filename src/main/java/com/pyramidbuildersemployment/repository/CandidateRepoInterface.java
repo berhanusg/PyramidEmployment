@@ -1,5 +1,10 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface CandidateRepoInterface {
+import com.pyramidbuildersemployment.models.Address;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CandidateRepoInterface extends CrudRepository<Address, Long > {
     
 }

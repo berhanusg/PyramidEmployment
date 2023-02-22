@@ -1,5 +1,8 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface ExperienceRepoInterface {
+import com.pyramidbuildersemployment.models.Experience;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ExperienceRepoInterface extends CrudRepository<Experience, Long > {
     
 }

@@ -1,9 +1,11 @@
 package com.pyramidbuildersemployment.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
-
+@Data
 @Entity
 @Table(name ="Hiringcompany")
 public class HiringCompany {

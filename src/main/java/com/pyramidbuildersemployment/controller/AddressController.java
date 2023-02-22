@@ -2,6 +2,7 @@ package  com.pyramidbuildersemployment.controller;
 
 import java.util.List;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,13 +35,13 @@ class AddressController {
 	}
     
     @GetMapping() // change this whatever you want the path to be
-	public List<AddressService> getAllAddress() {
+	public List<Address> getAllAddress() {
 		return addressService.getAllAddress();
 	}
 
     
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Address> getAddressById(@PathVariable long id) {
+	public ResponseEntity<Address> getAddressById(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
 		Address address = addressService.getAddressById(id);
 
 		if (address != null) {
