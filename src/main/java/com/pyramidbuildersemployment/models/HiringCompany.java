@@ -1,11 +1,16 @@
 package com.pyramidbuildersemployment.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name ="Hiringcompany")
 public class HiringCompany {
@@ -29,15 +34,22 @@ public class HiringCompany {
     @Column (name ="hiringCompanyName")
     private String hiringCompanyName;
 
-    public HiringCompany(){
-        super();
-        this.contactpersonfname ="";
-        this.contactpersonlname ="";
-        this.hiringcompanyemail ="";
-        this.webSite ="";
-        this.hiringCompanyName ="";
 
-    }
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+//    public HiringCompany(){
+//        super();
+//        this.contactpersonfname ="";
+//        this.contactpersonlname ="";
+//        this.hiringcompanyemail ="";
+//        this.webSite ="";
+//        this.hiringCompanyName ="";
+//
+//    }
 
     private String getcontactpersonfname(){
 

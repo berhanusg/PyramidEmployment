@@ -1,5 +1,8 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface ProffessionRepoInterface {
+import com.pyramidbuildersemployment.models.Profession;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ProffessionRepoInterface extends CrudRepository<Profession, Long> {
     
 }

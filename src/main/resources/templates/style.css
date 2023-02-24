@@ -1,0 +1,39 @@
+/* Set background color to green */
+body {
+  background-color: green;
+}
+
+/* Set font color to white */
+body, input {
+  color: white;
+}
+
+/* Adjust the width of input boxes */
+.form-control {
+  width: 50%;
+}
+
+/* Style the submit button */
+.btn-primary {
+  background-color: white;
+  color: green;
+  border: none;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Style the navbar */
+.navbar {
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  padding: 20px;
+}
+
+/* Style the links in the navbar */
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}

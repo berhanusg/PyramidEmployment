@@ -1,11 +1,16 @@
 package com.pyramidbuildersemployment.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "tblcandidate")
 public class Candidate {
@@ -34,25 +39,23 @@ public class Candidate {
     private String email;
     @Column(name = "education_level")
     private String education_level;
+//    @ManyToOne
+//    @JoinColumn(name = "address_id")
+//    private Address address;
+        @ManyToOne
+       @JoinColumn(name = "profession_id")
+        private Profession profession;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "tblcandidate_address",
+            joinColumns = @JoinColumn(name = "candidate_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    private Address candidate;
 
 
-
-    private List<Candidate> Candidate;
-
-    public Candidate(){
-
-        super();
-        this.id=0;
-        this.firstname= "";
-        this.middlename ="";
-        this.lastname="";
-        this.gender ="";
-        this.email ="";
-        this.telephone ="";
-        this.education_level="";
-
-
-    }
 
 
     private long  getId(){

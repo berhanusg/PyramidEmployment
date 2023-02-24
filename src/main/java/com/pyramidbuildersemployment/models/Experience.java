@@ -1,10 +1,16 @@
 package com.pyramidbuildersemployment.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.*;
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+
 @Entity
 @Table (name= "tblexperience")
 public class Experience {
@@ -17,32 +23,26 @@ public class Experience {
     @JoinColumn(name = "candidateid")
     private List<Candidate> candidate;
 
-    @ManyToOne
-    @JoinColumn(name = "proffessionid")
-    private List<Profession> proffessionid;
-
-    @Column(name = "experienceperiod")
-    private String experienceperiod;
-
-    private List<Candidate> Candidate;
-    private List<Experience> experience;
-
-    public Experience(){
-
-        super();
-        this.id=0;
-        this.Candidate = new ArrayList<>();
-        this.proffessionid= new ArrayList<>();
 
 
-    }
-    private String getExperienceperiod(){
-        return experienceperiod;
-    }
-    private void setExperienceperiod( String experienceperiod)
-    {
-        this.experienceperiod = experienceperiod;
+    @Column(name = "profession_id")
+    private String professionid;
 
+   // private List<Candidate> Candidate;
+   private List<Experience> experience;
+
+//    public Experience(){
+//
+//        super();
+//        this.id=0;
+//        this.Candidate = new ArrayList<>();
+//        this.proffessionid= new ArrayList<>();
+//
+//
+//    }
+
+    public void setExperienceperiod(List<Experience> experienceperiod) {
+        this.experience = experienceperiod;
     }
 
     public List<Candidate> getCandidate() {

@@ -1,12 +1,17 @@
 package com.pyramidbuildersemployment.models;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
-@Data
+ @Getter
+ @Setter
+ @NoArgsConstructor
 @Entity
 @Table (name = "tbladdress")
 public class Address {
@@ -15,15 +20,14 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-    
-    @ManyToOne
-	@JoinColumn(name = "candidateid")
-	private List<Candidate> candidate;
+
+    @OneToOne(mappedBy = "candidate")
+    private Candidate candidate;
 
     @ManyToOne
     @JoinColumn(name = "hiring_company_id")
     private ArrayList<HiringCompany> hiringcompanyid;
-    
+
     @Column(name = "street")
 	private String street;
     @Column(name = "city")
@@ -36,44 +40,12 @@ public class Address {
     @Column(name = "country")
 	private String country;
 
-   // private List<HiringCompany> hiringCompany;
-    
-    public Address(){
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hiring_company_id")
+    private HiringCompany hiringCompany;
 
-        super();
-        this.id=0;
-        this.candidate =new ArrayList<>();
-        this.hiringcompanyid = new ArrayList<HiringCompany>();
-        this.street ="";
-        this.city ="";
-        this.state="";
-        this.country ="";
-       
 
-    }
-    
- 
-    // //private long  getId(){
-    // //return id;
-    // //}
-    // private void setId(long id){
-    //     this.id = id;
-    // }  
-    public List<Candidate> getCandidate() {
-            return candidate;
-    }
-    public void setCandidate(List<Candidate> candidate) {
-            this.candidate = candidate;
-    }
 
-    public void setHiringCompany(ArrayList<HiringCompany> hiringCompany) {
-            this.hiringcompanyid = hiringCompany;
-    }
-    public List<HiringCompany> getHiringCompanies() {
-        List<HiringCompany> hiringCompanyid = null;
-        return hiringCompanyid;
-    }
-    
     private String getstreet(){
         return street;
     }
@@ -122,8 +94,8 @@ public class Address {
 
 
 
-      
-     
+
+
     
     
 }

@@ -1,5 +1,7 @@
 package com.pyramidbuildersemployment.repository;
 
-public interface VacancyRepoInterface {
-    
+import com.pyramidbuildersemployment.models.Vacancy;
+import org.springframework.data.repository.CrudRepository;
+
+public interface VacancyRepoInterface extends CrudRepository<Vacancy, Long>{
 }

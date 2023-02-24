@@ -1,5 +1,5 @@
 package com.pyramidbuildersemployment.service;
 
-public class ExperinceService {
+public class VacancyService {
     
 }

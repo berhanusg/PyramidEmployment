@@ -2,27 +2,29 @@ package com.pyramidbuildersemployment.service;
 
 
 import com.pyramidbuildersemployment.models.Address;
-import com.pyramidbuildersemployment.repository.AddressRepoImplement;
+
+import com.pyramidbuildersemployment.repository.AddressRepoInterface;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
 public class AddressServiceImpl implements AddressService{
 
-        private final AddressRepoImplement addressRepository;
+    @Autowired
+    private  AddressRepoInterface addressRepointerface;
 
-        public AddressServiceImpl(AddressRepoImplement addressRepository) {
-            this.addressRepository = addressRepository;
+        public AddressServiceImpl(AddressRepoInterface addresinterface) {
+            this.addressRepointerface= addresinterface;
         }
 
         public List<Address> getAllAddress() {
-            return (List<Address>) addressRepository.findAll();
+            return (List<Address>) addressRepointerface.findAll();
         }
 
         public Address getAddressById(long id) throws ChangeSetPersister.NotFoundException {
-            return addressRepository.findById(id)
+            return addressRepointerface.findById(id)
                     .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
         }
 
@@ -32,15 +34,15 @@ public class AddressServiceImpl implements AddressService{
     }
 
     public Address saveAddress(Address address) {
-            return addressRepository.save(address);
+            return addressRepointerface.save(address);
         }
 
         public Address updateAddress(Address address) {
-            return addressRepository.save(address);
+            return addressRepointerface.save(address);
         }
 
         public void deleteAddress(long id) {
-            addressRepository.deleteById(id);
+            addressRepointerface.deleteById(id);
         }
     }
 
