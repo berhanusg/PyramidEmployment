@@ -21,7 +21,7 @@ public class Profession {
 
     @ManyToOne
     @JoinColumn(name = "experience_id")
-    private List<Experience> experienceid;
+    private Experience experienceid;
     public Long getId() {
         return id;
     }

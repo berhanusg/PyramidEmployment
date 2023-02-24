@@ -42,18 +42,22 @@ public class Candidate {
 //    @ManyToOne
 //    @JoinColumn(name = "address_id")
 //    private Address address;
-        @ManyToOne
-       @JoinColumn(name = "profession_id")
-        private Profession profession;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+
+
+    @ManyToOne
+    @JoinColumn(name = "profession_id")
+    private Profession profession;
+
 
     @OneToOne(cascade = CascadeType.ALL)
+   // @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+   /* @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "tblcandidate_address",
             joinColumns = @JoinColumn(name = "candidate_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id"))
-    private Address candidate;
+    private Address candidate;*/
 
 
 

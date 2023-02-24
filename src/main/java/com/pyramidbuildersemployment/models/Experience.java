@@ -10,7 +10,6 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
 @Table (name= "tblexperience")
 public class Experience {
@@ -21,7 +20,7 @@ public class Experience {
 
     @ManyToOne
     @JoinColumn(name = "candidateid")
-    private List<Candidate> candidate;
+    private Candidate candidate;
 
 
 
@@ -29,7 +28,8 @@ public class Experience {
     private String professionid;
 
    // private List<Candidate> Candidate;
-   private List<Experience> experience;
+   @ManyToOne
+   private Experience experience;
 
 //    public Experience(){
 //
@@ -41,21 +41,4 @@ public class Experience {
 //
 //    }
 
-    public void setExperienceperiod(List<Experience> experienceperiod) {
-        this.experience = experienceperiod;
-    }
-
-    public List<Candidate> getCandidate() {
-        return candidate;
-    }
-
-    public void setCandidate(List<Candidate> pets) {
-        this.candidate = candidate;
-    }
-
-    public List<Experience> getExperience(){return experience;}
-
-    public void setExperience(List<Experience> experience) {
-        this.experience = experience;
-    }
 }

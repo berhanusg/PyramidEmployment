@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -21,12 +20,12 @@ public class Address {
 	@Column(name = "id")
 	private long id;
 
-    @OneToOne(mappedBy = "candidate")
+    @OneToOne//(mappedBy = "candidate")
     private Candidate candidate;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "hiring_company_id")
-    private ArrayList<HiringCompany> hiringcompanyid;
+    private List<HiringCompany> hiringcompanyid;*/
 
     @Column(name = "street")
 	private String street;
