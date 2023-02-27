@@ -1,6 +1,7 @@
 package com.pyramidbuildersemployment.DAO;
 
 import com.pyramidbuildersemployment.models.Address;
+import com.pyramidbuildersemployment.repository.AddressRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,31 +23,28 @@ that if an error occurs during the database operation, the entire transaction wi
 @Transactional
 public class AddressDAO {
 
-    @Autowired
-    private EntityManager entityManager;
+        @Autowired
+        private AddressRepoInterface addressRepo;
 
-    public Address findById(long id) {
-        return entityManager.find(Address.class, id);
+        public Address findById(long id) {
+            return addressRepo.findById(id).orElse(null);
+        }
+
+        public List<Address> findAll() {
+            return (List<Address>) addressRepo.findAll();
+        }
+
+        public Address save(Address address) {
+            return addressRepo.save(address);
+        }
+
+        public Address update(Address address) {
+            return addressRepo.save(address);
+        }
+
+        public void delete(Address address) {
+            addressRepo.delete(address);
+        }
     }
 
-    public List<Address> findAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Address> cq = cb.createQuery(Address.class);
-        Root<Address> root = cq.from(Address.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
-    }
 
-    public Address save(Address address) {
-        entityManager.persist(address);
-        return address;
-    }
-
-    public Address update(Address address) {
-        return entityManager.merge(address);
-    }
-
-    public void delete(Address address) {
-        entityManager.remove(address);
-    }
-}

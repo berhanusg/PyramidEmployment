@@ -46,8 +46,12 @@ public class HiringCompanyServiceImpl implements HiringCompanyService{
 
     }
 
-    public HiringCompany registerHiringCompany(HiringCompany hiringCompany) {
+    @Override
+    public HiringCompany registerhiringCompany(HiringCompany hiringCompany) {
         return hiringRepoInterface.save(hiringCompany);
     }
-}
+    }
+
+
+
 

@@ -3,6 +3,7 @@ package com.pyramidbuildersemployment.DAO;
 
 
 import com.pyramidbuildersemployment.models.Candidate;
+import com.pyramidbuildersemployment.repository.CandidateRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,31 +18,30 @@ import java.util.List;
 @Transactional
 public class CandidateDAO {
 
-    @Autowired
-    private EntityManager entityManager;
 
-    public Candidate findById(long id) {
-        return entityManager.find(Candidate.class, id);
+
+        @Autowired
+        private CandidateRepoInterface candidateRepo;
+
+        public Candidate findById(long id) {
+            return candidateRepo.findById(id).orElse(null);
+        }
+
+        public List<Candidate> findAll() {
+            return (List<Candidate>) candidateRepo.findAll();
+        }
+
+        public Candidate save(Candidate candidate) {
+            return candidateRepo.save(candidate);
+        }
+
+        public Candidate update(Candidate candidate) {
+            return candidateRepo.save(candidate);
+        }
+
+        public void delete(Candidate candidate) {
+            candidateRepo.delete(candidate);
+        }
     }
 
-    public List<Candidate> findAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Candidate> cq = cb.createQuery(Candidate.class);
-        Root<Candidate> root = cq.from(Candidate.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
-    }
 
-    public Candidate save(Candidate candidate) {
-        entityManager.persist(candidate);
-        return candidate;
-    }
-
-    public Candidate update(Candidate candidate) {
-        return entityManager.merge(candidate);
-    }
-
-    public void delete(Candidate candidate) {
-        entityManager.remove(candidate);
-    }
-}

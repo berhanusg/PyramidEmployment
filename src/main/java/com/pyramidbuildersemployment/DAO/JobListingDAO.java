@@ -2,6 +2,8 @@ package com.pyramidbuildersemployment.DAO;
 
 import com.pyramidbuildersemployment.models.HiringCompany;
 import com.pyramidbuildersemployment.models.JobListing;
+import com.pyramidbuildersemployment.repository.HiringRepoInterface;
+import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,30 +19,25 @@ import java.util.List;
 public class JobListingDAO {
 
     @Autowired
-    private EntityManager entityManager;
+    private JobListingRepoInterface jobListingRepo;
 
     public JobListing findById(long id) {
-        return entityManager.find(JobListing.class, id);
+        return jobListingRepo.findById(id).orElse(null);
     }
 
     public List<JobListing> findAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<JobListing> cq = cb.createQuery(JobListing.class);
-        Root<JobListing> root = cq.from(JobListing.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
+        return (List<JobListing>) jobListingRepo.findAll();
     }
 
-    public JobListing save(JobListing jobLIsting) {
-        entityManager.persist(jobLIsting);
-        return jobLIsting;
+    public JobListing save(JobListing jobListing) {
+        return jobListingRepo.save(jobListing);
     }
 
-    public JobListing update(JobListing jobLIsting) {
-        return entityManager.merge(jobLIsting);
+    public JobListing update(JobListing jobListing) {
+        return jobListingRepo.save(jobListing);
     }
 
-    public void delete(JobListing jobLIsting) {
-        entityManager.remove(jobLIsting);
+    public void delete(JobListing jobListing) {
+        jobListingRepo.delete(jobListing);
     }
 }

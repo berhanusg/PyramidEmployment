@@ -35,7 +35,7 @@ public class HiringCompanyController {
     @PostMapping("/hiringcompany/register")
     public String registerCandidate(@ModelAttribute("hiringcompany") HiringCompany hiringCompany) {
         // Call the service method to save the candidate and address to the database
-        hiringCompanyServiceImpl.registerHiringCompany(hiringCompany);
+        hiringCompanyServiceImpl.registerhiringCompany(hiringCompany);
 
         // Redirect to a success page
         return "redirect:/success";

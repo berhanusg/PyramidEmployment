@@ -3,6 +3,8 @@ package com.pyramidbuildersemployment.DAO;
 
 import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Experience;
+import com.pyramidbuildersemployment.repository.CandidateRepoInterface;
+import com.pyramidbuildersemployment.repository.ExperienceRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,32 +21,26 @@ public class ExperienceDAO {
 
 
     @Autowired
-    private EntityManager entityManager;
+    private ExperienceRepoInterface experienceRepo;
 
     public Experience findById(long id) {
-        return entityManager.find(Experience.class, id);
+        return experienceRepo.findById(id).orElse(null);
     }
 
     public List<Experience> findAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Experience> cq = cb.createQuery(Experience.class);
-        Root<Experience> root = cq.from(Experience.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
+        return (List<Experience>) experienceRepo.findAll();
     }
 
     public Experience save(Experience experience) {
-        entityManager.persist(experience);
-        return experience;
+        return experienceRepo.save(experience);
     }
 
     public Experience update(Experience experience) {
-        return entityManager.merge(experience);
+        return experienceRepo.save(experience);
     }
 
     public void delete(Experience experience) {
-        entityManager.remove(experience);
+        experienceRepo.delete(experience);
     }
-
-
 }
+

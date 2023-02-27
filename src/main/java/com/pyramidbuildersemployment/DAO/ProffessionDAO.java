@@ -2,7 +2,10 @@ package com.pyramidbuildersemployment.DAO;
 
 
 
+import com.pyramidbuildersemployment.models.JobListing;
 import com.pyramidbuildersemployment.models.Profession;
+import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
+import com.pyramidbuildersemployment.repository.ProffessionRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,31 +21,27 @@ import java.util.List;
 public class ProffessionDAO {
 
 
+
     @Autowired
-    private EntityManager entityManager;
+    private ProffessionRepoInterface professionRepo;
 
     public Profession findById(long id) {
-        return entityManager.find(Profession.class, id);
+        return professionRepo.findById(id).orElse(null);
     }
 
     public List<Profession> findAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Profession> cq = cb.createQuery(Profession.class);
-        Root<Profession> root = cq.from(Profession.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
+        return (List<Profession>) professionRepo.findAll();
     }
 
     public Profession save(Profession profession) {
-        entityManager.persist(profession);
-        return profession;
+        return professionRepo.save(profession);
     }
 
     public Profession update(Profession profession) {
-        return entityManager.merge(profession);
+        return professionRepo.save(profession);
     }
 
     public void delete(Profession profession) {
-        entityManager.remove(profession);
+        professionRepo.delete(profession);
     }
 }

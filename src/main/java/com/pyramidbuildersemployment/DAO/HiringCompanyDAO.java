@@ -2,6 +2,8 @@ package com.pyramidbuildersemployment.DAO;
 
 import com.pyramidbuildersemployment.models.Experience;
 import com.pyramidbuildersemployment.models.HiringCompany;
+import com.pyramidbuildersemployment.repository.ExperienceRepoInterface;
+import com.pyramidbuildersemployment.repository.HiringRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,32 +18,29 @@ import java.util.List;
 @Transactional
 public class HiringCompanyDAO {
 
+
+
     @Autowired
-    private EntityManager entityManager;
+    private HiringRepoInterface hiringRepo;
 
     public HiringCompany findById(long id) {
-        return entityManager.find(HiringCompany.class, id);
+        return hiringRepo.findById(id).orElse(null);
     }
 
     public List<HiringCompany> findAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<HiringCompany> cq = cb.createQuery(HiringCompany.class);
-        Root<HiringCompany> root = cq.from(HiringCompany.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
+        return (List<HiringCompany>) hiringRepo.findAll();
     }
 
     public HiringCompany save(HiringCompany hiringCompany) {
-        entityManager.persist(hiringCompany);
-        return hiringCompany;
+        return hiringRepo.save(hiringCompany);
     }
 
     public HiringCompany update(HiringCompany hiringCompany) {
-        return entityManager.merge(hiringCompany);
+        return hiringRepo.save(hiringCompany);
     }
 
     public void delete(HiringCompany hiringCompany) {
-        entityManager.remove(hiringCompany);
+        hiringRepo.delete(hiringCompany);
     }
-
 }
+
