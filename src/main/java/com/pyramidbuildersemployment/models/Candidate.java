@@ -47,10 +47,12 @@ public class Candidate {
     @ManyToOne
     @JoinColumn(name = "profession_id")
     private Profession profession;
-
+    @OneToOne
+    @JoinColumn(name = "experience_id")
+    private Experience experience;
 
     @OneToOne(cascade = CascadeType.ALL)
-   // @JoinColumn(name = "address_id", referencedColumnName = "id")
+   @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
    /* @OneToOne(cascade = CascadeType.ALL)
@@ -60,7 +62,9 @@ public class Candidate {
     private Address candidate;*/
 
 
-
+//    @OneToOne
+//    @JoinColumn(name = "address_id")
+//    private Address address;
 
     private long  getId(){
         return id;

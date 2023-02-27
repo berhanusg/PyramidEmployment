@@ -1,5 +1,6 @@
 package com.pyramidbuildersemployment.service;
 
+import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Profession;
 
 import com.pyramidbuildersemployment.repository.ProffessionRepoInterface;
@@ -33,7 +34,7 @@ public class ProfessionServiceImpl implements ProffesionService {
     }
 
     @Override
-    public Profession updateCandidate(Profession profession) {
+    public Profession updateProfession(Profession profession) {
         return null;
     }
 
@@ -41,5 +42,7 @@ public class ProfessionServiceImpl implements ProffesionService {
     public void deleteProffession(long id) {
 
     }
-
+    public Profession registerProfession(Profession profession) {
+        return proffessionRepoInterface.save(profession);
+    }
 }

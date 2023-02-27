@@ -12,7 +12,8 @@ public interface JobListingService {
 
     JobListing saveAll(JobListing jobListing);
 
-    JobListing updateCandidate(JobListing jobListing);
+    JobListing updateJoblisting(JobListing jobListing);
 
     void deleteJobListing(long id);
+     JobListing registerJoblisting(JobListing jobListing);
 }

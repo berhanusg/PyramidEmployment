@@ -15,4 +15,5 @@ public interface CandidateService {
 
     public Candidate updateCandidate(Candidate candidate);
     public void deleteCandidate(long id);
+    public Candidate registerCandidate(Candidate candidate);
 }

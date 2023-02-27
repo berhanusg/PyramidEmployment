@@ -29,7 +29,7 @@ technologies used: java/ Springboot/Pgsql/ dbeaver interface
 The Front End will be a single page application made using Angular
 The Expanded would include
 
-To build a job recruiter and job seeker site, you would need to develop software that includes the following features:
+  
 
 User Registration: This feature allows job seekers and recruiters to register and create their profiles. The registration process should include email verification and password reset options.
 

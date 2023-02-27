@@ -14,7 +14,8 @@ public interface ProffesionService {
 
     Profession saveAll(Profession profession);
 
-     Profession updateCandidate(Profession profession);
+     Profession updateProfession(Profession profession);
      void deleteProffession(long id);
-    
+     Profession registerProfession(Profession profession);
+
 }

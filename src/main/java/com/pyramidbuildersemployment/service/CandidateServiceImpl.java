@@ -43,4 +43,8 @@ public class CandidateServiceImpl implements CandidateService{
     public void deleteCandidate(long id) {
 
     }
+
+    public Candidate registerCandidate(Candidate candidate) {
+        return candidateReepointerface.save(candidate);
+    }
 }

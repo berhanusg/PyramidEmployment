@@ -1,6 +1,7 @@
 package com.pyramidbuildersemployment.service;
 
 import com.pyramidbuildersemployment.models.Experience;
+import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.repository.ExperienceRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,8 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Override
     public void deleteExperience(long id) {
 
+    }
+    public Experience registerexperience(Experience experience) {
+        return experienceRepointerface.save(experience);
     }
 }

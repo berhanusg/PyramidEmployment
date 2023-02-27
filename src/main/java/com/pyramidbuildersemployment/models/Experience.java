@@ -16,8 +16,13 @@ public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
-
+    private long experienceid;
+    @Column(name = "description")
+    private String experiencedescription;
+    @Column(name = "months")
+    private String numberOfMonths;
+    @Column(name = "years")
+    private String numberOfYears;
     @ManyToOne
     @JoinColumn(name = "candidateid")
     private Candidate candidate;
@@ -31,14 +36,6 @@ public class Experience {
    @ManyToOne
    private Experience experience;
 
-//    public Experience(){
-//
-//        super();
-//        this.id=0;
-//        this.Candidate = new ArrayList<>();
-//        this.proffessionid= new ArrayList<>();
-//
-//
-//    }
+
 
 }

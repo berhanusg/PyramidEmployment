@@ -17,5 +17,6 @@ public interface  HiringCompanyService   {
     HiringCompany updateHiringCompany(HiringCompany hiringCompany);
 
     void deleteHiringCompany(long id);
+    public HiringCompany registerhiringCompany(HiringCompany hiringCompany);
     
 }

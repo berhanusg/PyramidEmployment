@@ -22,6 +22,17 @@ public class Profession {
     @ManyToOne
     @JoinColumn(name = "experience_id")
     private Experience experienceid;
+    private String industry;
+
+    /*
+
+    In the Profession class, we add a field
+    to hold the reference to the owning JobListing and a
+     @ManyToOne annotation to specify the relationship:
+     */
+    @ManyToOne
+    @JoinColumn(name = "joblisting_id")
+    private JobListing jobListing;
     public Long getId() {
         return id;
     }
@@ -29,4 +40,10 @@ public class Profession {
     public void setId(Long id) {
         this.id = id;
     }
+
 }
+
+
+
+    // constructor, getters and setters
+

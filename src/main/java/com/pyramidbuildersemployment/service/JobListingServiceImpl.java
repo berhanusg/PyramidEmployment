@@ -1,5 +1,6 @@
 package com.pyramidbuildersemployment.service;
 
+import com.pyramidbuildersemployment.models.Experience;
 import com.pyramidbuildersemployment.models.JobListing;
 
 import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
@@ -32,12 +33,16 @@ public class JobListingServiceImpl implements JobListingService{
     }
 
     @Override
-    public JobListing updateCandidate(JobListing jobListing) {
+    public JobListing updateJoblisting(JobListing jobListing) {
         return null;
     }
 
     @Override
     public void deleteJobListing(long id) {
 
+    }
+
+    public JobListing registerJoblisting(JobListing jobListing) {
+        return jobListingRepoInterface.save(jobListing);
     }
 }

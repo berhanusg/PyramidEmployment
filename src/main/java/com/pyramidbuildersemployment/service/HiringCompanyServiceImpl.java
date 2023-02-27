@@ -2,6 +2,7 @@ package com.pyramidbuildersemployment.service;
 
 import com.pyramidbuildersemployment.models.HiringCompany;
 
+import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.repository.HiringRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,9 @@ public class HiringCompanyServiceImpl implements HiringCompanyService{
     public void deleteHiringCompany(long id) {
 
     }
+
+    public HiringCompany registerHiringCompany(HiringCompany hiringCompany) {
+        return hiringRepoInterface.save(hiringCompany);
+    }
 }
+

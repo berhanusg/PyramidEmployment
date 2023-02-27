@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Address Form</title>
+    <title>JOb Seeker</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,7 +12,8 @@
     <a href="#">Jobseeker Registration</a>
     <a href="#">Hiring Company Registration</a>
 </nav>
-<h1>Address Form</h1>
+<h1>Job Seeker Form</h1>
+<form th:action="@{/candidate/register}" th:object="${candidate}" method="post">
 <form method="post" th:action="@{/address}">
     <div class="form-group">
         <label for="street">Street:</label>
@@ -35,6 +36,7 @@
         <input type="text" class="form-control" id="country" name="country" th:field="*{country}">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </form>
 </body>
 </html>
