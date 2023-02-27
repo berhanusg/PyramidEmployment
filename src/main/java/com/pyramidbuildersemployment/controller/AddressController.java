@@ -27,20 +27,31 @@ import com.pyramidbuildersemployment.service.AddressService;
 @RequestMapping("/Address")
 
 class AddressController {
-    
+    /*
+ NOTE   The AddressController can get to the database indirectly through the AddressService
+     interface that it depends on. The AddressService interface defines methods that
+     provide access to the database via a AddressRepoInterface instance.
+     The AddressServiceImpl class implements the AddressService interface and provides
+     the actual implementation for those methods by using the
+    AddressRepoInterface instance that it is injected with. The AddressController interacts
+     with the AddressService methods to get, create, update or delete Address objects.
+  IN Summary  the AddressController interacts with the AddressService interface which, in turn,
+    interacts with the underlying database via the AddressRepoInterface instance.
+
+     */
     private AddressService addressService;
    
 	public AddressController(AddressService addressService) {
 		this.addressService = addressService;
 	}
-    
-    @GetMapping() // change this whatever you want the path to be
+
+    @GetMapping("/addresses") // change this whatever you want the path to be
 	public List<Address> getAllAddress() {
 		return addressService.getAllAddress();
 	}
 
     
-	@GetMapping(path = "/{id}")
+	@GetMapping(path = "/address/{id}")
 	public ResponseEntity<Address> getAddressById(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
 		Address address = addressService.getAddressById(id);
 
@@ -53,7 +64,7 @@ class AddressController {
 
 	}
 
-    @PostMapping()
+    @PostMapping("/address/register")
 	public ResponseEntity<Address> registerAddress(@RequestBody Address address) {
 
 	    address = addressService.saveAll(address);
@@ -61,7 +72,7 @@ class AddressController {
 
 	}
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "address/{id}")
 	public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable long id) {
 		// System.out.println("test");
 		// return new ResponseEntity<Customer>(customerService.updateCustomer(customer),
@@ -79,7 +90,7 @@ class AddressController {
 		}
 
 	}
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "address/{id}")
 	public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
 		// delete address from DB

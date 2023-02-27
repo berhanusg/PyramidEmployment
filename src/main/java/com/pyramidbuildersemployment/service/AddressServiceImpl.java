@@ -3,6 +3,7 @@ package com.pyramidbuildersemployment.service;
 
 import com.pyramidbuildersemployment.models.Address;
 
+import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.repository.AddressRepoInterface;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,10 @@ public class AddressServiceImpl implements AddressService{
         public void deleteAddress(long id) {
             addressRepointerface.deleteById(id);
         }
+
+    public Address registerAddress(Address address) {
+        return addressRepointerface.save(address);
+    }
     }
 
 

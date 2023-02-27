@@ -19,10 +19,10 @@ import java.util.Objects;
 @CrossOrigin
 public class HiringCompanyController {
     @Autowired
-    private HiringCompanyServiceImpl hiringCompanyServiceImpl;
-
-    public HiringCompanyController(HiringCompanyServiceImpl hiringCompanyServiceImpl) {
-        this.hiringCompanyServiceImpl = hiringCompanyServiceImpl;
+   // private HiringCompanyServiceImpl hiringCompanyServiceImpl;
+    private HiringCompanyService hiringCompanyService;
+    public HiringCompanyController(HiringCompanyService hiringCompanyService) {
+        this.hiringCompanyService = hiringCompanyService;
     }
 
 
@@ -35,22 +35,22 @@ public class HiringCompanyController {
     @PostMapping("/hiringcompany/register")
     public String registerCandidate(@ModelAttribute("hiringcompany") HiringCompany hiringCompany) {
         // Call the service method to save the candidate and address to the database
-        hiringCompanyServiceImpl.registerhiringCompany(hiringCompany);
+        hiringCompanyService.registerhiringCompany(hiringCompany);
 
         // Redirect to a success page
         return "redirect:/success";
     }
 
 
-    @GetMapping() // change this whatever you want the path to be
+    @GetMapping("/hiringcompany") // change this whatever you want the path to be
     public List<HiringCompanyService> getAllAllHiringCompanies() {
-        return hiringCompanyServiceImpl.getAllAllHiringCompanies();
+        return hiringCompanyService.getAllAllHiringCompanies();
     }
 
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/hiringcompany/{id}")
     public ResponseEntity<HiringCompany> getCandidateById(@PathVariable long id) {
-        HiringCompany hiringCompany = hiringCompanyServiceImpl.getHiringCompanyById(id);
+        HiringCompany hiringCompany = hiringCompanyService.getHiringCompanyById(id);
 
         if (hiringCompany != null) {
             // send a 200 status code with the user object as the response body
@@ -61,20 +61,20 @@ public class HiringCompanyController {
 
     }
 
-    @PostMapping("/{joblisting}")
+    @PostMapping("/{hiringcompany}")
     public ResponseEntity<HiringCompany> registerCandidat(@RequestBody HiringCompany hiringCompany) {
 
-        hiringCompany = hiringCompanyServiceImpl.saveAll(hiringCompany);
+        hiringCompany = hiringCompanyService.saveAll(hiringCompany);
         return ResponseEntity.status(HttpStatus.CREATED).body(hiringCompany);
 
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "hiringcompany/{id}")
     public ResponseEntity<HiringCompany> updateProfession(@RequestBody HiringCompany hiringCompany, @PathVariable long id) {
 
 
         if (hiringCompany.getHiringcompany_id()== id) {
-            hiringCompany = hiringCompanyServiceImpl.updateHiringCompany(hiringCompany);
+            hiringCompany = hiringCompanyService.updateHiringCompany(hiringCompany);
             if (hiringCompany != null) {
                 return ResponseEntity.ok(hiringCompany);
             } else {
@@ -90,13 +90,13 @@ public class HiringCompanyController {
 
 
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "hiringcompany/{id}")
     public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
         // delete address from DB
-        hiringCompanyServiceImpl.deleteHiringCompany(id);
+        hiringCompanyService.deleteHiringCompany(id);
 
-        return new ResponseEntity<String>(" The Job Listed  deleted successfully!.", HttpStatus.OK);
+        return new ResponseEntity<String>(" The Hiring Company  deleted successfully!.", HttpStatus.OK);
     }
 
 }

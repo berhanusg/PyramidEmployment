@@ -1,13 +1,10 @@
 package  com.pyramidbuildersemployment.controller;
 
-import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Profession;
-import com.pyramidbuildersemployment.service.ProfessionServiceImpl;
 import com.pyramidbuildersemployment.service.ProffesionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,78 +12,53 @@ import java.util.List;
 @CrossOrigin
 public class ProffessionController {
     @Autowired
-    private ProfessionServiceImpl professionServiceImpl;
+ //   private ProfessionServiceImpl professionServiceImpl;
+    private ProffesionService professionService;
 
-    public ProffessionController(ProfessionServiceImpl professionServiceImpl) {
-        this.professionServiceImpl = professionServiceImpl;
+    public ProffessionController(ProffesionService professionService) {
+        this.professionService = professionService;
     }
 
 
-    @GetMapping("/profession/register")
-    public String showJobSeekerRegistrationForm(Model model) {
-        model.addAttribute("profession", new Profession());
-        return "profession-registration-form";
+    @GetMapping("/profession")
+    public List<ProffesionService> getAllProfessions() {
+        return professionService.getAllProffessions();
     }
 
-    @PostMapping("/profession/register")
-    public String registerCandidate(@ModelAttribute("profession") Profession profession) {
-        // Call the service method to save the candidate and address to the database
-        professionServiceImpl.registerProfession(profession);
-
-        // Redirect to a success page
-        return "redirect:/success";
-    }
-
-
-    @GetMapping() // change this whatever you want the path to be
-    public List<ProffesionService> getAllProffesions() {
-        return professionServiceImpl.getAllProffessions();
-    }
-
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Profession> getCandidateById(@PathVariable long id) {
-        Profession profession = professionServiceImpl.getProfessionById(id);
+    @GetMapping("/profession/{id}")
+    public ResponseEntity<Profession> getProfessionById(@PathVariable long id) {
+        Profession profession = professionService.getProfessionById(id);
 
         if (profession != null) {
-            // send a 200 status code with the user object as the response body
             return ResponseEntity.ok(profession);
         } else {
             return ResponseEntity.notFound().build();
         }
-
     }
 
-    @PostMapping("/{profession}")
-    public ResponseEntity<Profession> registerCandidat(@RequestBody Profession profession) {
-
-        profession = professionServiceImpl.saveAll(profession);
+    @PostMapping("/profession")
+    public ResponseEntity<Profession> registerProfession(@RequestBody Profession profession) {
+        professionService.registerProfession(profession);
         return ResponseEntity.status(HttpStatus.CREATED).body(profession);
-
     }
 
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<Profession> updateProfession(@RequestBody Profession profession, @PathVariable long id) {
-
-
-        if (profession.getExperienceid().equals(id)) {
-            profession = professionServiceImpl.updateProfession(profession);
+    @PutMapping("/profession/{id}")
+    public ResponseEntity<ProffesionService> updateProfession(@RequestBody Profession profession, @PathVariable long id) {
+        if (professionService.getProfessionById(id).equals(id)) {
+            profession = professionService.updateProfession(profession );
             if (profession != null) {
-                return ResponseEntity.ok(profession);
+                return ResponseEntity.ok(professionService);
             } else {
                 return ResponseEntity.badRequest().build();
             }
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-
     }
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
-        // delete address from DB
-        professionServiceImpl.deleteProffession(id);
-
+    @DeleteMapping("/profession/{id}")
+    public ResponseEntity<String> deleteProfession(@PathVariable long id) {
+        professionService.deleteProffession(id);
         return new ResponseEntity<String>("Profession deleted successfully!.", HttpStatus.OK);
     }
 

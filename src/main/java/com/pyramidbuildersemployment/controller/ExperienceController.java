@@ -1,9 +1,9 @@
 package  com.pyramidbuildersemployment.controller;
 
 import com.pyramidbuildersemployment.models.Experience;
-import com.pyramidbuildersemployment.models.Profession;
+
 import com.pyramidbuildersemployment.service.ExperienceService;
-import com.pyramidbuildersemployment.service.ExperienceServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,38 +16,39 @@ import java.util.List;
 @CrossOrigin
 public class ExperienceController {
     @Autowired
-    private ExperienceServiceImpl experienceServiceImpl;
+   // private ExperienceServiceImpl experienceServiceImpl;
+    private ExperienceService experienceService;
 
-    public ExperienceController(ExperienceServiceImpl experienceServiceImpl) {
-        this.experienceServiceImpl = experienceServiceImpl;
+    public ExperienceController(ExperienceService experienceService) {
+        this.experienceService = experienceService;
     }
 
 
     @GetMapping("/experience/register")
-    public String showJobSeekerRegistrationForm(Model model) {
+    public String showExperienceRegistrationForm(Model model) {
         model.addAttribute("experience", new Experience());
         return "experience-registration-form";
     }
 
     @PostMapping("/profession/register")
-    public String registerCandidate(@ModelAttribute("experience") Experience experience) {
+    public String registerExperience(@ModelAttribute("experience") Experience experience) {
         // Call the service method to save the candidate and address to the database
-        experienceServiceImpl.registerexperience(experience);
+        experienceService.registerexperience(experience);
 
         // Redirect to a success page
         return "redirect:/success";
     }
 
 
-    @GetMapping() // change this whatever you want the path to be
+    @GetMapping("/experiences") // change this whatever you want the path to be
     public List<ExperienceService> getAllExperiences() {
-        return experienceServiceImpl.getAllAllexperiencs();
+        return experienceService.getAllAllexperiencs();
     }
 
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Experience> getCandidateById(@PathVariable long id) {
-        Experience experience = experienceServiceImpl.getExperienceById(id);
+    @GetMapping(path = " /experience/{id}" )
+    public ResponseEntity<Experience> geExperienceeById(@PathVariable long id) {
+        Experience experience = experienceService.getExperienceById(id);
 
         if (experience != null) {
             // send a 200 status code with the user object as the response body
@@ -61,17 +62,17 @@ public class ExperienceController {
     @PostMapping("/{experience}")
     public ResponseEntity<Experience> registerCandidat(@RequestBody Experience experience) {
 
-        experience = experienceServiceImpl.saveAll(experience);
+        experience = experienceService.saveAll(experience);
         return ResponseEntity.status(HttpStatus.CREATED).body(experience);
 
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/experience/{id}")
     public ResponseEntity<Experience> updateProfession(@RequestBody Experience experience, @PathVariable long id) {
 
 
         if (experience.getExperienceid()==id) {
-            experience = experienceServiceImpl.updateExperience(experience);
+            experience = experienceService.updateExperience(experience);
             if (experience != null) {
                 return ResponseEntity.ok(experience);
             } else {
@@ -82,11 +83,11 @@ public class ExperienceController {
         }
 
     }
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/experience/{id}")
     public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
         // delete address from DB
-        experienceServiceImpl.deleteExperience(id);
+        experienceService.deleteExperience(id);
 
         return new ResponseEntity<String>("Experience deleted successfully!.", HttpStatus.OK);
     }

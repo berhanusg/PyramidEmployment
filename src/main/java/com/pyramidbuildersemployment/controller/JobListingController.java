@@ -1,11 +1,7 @@
 package  com.pyramidbuildersemployment.controller;
 
 import com.pyramidbuildersemployment.models.JobListing;
-import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.service.JobListingService;
-import com.pyramidbuildersemployment.service.JobListingServiceImpl;
-import com.pyramidbuildersemployment.service.ProfessionServiceImpl;
-import com.pyramidbuildersemployment.service.ProffesionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +13,10 @@ import java.util.List;
 @CrossOrigin
 public class JobListingController {
     @Autowired
-    private JobListingServiceImpl jobListingServiceImpl;
+    private JobListingService jobListingService;
 
-    public JobListingController(JobListingServiceImpl jobListingServiceImpl) {
-        this.jobListingServiceImpl = jobListingServiceImpl;
+    public JobListingController(JobListingService jobListingService) {
+        this.jobListingService = jobListingService;
     }
 
 
@@ -31,24 +27,24 @@ public class JobListingController {
     }
 
     @PostMapping("/joblisting/register")
-    public String registerCandidate(@ModelAttribute("joblisting") JobListing jobListing) {
+    public String registerJoblisting(@ModelAttribute("joblisting") JobListing jobListing) {
         // Call the service method to save the candidate and address to the database
-        jobListingServiceImpl.registerJoblisting(jobListing);
+        jobListingService.registerJoblisting(jobListing);
 
         // Redirect to a success page
         return "redirect:/success";
     }
 
 
-    @GetMapping() // change this whatever you want the path to be
-    public List<JobListingService> getAllProffesions() {
-        return jobListingServiceImpl.getAllAlljoblistings();
+    @GetMapping("/joblisting") // change this whatever you want the path to be
+    public List<JobListingService> getAllJoblistings() {
+        return jobListingService.getAllAlljoblistings();
     }
 
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<JobListing> getCandidateById(@PathVariable long id) {
-        JobListing jobListing = jobListingServiceImpl.getJobListingById(id);
+    @GetMapping(path = "joblisting/{id}")
+    public ResponseEntity<JobListing> getJoblistingById(@PathVariable long id) {
+        JobListing jobListing = jobListingService.getJobListingById(id);
 
         if (jobListing != null) {
             // send a 200 status code with the user object as the response body
@@ -59,20 +55,14 @@ public class JobListingController {
 
     }
 
-    @PostMapping("/{joblisting}")
-    public ResponseEntity<JobListing> registerCandidat(@RequestBody JobListing jobListing) {
 
-        jobListing = jobListingServiceImpl.saveAll(jobListing);
-        return ResponseEntity.status(HttpStatus.CREATED).body(jobListing);
 
-    }
-
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "joblisting/{id}")
     public ResponseEntity<JobListing> updateProfession(@RequestBody JobListing jobListing, @PathVariable long id) {
 
 
         if (jobListing.getExperienceid().equals(id)) {
-            jobListing = jobListingServiceImpl.updateJoblisting(jobListing);
+            jobListing = jobListingService.updateJoblisting(jobListing);
             if (jobListing != null) {
                 return ResponseEntity.ok(jobListing);
             } else {
@@ -83,11 +73,11 @@ public class JobListingController {
         }
 
     }
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "joblisting/{id}")
     public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
         // delete address from DB
-        jobListingServiceImpl.deleteJobListing(id);
+        jobListingService.deleteJobListing(id);
 
         return new ResponseEntity<String>(" The Job Listed  deleted successfully!.", HttpStatus.OK);
     }
