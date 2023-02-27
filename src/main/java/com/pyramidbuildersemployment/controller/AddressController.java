@@ -2,18 +2,15 @@ package  com.pyramidbuildersemployment.controller;
 
 import java.util.List;
 
+import com.pyramidbuildersemployment.dto.AddressDTO;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.pyramidbuildersemployment.service.AddressService;
  import com.pyramidbuildersemployment.models.Address;
@@ -22,9 +19,8 @@ import com.pyramidbuildersemployment.service.AddressService;
 
  
 
-@RestController
+@Controller
 @CrossOrigin
-@RequestMapping("/Address")
 
 class AddressController {
     /*
@@ -64,13 +60,29 @@ class AddressController {
 
 	}
 
-    @PostMapping("/address/register")
-	public ResponseEntity<Address> registerAddress(@RequestBody Address address) {
-
-	    address = addressService.saveAll(address);
-		   return ResponseEntity.status(HttpStatus.CREATED).body(address);
+    @GetMapping("/address/register")
+	public String registerAddress(Model model) {
+		model.addAttribute("address", new AddressDTO());
+	    //address = addressService.saveAll(address); WRONG
+		   return "address";
 
 	}
+
+
+	@PostMapping("/address-process")
+	public String processAddressRegistartion(@ModelAttribute ("address") AddressDTO addressDTO, Model model)
+	{
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Address address = modelMapper.map(addressDTO, Address.class);
+
+		addressService.registerAddress(address);
+
+		return "index";
+	}
+
+
+
 
     @PutMapping(path = "address/{id}")
 	public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable long id) {

@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Address Form</h1>
-<form method="post" th:action="@{/address}">
+<form method="post" th:action="@{/address-processing}"  th:object="${address}">
     <div class="form-group">
         <label for="street">Street:</label>
         <input type="text" class="form-control" id="street" name="street" th:field="*{street}">

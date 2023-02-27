@@ -25,6 +25,7 @@ public class HiringCompany {
      */
     @OneToMany(mappedBy = "hiringCompany")
     private List<Address> addresses;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
