@@ -19,9 +19,12 @@ public class Profession {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "experience_id")
-    private Experience experienceid;
+
+//
+//    @ManyToOne
+//    @JoinColumn(name = "experience_id")
+//    private Experience experienceid;
+    private String ProfessionName;
     private String industry;
 
     /*
@@ -31,15 +34,9 @@ public class Profession {
      @ManyToOne annotation to specify the relationship:
      */
     @ManyToOne
-    @JoinColumn(name = "joblisting_id")
-    private JobListing jobListing;
-    public Long getId() {
-        return id;
-    }
+   @JoinColumn(name = "joblisting_id")
+  private JobListing jobListing;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 }
 

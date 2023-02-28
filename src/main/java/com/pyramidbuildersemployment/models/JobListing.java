@@ -40,9 +40,9 @@ With this setup, we can add professions to a job
  listing by creating Profession objects and adding them to
  the professions list on the JobListing object.
  */
-    @ManyToOne
-    @JoinColumn(name = "experience_id")
-    private Experience experienceid;
+//    @ManyToOne
+//    @JoinColumn(name = "experience_id")
+//    private Experience experienceid;
 
     @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
     private List<Profession> professions;

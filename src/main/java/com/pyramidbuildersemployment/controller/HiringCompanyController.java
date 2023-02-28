@@ -9,13 +9,14 @@ import com.pyramidbuildersemployment.service.JobListingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
 
-@RestController
+@Controller
 @CrossOrigin
 public class HiringCompanyController {
     @Autowired
@@ -26,13 +27,13 @@ public class HiringCompanyController {
     }
 
 
-    @GetMapping("/hiringcompany/register")
+    @GetMapping("/hiring-company/register")
     public String showJobSeekerRegistrationForm(Model model) {
         model.addAttribute("hiringcompany", new HiringCompany());
         return "hiringcompany-registration-form";
     }
 
-    @PostMapping("/hiringcompany/register")
+    @PostMapping("/hiring-company/register")
     public String registerCandidate(@ModelAttribute("hiringcompany") HiringCompany hiringCompany) {
         // Call the service method to save the candidate and address to the database
         hiringCompanyService.registerhiringCompany(hiringCompany);
@@ -42,13 +43,13 @@ public class HiringCompanyController {
     }
 
 
-    @GetMapping("/hiringcompany") // change this whatever you want the path to be
+    @GetMapping("/hiring-company") // change this whatever you want the path to be
     public List<HiringCompanyService> getAllAllHiringCompanies() {
         return hiringCompanyService.getAllAllHiringCompanies();
     }
 
 
-    @GetMapping(path = "/hiringcompany/{id}")
+    @GetMapping(path = "/hiring-company/{id}")
     public ResponseEntity<HiringCompany> getCandidateById(@PathVariable long id) {
         HiringCompany hiringCompany = hiringCompanyService.getHiringCompanyById(id);
 
@@ -61,7 +62,7 @@ public class HiringCompanyController {
 
     }
 
-    @PostMapping("/{hiringcompany}")
+    @PostMapping("/{hiring-company}")
     public ResponseEntity<HiringCompany> registerCandidat(@RequestBody HiringCompany hiringCompany) {
 
         hiringCompany = hiringCompanyService.saveAll(hiringCompany);
@@ -69,7 +70,7 @@ public class HiringCompanyController {
 
     }
 
-    @PutMapping(path = "hiringcompany/{id}")
+    @PutMapping(path = "hiring-company/{id}")
     public ResponseEntity<HiringCompany> updateProfession(@RequestBody HiringCompany hiringCompany, @PathVariable long id) {
 
 

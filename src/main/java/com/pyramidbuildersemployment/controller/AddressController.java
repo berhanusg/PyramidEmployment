@@ -59,50 +59,78 @@ class AddressController {
 		}
 
 	}
+//
+//    @GetMapping("/address/register")
+//	public String registerAddress(Model model) {
+//		model.addAttribute("address", new AddressDTO());
+//	    //address = addressService.saveAll(address); WRONG
+//		   return "address";
+//
+//	}
+@GetMapping("/address/register")
+public String registerAddress(@ModelAttribute("address") AddressDTO address, Model model) {
+	model.addAttribute("addressList", addressService.getAllAddress());
+	return "address";
+}
 
-    @GetMapping("/address/register")
-	public String registerAddress(Model model) {
-		model.addAttribute("address", new AddressDTO());
-	    //address = addressService.saveAll(address); WRONG
-		   return "address";
 
-	}
-
-
+//	@PostMapping("/address-process")
+//	public String processAddressRegistartion(@ModelAttribute ("address") AddressDTO addressDTO, Model model)
+//	{
+//		ModelMapper modelMapper = new ModelMapper();
+//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+//		Address address = modelMapper.map(addressDTO, Address.class);
+//		addressService.registerAddress(address);
+//		return "index";
+//	}
 	@PostMapping("/address-process")
-	public String processAddressRegistartion(@ModelAttribute ("address") AddressDTO addressDTO, Model model)
-	{
+	public String saveAddress(@ModelAttribute("address") AddressDTO addressDTO) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Address address = modelMapper.map(addressDTO, Address.class);
-
 		addressService.registerAddress(address);
-
-		return "index";
+		return "redirect:/address/register";
 	}
 
 
 
 
-    @PutMapping(path = "address/{id}")
-	public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable long id) {
-		// System.out.println("test");
-		// return new ResponseEntity<Customer>(customerService.updateCustomer(customer),
-		// HttpStatus.OK);
+//	@PutMapping(path = "address/{id}")
+//	public ResponseEntity<AddressDTO> updateAddress(@RequestBody AddressDTO addressDto, @PathVariable long id) {
+//		Address address = new Address();
+//		if (address.getAddressById() == id) {
+//			address = addressService.updateAddress(address);
+//			if (address != null) {
+//				AddressDTO updatedAddressDto = new AddressDTO( );
+//				return ResponseEntity.ok(updatedAddressDto);
+//			} else {
+//				return ResponseEntity.badRequest().build();
+//			}
+//		} else {
+//			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+//		}
+//	}
 
+	@PutMapping(path = "address/{id}")
+	public ResponseEntity<AddressDTO> updateAddress(@RequestBody AddressDTO addressDto, @PathVariable long id) {
+		Address address = new Address();
 		if (address.getAddressById() == id) {
+			ModelMapper modelMapper = new ModelMapper();
+			modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+			modelMapper.map(addressDto, address);
 			address = addressService.updateAddress(address);
 			if (address != null) {
-				return ResponseEntity.ok(address);
+				AddressDTO updatedAddressDto = modelMapper.map(address, AddressDTO.class);
+				return ResponseEntity.ok(updatedAddressDto);
 			} else {
 				return ResponseEntity.badRequest().build();
 			}
 		} else {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
-
 	}
-    @DeleteMapping(path = "address/{id}")
+
+	@DeleteMapping(path = "address/{id}")
 	public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
 		// delete address from DB

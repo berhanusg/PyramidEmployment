@@ -54,47 +54,6 @@ public class Address {
 
 
 
-    private String getstreet(){
-        return street;
-    }
-    private void setStreet( String street)
-    {
-        this.street = street;
-
-    }
-    private String getCity(){
-        return city;
-    }
-    private void setCity( String city)
-    {
-        this.street = city;
-
-    }
-    private String getState(){
-        return state;
-    }
-    private void setState( String state)
-    {
-        this.state = state;
-
-    }
-    private String getZip(){
-        return zip;
-    }
-    private void setZip( String zip)
-    {
-        this.zip = zip;
-
-    }
-    private String getCountry(){
-        return country;
-    }
-    private void setCountry( String country)
-    {
-        this.country = country;
-
-    }
-
 
     public long getAddressById() {
         return  id;
