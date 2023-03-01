@@ -1,6 +1,7 @@
 package  com.pyramidbuildersemployment.controller;
 
 import com.pyramidbuildersemployment.dto.CandidateDTO;
+import com.pyramidbuildersemployment.dto.ProffesionDTO;
 import com.pyramidbuildersemployment.models.Address;
 import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.service.*;
@@ -9,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @Controller
 @CrossOrigin
@@ -27,22 +30,6 @@ public class CandidateController {
     }
 
 
-//    @GetMapping("/candidate/register")
-//    public String showJobSeekerRegistrationForm(Model model) {
-//        model.addAttribute("candidate", new Candidate());
-//        return "candidate-registration-form";
-//    }
-//
-
-
-//    @PostMapping("/candidate/register")
-//    public String registerCandidate(@ModelAttribute("candidate") Candidate candidate) {
-//        // Call the service method to save the candidate and address to the database
-//        candidateService.registerCandidate(candidate);
-//
-//        // Redirect to a success page
-//        return "redirect:/success";
-//    }
 /*
 This method creates a new Candidate entity and sets its properties based
  on the values in the CandidateDTO object. It also creates a new Address
@@ -53,8 +40,17 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
 
  */
-    @PostMapping("/candidate-save")
-    public String saveCandidate(@ModelAttribute("candidate") CandidateDTO candidateDTO) {
+    @PostMapping("/candidate-register")
+    public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "candidate-register";
+        }
+
+        // add null check for address
+        if (candidateDTO.getStreet() == null) {
+            // handle null address error
+            return "candidate-register";
+        }
         // create new Candidate entity
         Candidate candidate = new Candidate();
         candidate.setId(candidateDTO.getId());
@@ -69,6 +65,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
         candidate.setNumberOfYears(candidateDTO.getNumberOfYears());
         candidate.setExperiencedescription(candidateDTO.getExperiencedescription());
+
        // replaced it by adding the number of months and years with experience description attribute in the candidate model and the candidateDTO
         //candidate.setExperienceId(experienceService.getExperienceById(candidateDTO.getExperienceId())); will delete experience model
 
@@ -85,15 +82,25 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setAddress(address);
 
         // save Candidate entity
-        candidateService.registerCandidate(candidate);
-
-        return "redirect:/candidate/list";
-    }
-    @GetMapping("/candidate-register")
-    public String registerCandidate(Model model) {
         model.addAttribute("candidateDTO", new CandidateDTO());
-        model.addAttribute("professions", proffesionService.getAllProffessions());
+        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
+       // candidateService.registerCandidate(candidate);
 
+        return "redirect:/candidate-list";
+    }
+//    @PostMapping("/candidate-register")
+//    public String registerCandidate(Model model) {
+//
+//
+//        Candidate candidate = new Candidate();
+//        model.addAttribute("candidateDTO", new CandidateDTO());
+//        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
+//
+//        return "candidate-register";
+//    }
+    @GetMapping("/candidate-register")
+    public String showCandidateRegistrationForm(Model model) {
+        model.addAttribute("candidateDTO", new CandidateDTO());
         return "candidate-register";
     }
 
@@ -103,7 +110,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         }
 
 
-        @GetMapping(path = "/candidate-{id}")
+        @GetMapping(path = "/candidate/{id}")
         public ResponseEntity<Candidate> getCandidateById(@PathVariable long id) {
             Candidate candidate = candidateService.getCandidateById(id);
 
@@ -148,7 +155,17 @@ Finally, it saves the Candidate entity to the database and redirects the user to
             return new ResponseEntity<String>("Address deleted successfully!.", HttpStatus.OK);
         }
 
-
-
+    @GetMapping("/candidate-list")
+    public String candidateList(Model model) {
+//        List<Candidate> candidates = candidateService.getAllCandidates();
+        model.addAttribute("candidates", candidateService.getAllCandidates());
+        return "candidate-list";
     }
+       // model.addAttribute("candidates", candidates);
+
+
+
+
+
+}
 

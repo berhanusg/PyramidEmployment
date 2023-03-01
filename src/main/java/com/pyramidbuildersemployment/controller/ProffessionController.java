@@ -26,44 +26,37 @@ public class ProffessionController {
     }
 
 
-   // @GetMapping("/profession")
-   @RequestMapping(value = "/profession", method = {RequestMethod.GET})
+   @GetMapping("/profession")
+  // @RequestMapping(value = "/profession", method = {RequestMethod.GET})
     public List<ProffesionService> getAllProfessions() {
         return professionService.getAllProffessions();
     }
 
 
- //   @GetMapping("/profession/register")
-//	public String registerProfession(Model model) {
-//        model.addAttribute("address", new ProffesionDTO());
-//        //address = addressService.saveAll(address); WRONG
-//        return "profession";
-//        if (profession != null) {
-//            return ResponseEntity.ok(profession);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+
 
     @PostMapping("/profession-save")
+
     public String registerProfession(@ModelAttribute("professionDTO") @Valid ProffesionDTO professionDTO, BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
             return "profession-register";
         }
-        model.addAttribute("profession", new ProffesionDTO());
+
         // create new profession entity
         Profession profession = new Profession();
         profession.setId(professionDTO.getId());
         profession.setProfessionName(professionDTO.getProfessionName());
         profession.setIndustry(professionDTO.getIndustry());
-
+        model.addAttribute("professionDTO", new ProffesionDTO());
         // save profession entity to database
+        model.addAttribute("professionDTO", professionDTO);
+
         professionService.registerProfession(profession);
 
         return "redirect:/profession-list";
     }
 
-    @GetMapping("/profession/register")
+    @GetMapping("/profession-register")
     public String registerProfession(Model model) {
         model.addAttribute("professionDTO", new ProffesionDTO());
         return "profession-register";

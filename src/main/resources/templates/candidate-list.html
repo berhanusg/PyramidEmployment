@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Job Site</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Candidates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hiring Companies</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <h2>Candidate List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Profession</th>
+            <th>Years of Experience</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="candidate : ${candidates}">
+            <td th:text="${candidate.id}"></td>
+            <td th:text="${candidate.firstname + ' ' + candidate.lastname}"></td>
+            <td th:text="${candidate.email}"></td>
+            <td th:text="${candidate.profession.professionName}"></td>
+            <td th:text="${candidate.numberOfYears}"></td>
+            <td>
+                <a class="btn btn-primary btn-sm" th:href="@{/candidate-detail/{id}(id=${candidate.id})}">
+                    Details
+                </a>
+                <a class="btn btn-warning btn-sm" th:href="@{/candidate-edit/{id}(id=${candidate.id})}">
+                    Edit
+                </a>
+                <a class="btn btn-danger btn-sm" th:href="@{/candidate-delete/{id}(id=${candidate.id})}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" th:href="@{/candidate-register}">Add New Candidate</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
