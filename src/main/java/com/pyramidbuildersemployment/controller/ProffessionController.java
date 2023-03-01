@@ -18,7 +18,6 @@ import java.util.List;
 @CrossOrigin
 public class ProffessionController {
     @Autowired
- //   private ProfessionServiceImpl professionServiceImpl;
     private ProffesionService professionService;
     private CandidateService candidateService;
     public ProffessionController(ProffesionService professionService) {
@@ -26,18 +25,23 @@ public class ProffessionController {
     }
 
 
-   @GetMapping("/profession")
-  // @RequestMapping(value = "/profession", method = {RequestMethod.GET})
-    public List<ProffesionService> getAllProfessions() {
-        return professionService.getAllProffessions();
+    /**
+     * This method shows in browser
+     * empty form
+     *
+     * @param model
+     * @return
+     */
+    @GetMapping("/profession-register")
+    public String registerProfession(Model model) {
+        model.addAttribute("professionDTO", new ProffesionDTO());
+        return "profession-register";
     }
 
 
-
-
     @PostMapping("/profession-save")
-
     public String registerProfession(@ModelAttribute("professionDTO") @Valid ProffesionDTO professionDTO, BindingResult bindingResult,Model model) {
+
         if (bindingResult.hasErrors()) {
             return "profession-register";
         }
@@ -47,8 +51,6 @@ public class ProffessionController {
         profession.setId(professionDTO.getId());
         profession.setProfessionName(professionDTO.getProfessionName());
         profession.setIndustry(professionDTO.getIndustry());
-        model.addAttribute("professionDTO", new ProffesionDTO());
-        // save profession entity to database
         model.addAttribute("professionDTO", professionDTO);
 
         professionService.registerProfession(profession);
@@ -56,41 +58,19 @@ public class ProffessionController {
         return "redirect:/profession-list";
     }
 
-    @GetMapping("/profession-register")
-    public String registerProfession(Model model) {
-        model.addAttribute("professionDTO", new ProffesionDTO());
-        return "profession-register";
-    }
+
 
         // @PostMapping("/profession")
-        @RequestMapping(value = "/profession", method = {RequestMethod.POST})
-        public ResponseEntity<Profession> registerProfession (@RequestBody Profession profession){
-            professionService.registerProfession(profession);
-            return ResponseEntity.status(HttpStatus.CREATED).body(profession);
-        }
 
+    @GetMapping("/profession-list")
+    public String listProfessions(Model model)
+    {
+        List<Profession> professionList = professionService.getAllProffessions();
 
-        //  @RequestMapping(value = "/profession/{id}", method = {RequestMethod.GET, RequestMethod.POST})
-        @PutMapping("/profession/{id}")
-        public ResponseEntity<ProffesionService> updateProfession (@RequestBody Profession profession,
-        @PathVariable long id){
-            if (professionService.getProfessionById(id).equals(id)) {
-                profession = professionService.updateProfession(profession);
-                if (profession != null) {
-                    return ResponseEntity.ok(professionService);
-                } else {
-                    return ResponseEntity.badRequest().build();
-                }
-            } else {
-                return ResponseEntity.status(HttpStatus.CONFLICT).build();
-            }
-        }
+        model.addAttribute("profList", professionList);
 
-        @DeleteMapping("/profession/{id}")
-        public ResponseEntity<String> deleteProfession ( @PathVariable long id){
-            professionService.deleteProffession(id);
-            return new ResponseEntity<String>("Profession deleted successfully!.", HttpStatus.OK);
-        }
+        return  "profession-list";
+    }
 
 
     }

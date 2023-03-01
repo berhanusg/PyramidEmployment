@@ -19,8 +19,8 @@ public class ProfessionServiceImpl implements ProffesionService {
         this.proffessionRepoInterface = proffessionRepoInterface;
     }
     @Override
-    public List<ProffesionService> getAllProffessions() {
-        return null;
+    public List<Profession> getAllProffessions() {
+        return (List<Profession>) proffessionRepoInterface.findAll();
     }
 
     @Override

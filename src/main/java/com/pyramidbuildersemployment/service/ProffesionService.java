@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProffesionService {
 
 
-     List<ProffesionService> getAllProffessions();
+     List<Profession> getAllProffessions();
 
      Profession getProfessionById(long id);
 
