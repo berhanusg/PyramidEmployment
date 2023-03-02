@@ -1,13 +1,12 @@
 package com.pyramidbuildersemployment.service;
 
-import com.pyramidbuildersemployment.models.Address;
 import com.pyramidbuildersemployment.models.Candidate;
 
 import java.util.List;
 
 public interface CandidateService {
 
-     List<CandidateService> getAllCandidates();
+     List<Candidate> getAllCandidates();
 
      Candidate getCandidateById(long id);
 

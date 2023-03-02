@@ -2,6 +2,7 @@ package com.pyramidbuildersemployment.service;
 
 import com.pyramidbuildersemployment.models.Candidate;
 
+import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.repository.CandidateRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class CandidateServiceImpl implements CandidateService{
     }
 
     @Override
-    public List<CandidateService> getAllCandidates() {
-        return null;
+    public List<Candidate> getAllCandidates() {
+        return (List<Candidate>) candidateReepointerface.findAll();
     }
 
     @Override

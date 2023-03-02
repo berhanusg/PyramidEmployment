@@ -22,27 +22,22 @@ public class Candidate {
 
     @Column(name = "firstname")
     private String firstname;
-
-
     private String middlename;
-
     private String lastname;
-
-
     private String gender;
-
-
     private String telephone;
-
-
     private String email;
-
-
     @Column(name = "months")
     private String numberOfMonths;
     @Column(name = "years")
     private String numberOfYears;
     private String experiencedescription;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
+    private String country;
+
     public String getEducation_level() {
         return education_level;
     }
@@ -79,9 +74,9 @@ public class Candidate {
 //    @JoinColumn(name = "experience_id")
 //    private Experience experienceId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+//    @OneToOne(cascade = CascadeType.ALL)
+//   @JoinColumn(name = "address_id", referencedColumnName = "id")
+//    private Address address;
 
 
 

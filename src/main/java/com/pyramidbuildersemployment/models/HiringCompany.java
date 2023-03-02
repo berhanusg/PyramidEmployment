@@ -23,8 +23,7 @@ public class HiringCompany {
     The mappedBy attribute is used to indicate the name of the association field in the
      Address entity that owns the relationship.
      */
-    @OneToMany(mappedBy = "hiringCompany")
-    private List<Address> addresses;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,14 +36,16 @@ public class HiringCompany {
     private String contactpersonlname;
     @Column (name= "hiringcompanyemail")
     private String hiringcompanyemail;
-
     @Column (name = "webSite")
     private String webSite;
     @Column (name ="hiringCompanyName")
     private String hiringCompanyName;
-
     private String email ;
-
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
+    private String country;
     @ManyToOne
     @JoinColumn(name = "job_listing_id")
     private JobListing jobListing;

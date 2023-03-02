@@ -5,8 +5,7 @@ import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.service.CandidateService;
 import com.pyramidbuildersemployment.service.ProffesionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,7 @@ import java.util.List;
 public class ProffessionController {
     @Autowired
     private ProffesionService professionService;
-    private CandidateService candidateService;
+
     public ProffessionController(ProffesionService professionService) {
         this.professionService = professionService;
     }
@@ -35,11 +34,20 @@ public class ProffessionController {
     @GetMapping("/profession-register")
     public String registerProfession(Model model) {
         model.addAttribute("professionDTO", new ProffesionDTO());
+
         return "profession-register";
     }
 
+/*
+registerProfession(): This method is used to register a new profession.
+It sends a POST request to /profession-save endpoint and takes a ProfessionDTO object as input.
+ First, it checks if there are any validation errors. If there are any errors, it returns the "profession-register" template.
+ Otherwise, it creates a new Profession object, sets its properties
+ using the values from ProfessionDTO object, and saves it to the database
+  using the ProfessionService. Finally, it redirects the user to "/profession-list" endpoint.
 
-    @PostMapping("/profession-save")
+ */
+    @PostMapping("/profession-register")
     public String registerProfession(@ModelAttribute("professionDTO") @Valid ProffesionDTO professionDTO, BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
@@ -60,7 +68,7 @@ public class ProffessionController {
 
 
 
-        // @PostMapping("/profession")
+
 
     @GetMapping("/profession-list")
     public String listProfessions(Model model)

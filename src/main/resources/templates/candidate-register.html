@@ -30,7 +30,7 @@
 </nav>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+       <div class="col-md-8">
             <h1>Candidate Registration</h1>
             <form th:action="@{/candidate-register}" th:object="${candidateDTO}" method="post">
 <!--                <form th:action="@{/candidate/save}" th:object="${candidateDTO}" method="post">-->
@@ -69,22 +69,23 @@
                 </div>
                     <div class="form-group" >
                     <label for="professionId">Profession</label>
-                    <select class="form-control" th:field="*{professionId}" id="professionId" required>
+                 <select class="form-control" th:field="*{professionId}" id="professionId" >
+<!--                        <select class="form-control" th:field="*{professionName}" id="professionName" >-->
                         <option value="">Select Profession</option>
-                        <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.name}"></option>
+                        <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.professionName}"></option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="numberOfMonths">Street</label>
+                    <label for="numberOfMonths">Number Of Months</label>
                     <input type="text" class="form-control" th:field="*{numberOfMonths}" id="numberOfMonths" required/>
                 </div>
                 <div class="form-group">
-                    <label for="numberOfYears">Street</label>
+                    <label for="numberOfYears">Number of Years</label>
                     <input type="text" class="form-control" th:field="*{numberOfYears}" id="numberOfYears" required/>
                 </div>
                 <div class="form-group">
-                    <label for="experiencedescription">Street</label>
+                    <label for="experiencedescription">Experience Description</label>
                     <input type="text" class="form-control" th:field="*{experiencedescription}" id="experiencedescription" required/>
                 </div>
                 <div class="form-group">

@@ -44,7 +44,7 @@
             <td th:text="${candidate.id}"></td>
             <td th:text="${candidate.firstname + ' ' + candidate.lastname}"></td>
             <td th:text="${candidate.email}"></td>
-            <td th:text="${candidate.profession.professionName}"></td>
+<!--            <td th:text="${candidate.profession.professionName}"></td>-->
             <td th:text="${candidate.numberOfYears}"></td>
             <td>
                 <a class="btn btn-primary btn-sm" th:href="@{/candidate-detail/{id}(id=${candidate.id})}">
