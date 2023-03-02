@@ -21,6 +21,7 @@ public class ProfessionServiceImpl implements ProffesionService {
     @Override
     public List<Profession> getAllProffessions() {
         return (List<Profession>) proffessionRepoInterface.findAll();
+
     }
 
     @Override

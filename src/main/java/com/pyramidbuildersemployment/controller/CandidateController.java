@@ -30,15 +30,18 @@ public class CandidateController {
 
 
 
-    // Show empty FORM
+
 
     @GetMapping("/candidate-register")
     public String showCandidateRegistrationForm(Model model) {
+        List<Profession> professions = proffesionService.getAllProffessions();
+        model.addAttribute("professions", professions);
         model.addAttribute("candidateDTO", new CandidateDTO());
         return "candidate-register";
     }
 
-/*
+
+    /*
 
  Step 2- THis method is used to Register New Candidate
 The method creates a new Candidate entity and sets its properties based
@@ -71,19 +74,9 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setTelephone(candidateDTO.getTelephone());
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setEducation_level(candidateDTO.getEducationLevel());
-//         Profession objProfession = proffesionService.getProfessionById(candidateDTO.getProfessionId());
-//
-//       // Profession objProfession = proffesionService.getProfessionById(candidateDTO.getProfessionId());
-//
-//        if (objProfession != null) {
-//            candidate.setProfessionId(objProfession);
-//        } else {
-//            try {
-//                Lombok.checkNotNull(objProfession, null);
-//            } catch (NullPointerException e) {
-//                System.out.println(e);
-//            }
-//        }
+        Profession objProfession = proffesionService.getProfessionById(candidateDTO.getProfessionId());
+
+        // setprofession
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
         candidate.setNumberOfYears(candidateDTO.getNumberOfYears());
         candidate.setExperiencedescription(candidateDTO.getExperiencedescription());
@@ -106,6 +99,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         model.addAttribute("candidates",candidatesList);
         return "candidate-list";
     }
+
 
 
 

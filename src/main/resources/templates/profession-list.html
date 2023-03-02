@@ -52,6 +52,12 @@
         </tr>
         </tbody>
     </table>
+    <select>
+
+        <option th:each="p : ${profList}"   th:text="${p.professionName}"> </option>
+    </select>
+
+
     <a class="btn btn-success" th:href="@{/profession-register}">Add New Profession</a>
 </div>
 

@@ -68,15 +68,20 @@
                     <input type="text" class="form-control" th:field="*{educationLevel}" id="educationLevel" required/>
                 </div>
                     <div class="form-group" >
-                    <label for="professionId">Profession</label>
-                 <select class="form-control" th:field="*{professionId}" id="professionId" >
-<!--                        <select class="form-control" th:field="*{professionName}" id="professionName" >-->
-                        <option value="">Select Profession</option>
-                        <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.professionName}"></option>
-                    </select>
-                </div>
+<!--             <select class="form-control" th:field="*{professionId}" id="professionId" >&ndash;&gt;-->
+              <div th:object =  th:object="${profession-list}">
+                    <div class="form-group">
+                        <label for="professionId">Profession</label>
+                        <select class="form-control" th:field="*{professionId}" id="professionId">
+                            <option value="">Select Profession</option>
+                            <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.professionName}"></option>
+                        </select>
+                    </div>
+              </div>
 
-                <div class="form-group">
+
+
+                 <div class="form-group">
                     <label for="numberOfMonths">Number Of Months</label>
                     <input type="text" class="form-control" th:field="*{numberOfMonths}" id="numberOfMonths" required/>
                 </div>
