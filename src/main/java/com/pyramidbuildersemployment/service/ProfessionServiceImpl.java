@@ -12,16 +12,15 @@ import java.util.List;
 public class ProfessionServiceImpl implements ProffesionService {
 
    @Autowired
-    ProffessionRepoInterface proffessionRepoInterface;
+   ProffessionRepoInterface proffessionRepoInterface;
 
     ProfessionServiceImpl(ProffessionRepoInterface  proffessionRepoInterface){
-
         this.proffessionRepoInterface = proffessionRepoInterface;
     }
     @Override
     public List<Profession> getAllProffessions() {
-        return (List<Profession>) proffessionRepoInterface.findAll();
 
+        return (List<Profession>) proffessionRepoInterface.findAll();
     }
 
     @Override

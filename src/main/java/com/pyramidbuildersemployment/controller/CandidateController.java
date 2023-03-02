@@ -5,6 +5,7 @@ import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.service.*;
 import lombok.Lombok;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,10 @@ import java.util.List;
 public class CandidateController {
 
 
+
+    @Autowired
     private CandidateService candidateService;
+    @Autowired
     private ProffesionService proffesionService;
 
 
@@ -53,7 +57,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
 
  */
-    @PostMapping("/candidate-register")
+    @PostMapping("/candidate-register-process")
     public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "candidate-register";
