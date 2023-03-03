@@ -35,7 +35,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+<!--            <th>ID</th>-->
             <th>Company Name</th>
             <th>Contact Person First Name</th>
             <th>Contact Person Last Name</th>
@@ -45,7 +45,7 @@
             <th>Country</th>
             <th>Zip</th>
             <th>Website</th>
-            <th>Job Listing</th>
+<!--            <th>Job Listing</th>-->
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -62,14 +62,14 @@
             <td th:text="${company.country}"></td>
             <td th:text="${company.zip}"></td>
             <td th:text="${company.webSite}"></td>
-            <td th:text="${company.jobListingId}"></td>
+<!--            <td th:text="${company.jobListingId}"></td>-->
 <!--            <td><a th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>-->
 <!--            <td><a th:href="@{/delete-hiring-company/{id}(id=${company.id})}">Delete</a></td>-->
         </tr>
         </tbody>
     </table>
 
-    <a class="btn btn-success" th:href="@{/hiringCompany-register}">Add New Hiring Company</a>
+    <a class="btn btn-success" th:href="@{/hiringcompany-register}">Add New Hiring Company</a>
 </div>
 
 

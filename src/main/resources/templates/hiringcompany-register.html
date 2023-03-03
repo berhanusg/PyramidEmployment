@@ -50,12 +50,14 @@
         <label for="webSite">Website:</label>
         <input type="text" th:field="*{webSite}" id="webSite"/>
     </div>
-<!--    <div>-->
+
+<!--    <div th:object="${joblisting}">-->
 <!--        <label for="jobListingId">Job Listing:</label>-->
 <!--        <select th:field="*{jobListingId}" id="jobListingId">-->
-<!--            <option th:each="jobListing : ${jobListings}" th:value="${jobListing.id}" th:text="${jobListing.jobTitle}"></option>-->
+<!--            <option th:each="jobListing : ${joblisting}" th:value="${jobListing.id}" th:text="${jobListing.jobTitle}"></option>-->
 <!--        </select>-->
 <!--    </div>-->
+
     <div>
         <button type="submit">Register Hiring Company</button>
     </div>
@@ -63,3 +65,5 @@
 </body>
 
 </html>
+
+

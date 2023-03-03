@@ -36,7 +36,7 @@ public class HiringCompanyController {
     @GetMapping("/hiringcompany-register")
     public String showHiringCompanyRegistrationForm(Model model) {
         List<JobListing> jobListing = jobListingService.getAlljoblistings();
-       // model.addAttribute("joblisting", joblistings);
+      //  model.addAttribute("joblisting", jobListing);
         model.addAttribute("hiringCompanyDTO", new HiringCompanyDTO());
 
         return "hiringcompany-register";
