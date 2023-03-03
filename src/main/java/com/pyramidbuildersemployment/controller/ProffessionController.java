@@ -78,6 +78,20 @@ It sends a POST request to /profession-save endpoint and takes a ProfessionDTO o
 
         return  "profession-list";
     }
-
-
+    @GetMapping("/edit-profession/{id}")
+    public String showEditProfessionForm(@PathVariable("id") Long id, Model model) {
+        Profession profession = professionService.getProfessionById(id);
+        model.addAttribute("profession", profession);
+        return "profession-edit";
     }
+
+
+    @PostMapping("/update-profession")
+    public String updateProfession(@ModelAttribute("profession") Profession profession) {
+        professionService.updateProfession(profession);
+        return "redirect:/profession-list";
+    }
+
+
+}
+

@@ -46,8 +46,8 @@
             <th>Zip</th>
             <th>Website</th>
 <!--            <th>Job Listing</th>-->
-            <th>Edit</th>
-            <th>Delete</th>
+<!--            <th>Edit</th>-->
+<!--            <th>Delete</th>-->
         </tr>
         </thead>
         <tbody>
@@ -63,15 +63,18 @@
             <td th:text="${company.zip}"></td>
             <td th:text="${company.webSite}"></td>
 <!--            <td th:text="${company.jobListingId}"></td>-->
-<!--            <td><a th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>-->
-<!--            <td><a th:href="@{/delete-hiring-company/{id}(id=${company.id})}">Delete</a></td>-->
-        </tr>
+<!--           <td><a th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>&ndash;&gt;-->
+<!--           <td><a th:href="@{/delete-hiring-company/{id}(id=${company.id})}">Delete</a></td>&ndash;&gt;-->
+
+
         </tbody>
     </table>
 
     <a class="btn btn-success" th:href="@{/hiringcompany-register}">Add New Hiring Company</a>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

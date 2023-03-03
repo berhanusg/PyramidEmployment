@@ -1,5 +1,6 @@
 package com.pyramidbuildersemployment.service;
 
+import com.pyramidbuildersemployment.dto.ProffesionDTO;
 import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Profession;
 
@@ -7,6 +8,7 @@ import com.pyramidbuildersemployment.repository.ProffessionRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 @Service
 public class ProfessionServiceImpl implements ProffesionService {
@@ -35,8 +37,23 @@ public class ProfessionServiceImpl implements ProffesionService {
 
     @Override
     public Profession updateProfession(Profession profession) {
+
         return null;
     }
+    public Profession updateProfession(Long id, ProffesionDTO professionDTO) {
+        // Get the existing Profession entity by ID
+        Profession profession = proffessionRepoInterface.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Profession not found with id " + id));
+
+        // Update the properties of the Profession entity
+        profession.setProfessionName(professionDTO.getProfessionName());
+        profession.setIndustry(professionDTO.getIndustry());
+
+        // Save the updated Profession entity to the database
+        return proffessionRepoInterface.save(profession);
+    }
+
+
 
     @Override
     public void deleteProffession(long id) {
