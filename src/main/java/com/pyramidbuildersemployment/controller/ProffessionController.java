@@ -87,8 +87,11 @@ It sends a POST request to /profession-save endpoint and takes a ProfessionDTO o
 
 
     @PostMapping("/update-profession")
-    public String updateProfession(@ModelAttribute("profession") Profession profession) {
-        professionService.updateProfession(profession);
+
+   // public String updateProfession(@ModelAttribute("profession") Profession profession) {
+    public String updateProfession(@ModelAttribute("professionDTO")  Long id, ProffesionDTO professionDTO) {
+//        professionService.updateProfession(profession);
+        professionService.updateProfession(id,professionDTO);
         return "redirect:/profession-list";
     }
 

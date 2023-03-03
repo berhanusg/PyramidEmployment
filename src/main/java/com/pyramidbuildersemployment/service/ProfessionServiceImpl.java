@@ -38,6 +38,7 @@ public class ProfessionServiceImpl implements ProffesionService {
     @Override
     public Profession updateProfession(Profession profession) {
 
+
         return null;
     }
     public Profession updateProfession(Long id, ProffesionDTO professionDTO) {

@@ -1,5 +1,6 @@
 package com.pyramidbuildersemployment.service;
 
+import com.pyramidbuildersemployment.dto.ProffesionDTO;
 import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Profession;
 
@@ -17,5 +18,6 @@ public interface ProffesionService {
      Profession updateProfession(Profession profession);
      void deleteProffession(long id);
      Profession registerProfession(Profession profession);
+    Profession updateProfession(Long id, ProffesionDTO professionDTO);
 
 }
