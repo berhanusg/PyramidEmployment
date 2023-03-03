@@ -35,7 +35,7 @@ public class CandidateController {
 
 
 
-
+// This shows Empty form in the browser
     @GetMapping("/candidate-register")
     public String showCandidateRegistrationForm(Model model) {
         List<Profession> professions = proffesionService.getAllProffessions();
@@ -57,7 +57,9 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
 
  */
-    @PostMapping("/candidate-register-process")
+
+   // WAS  @PostMapping("/candidate-register-process")
+    @PostMapping("/candidate-register")
     public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "candidate-register";
@@ -78,9 +80,12 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setTelephone(candidateDTO.getTelephone());
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setEducation_level(candidateDTO.getEducationLevel());
-        Profession objProfession = proffesionService.getProfessionById(candidateDTO.getProfessionId());
 
-        // setprofession
+        Long professionId = candidateDTO.getProfessionId();
+        Profession profession = proffesionService.getProfessionById(professionId);
+        candidate.setProfessionId(profession);
+
+
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
         candidate.setNumberOfYears(candidateDTO.getNumberOfYears());
         candidate.setExperiencedescription(candidateDTO.getExperiencedescription());
@@ -90,12 +95,15 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setState(candidateDTO.getState());
         candidate.setZip(candidateDTO.getZip());
         candidate.setCountry(candidateDTO.getCountry());
-        model.addAttribute("candidateDTO", new CandidateDTO());
-        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
+//        model.addAttribute("candidateDTO", new CandidateDTO());
+//        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
+        model.addAttribute("candidateDTO", candidateDTO);
 
-
+        candidateService.registerCandidate(candidate);
         return "redirect:/candidate-list";
     }
+
+
 
     @GetMapping("/candidate-list")
     public String candidateList(Model model) {

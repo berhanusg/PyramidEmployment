@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Job Listing List</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Job Site</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Candidates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hiring Companies</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Job Listings</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Job Listing List</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Job Title</th>
+            <th>Job Description</th>
+            <th>Job Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="jobListing : ${joblistingList}">
+            <td th:text="${jobListing.id}"></td>
+            <td th:text="${jobListing.jobTitle}"></td>
+            <td th:text="${jobListing.jobDescription}"></td>
+            <td th:text="${jobListing.salary}"></td>
+            <td><a th:href="@{/edit-joblisting/{id}(id=${jobListing.id})}">Edit</a></td>
+            <td><a th:href="@{/delete-joblisting/{id}(id=${jobListing.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" th:href="@{/joblisting-register}">Add New Job Listing</a>
+</div>
+
+</body>
+</html>

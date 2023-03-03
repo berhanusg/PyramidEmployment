@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class JobListingDTO {
+    private Long id;
     private String jobTitle;
     private String jobDescription;
     private String location;

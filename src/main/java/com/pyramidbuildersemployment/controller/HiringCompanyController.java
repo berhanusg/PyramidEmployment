@@ -1,103 +1,96 @@
-//package  com.pyramidbuildersemployment.controller;
-//
-//import com.pyramidbuildersemployment.models.HiringCompany;
-//import com.pyramidbuildersemployment.models.JobListing;
-//import com.pyramidbuildersemployment.service.HiringCompanyService;
-//import com.pyramidbuildersemployment.service.HiringCompanyServiceImpl;
-//import com.pyramidbuildersemployment.service.JobListingService;
-//import com.pyramidbuildersemployment.service.JobListingServiceImpl;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//import java.util.Objects;
-//
-//@Controller
-//@CrossOrigin
-//public class HiringCompanyController {
-//    @Autowired
-//   // private HiringCompanyServiceImpl hiringCompanyServiceImpl;
-//    private HiringCompanyService hiringCompanyService;
-//    public HiringCompanyController(HiringCompanyService hiringCompanyService) {
-//        this.hiringCompanyService = hiringCompanyService;
-//    }
-//
-//
-//    @GetMapping("/hiring-company/register")
-//    public String showJobSeekerRegistrationForm(Model model) {
-//        model.addAttribute("hiringcompany", new HiringCompany());
-//        return "hiringcompany-registration-form";
-//    }
-//
-//    @PostMapping("/hiring-company/register")
-//    public String registerCandidate(@ModelAttribute("hiringcompany") HiringCompany hiringCompany) {
-//        // Call the service method to save the candidate and address to the database
-//        hiringCompanyService.registerhiringCompany(hiringCompany);
-//
-//        // Redirect to a success page
-//        return "redirect:/success";
-//    }
-//
-//
-//    @GetMapping("/hiring-company") // change this whatever you want the path to be
-//    public List<HiringCompanyService> getAllAllHiringCompanies() {
-//        return hiringCompanyService.getAllAllHiringCompanies();
-//    }
-//
-//
-//    @GetMapping(path = "/hiring-company/{id}")
-//    public ResponseEntity<HiringCompany> getCandidateById(@PathVariable long id) {
-//        HiringCompany hiringCompany = hiringCompanyService.getHiringCompanyById(id);
-//
-//        if (hiringCompany != null) {
-//            // send a 200 status code with the user object as the response body
-//            return ResponseEntity.ok(hiringCompany);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//    }
-//
-//    @PostMapping("/{hiring-company}")
-//    public ResponseEntity<HiringCompany> registerCandidat(@RequestBody HiringCompany hiringCompany) {
-//
-//        hiringCompany = hiringCompanyService.saveAll(hiringCompany);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(hiringCompany);
-//
-//    }
-//
-//    @PutMapping(path = "hiring-company/{id}")
-//    public ResponseEntity<HiringCompany> updateProfession(@RequestBody HiringCompany hiringCompany, @PathVariable long id) {
-//
-//
-//        if (hiringCompany.getHiringcompany_id()== id) {
-//            hiringCompany = hiringCompanyService.updateHiringCompany(hiringCompany);
-//            if (hiringCompany != null) {
-//                return ResponseEntity.ok(hiringCompany);
-//            } else {
-//                return ResponseEntity.badRequest().build();
-//            }
-//        } else {
-//            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-//        }
-//
-//    }
-//
-//
-//
-//
-//
-//    @DeleteMapping(path = "hiringcompany/{id}")
-//    public ResponseEntity<String> deleteAddress(@PathVariable long id) {
-//
-//        // delete address from DB
-//        hiringCompanyService.deleteHiringCompany(id);
-//
-//        return new ResponseEntity<String>(" The Hiring Company  deleted successfully!.", HttpStatus.OK);
-//    }
-//
-//}
+package  com.pyramidbuildersemployment.controller;
+import com.pyramidbuildersemployment.dto.HiringCompanyDTO;
+import com.pyramidbuildersemployment.models.HiringCompany;
+import com.pyramidbuildersemployment.models.JobListing;
+import com.pyramidbuildersemployment.service.HiringCompanyService;
+import com.pyramidbuildersemployment.service.JobListingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.List;
+
+
+@Controller
+@CrossOrigin
+public class HiringCompanyController {
+    @Autowired
+   // private HiringCompanyServiceImpl hiringCompanyServiceImpl;
+    private HiringCompanyService hiringCompanyService;
+    @Autowired
+    private JobListingService jobListingService;
+    public HiringCompanyController(HiringCompanyService hiringCompanyService) {
+        this.hiringCompanyService = hiringCompanyService;
+    }
+      /*
+
+      This code defines a controller method showHiringCompanyRegistrationForm()
+       that returns a String which is the name of the Thymeleaf template file (hiringcompany-register.html).
+       The method also adds a new HiringCompanyDTO object to the model so that it can be used in the template to bind form data.
+       Additionally, the method retrieves a list of all JobListing objects from the database using jobListingService.getAllAlljoblistings()
+        and adds it to the model so that it can be used to populate a select box in the template.
+  */
+    @GetMapping("/hiringcompany-register")
+    public String showHiringCompanyRegistrationForm(Model model) {
+        List<JobListing> jobListing = jobListingService.getAlljoblistings();
+       // model.addAttribute("joblisting", joblistings);
+        model.addAttribute("hiringCompanyDTO", new HiringCompanyDTO());
+
+        return "hiringcompany-register";
+    }
+
+    @PostMapping(value = "/hiringcompany-register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+
+    //@PostMapping("/hiringcompany-register")
+    public String registerCandidate(@ModelAttribute("hiringCompanyDTO") @Valid HiringCompanyDTO hiringCompanyDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "hiringcompany-register";
+        }
+
+        // add null check for address
+        if (hiringCompanyDTO.getHiringCompanyName() == null) {
+            // handle null name error
+            return "hiringcompany-register";
+        }
+        // create new HiringCompany entity
+        HiringCompany hiringCompany = new HiringCompany();
+
+        hiringCompany.setHiringCompanyName(hiringCompanyDTO.getHiringCompanyName());
+        hiringCompany.setContactpersonfname(hiringCompanyDTO.getContactpersonfname());
+        hiringCompany.setContactpersonlname(hiringCompanyDTO.getContactpersonlname());
+        hiringCompany.setHiringcompanyemail(hiringCompanyDTO.getEmail());
+        hiringCompany.setCity(hiringCompanyDTO.getCity());
+        hiringCompany.setState(hiringCompanyDTO.getState());
+        hiringCompany.setCountry(hiringCompanyDTO.getCountry());
+        hiringCompany.setZip(hiringCompanyDTO.getZip());
+        hiringCompany.setWebSite(hiringCompanyDTO.getWebSite());
+        hiringCompany.setStreet(hiringCompanyDTO.getStreet());
+        Long jobListingId = hiringCompanyDTO.getJobListingId();
+        JobListing joblisting= jobListingService.getJobListingById(jobListingId);
+        hiringCompany.setJobListingId(joblisting);
+        // Call the service method to save the hiring company to the database
+        model.addAttribute("hiringCompanyDTO", hiringCompanyDTO);
+        hiringCompanyService.registerhiringCompany(hiringCompany);
+        // Redirect to a success page
+        return "redirect:/hiringcompany-list";
+    }
+
+
+
+    @GetMapping("/hiringcompany-list")
+    public String hiringCompanyList(Model model) {
+        List<HiringCompany> hiringCompanyList = hiringCompanyService.getAllAllHiringCompanies();
+        model.addAttribute("hiringcompany",hiringCompanyList);
+        return "hiringcompany-list";
+    }
+
+
+
+
+
+
+
+}

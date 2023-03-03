@@ -2,7 +2,6 @@ package  com.pyramidbuildersemployment.controller;
 
 import com.pyramidbuildersemployment.dto.ProffesionDTO;
 import com.pyramidbuildersemployment.models.Profession;
-import com.pyramidbuildersemployment.service.CandidateService;
 import com.pyramidbuildersemployment.service.ProffesionService;
 import org.springframework.beans.factory.annotation.Autowired;
 

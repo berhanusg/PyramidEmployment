@@ -6,7 +6,7 @@ import com.pyramidbuildersemployment.models.JobListing;
 import java.util.List;
 
 public interface JobListingService {
-    List<JobListingService> getAllAlljoblistings();
+    List<JobListing> getAlljoblistings();
 
     JobListing getJobListingById(long id);
 

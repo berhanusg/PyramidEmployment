@@ -1,6 +1,5 @@
 package com.pyramidbuildersemployment.models;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -59,27 +58,6 @@ public class Candidate {
     public void setProfessionId(Profession professionId) {
         this.professionId = professionId;
     }
-
-
-
-//    public Experience getExperienceId() {
-//        return experienceId;
-//    }
-//
-//    public void setExperienceId(Experience experienceId) {
-//        this.experienceId = experienceId;
-//    }
-//
-//    @OneToOne
-//    @JoinColumn(name = "experience_id")
-//    private Experience experienceId;
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//   @JoinColumn(name = "address_id", referencedColumnName = "id")
-//    private Address address;
-
-
-
 
 
     public long getCandidateById() {

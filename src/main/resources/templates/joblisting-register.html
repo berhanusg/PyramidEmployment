@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Job Listing Registration Form</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<h1>Job Listing Registration Form</h1>
+<form th:action="@{/joblisting-register}" th:object="${jobListingDTO}" method="post">
+    <div>
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" th:field="*{jobTitle}" id="jobTitle"/>
+    </div>
+    <div>
+        <label for="jobDescription">Job Description:</label>
+        <input type="text" th:field="*{jobDescription}" id="jobDescription"/>
+    </div>
+    <div>
+        <label for="location">Job Location:</label>
+        <input type="text" th:field="*{location}" id="location"/>
+    </div>
+    <div>
+        <label for="salary">Salary:</label>
+        <input type="text" th:field="*{salary}" id="salary"/>
+    </div>
+
+    <div>
+        <button type="submit">Register Job Listing</button>
+    </div>
+</form>
+</body>
+
+</html>

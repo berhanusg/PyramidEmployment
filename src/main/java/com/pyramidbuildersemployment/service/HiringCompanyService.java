@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface  HiringCompanyService   {
 
-    List<HiringCompanyService> getAllAllHiringCompanies();
+    List<HiringCompany> getAllAllHiringCompanies();
 
     HiringCompany getHiringCompanyById(long id);
 

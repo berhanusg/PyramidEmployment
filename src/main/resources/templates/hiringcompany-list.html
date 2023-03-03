@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiring Company List</title>
+
+    <meta charset="UTF-8">
+    <title>Hiring Company List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Job Site</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Candidates</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Hiring Companies</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1>List of Hiring Companies</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Company Name</th>
+            <th>Contact Person First Name</th>
+            <th>Contact Person Last Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Zip</th>
+            <th>Website</th>
+            <th>Job Listing</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="company : ${hiringcompany}">
+            <td th:text="${company.id}"></td>
+            <td th:text="${company.hiringCompanyName}"></td>
+            <td th:text="${company.contactpersonfname}"></td>
+            <td th:text="${company.contactpersonlname}"></td>
+            <td th:text="${company.hiringcompanyemail}"></td>
+            <td th:text="${company.city}"></td>
+            <td th:text="${company.state}"></td>
+            <td th:text="${company.country}"></td>
+            <td th:text="${company.zip}"></td>
+            <td th:text="${company.webSite}"></td>
+            <td th:text="${company.jobListingId.jobTitle}"></td>
+            <td><a th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>
+            <td><a th:href="@{/delete-hiring-company/{id}(id=${company.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" th:href="@{/hiringCompany-register}">Add New Hiring Company</a>
+</div>
+
+
+</body>
+</html>

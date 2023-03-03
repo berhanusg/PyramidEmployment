@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Hiring Company Registration Form</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<h1>Hiring Company Registration Form</h1>
+<form th:action="@{/hiringcompany-register}" th:object="${hiringCompanyDTO}" method="post">
+    <div>
+        <label for="hiringCompanyName">Company Name:</label>
+        <input type="text" th:field="*{hiringCompanyName}" id="hiringCompanyName"/>
+    </div>
+    <div>
+        <label for="contactpersonfname">Contact Person First Name:</label>
+        <input type="text" th:field="*{contactpersonfname}" id="contactpersonfname"/>
+    </div>
+    <div>
+        <label for="contactpersonlname">Contact Person Last Name:</label>
+        <input type="text" th:field="*{contactpersonlname}" id="contactpersonlname"/>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" th:field="*{email}" id="email"/>
+    </div>
+    <div>
+        <label for="street">Street:</label>
+        <input type="text" th:field="*{street}" id="street"/>
+    </div>
+    <div>
+        <label for="city">City:</label>
+        <input type="text" th:field="*{city}" id="city"/>
+    </div>
+    <div>
+        <label for="state">State:</label>
+        <input type="text" th:field="*{state}" id="state"/>
+    </div>
+    <div>
+        <label for="country">Country:</label>
+        <input type="text" th:field="*{country}" id="country"/>
+    </div>
+    <div>
+        <label for="zip">Zip Code:</label>
+        <input type="text" th:field="*{zip}" id="zip"/>
+    </div>
+    <div>
+        <label for="webSite">Website:</label>
+        <input type="text" th:field="*{webSite}" id="webSite"/>
+    </div>
+<!--    <div>-->
+<!--        <label for="jobListingId">Job Listing:</label>-->
+<!--        <select th:field="*{jobListingId}" id="jobListingId">-->
+<!--            <option th:each="jobListing : ${jobListings}" th:value="${jobListing.id}" th:text="${jobListing.jobTitle}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
+    <div>
+        <button type="submit">Register Hiring Company</button>
+    </div>
+</form>
+</body>
+
+</html>

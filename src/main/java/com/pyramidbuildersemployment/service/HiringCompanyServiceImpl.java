@@ -1,5 +1,6 @@
 package com.pyramidbuildersemployment.service;
 
+import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.HiringCompany;
 
 import com.pyramidbuildersemployment.models.Profession;
@@ -22,8 +23,8 @@ public class HiringCompanyServiceImpl implements HiringCompanyService{
 
 
     @Override
-    public List<HiringCompanyService> getAllAllHiringCompanies() {
-        return null;
+    public List<HiringCompany> getAllAllHiringCompanies() {
+         return (List<HiringCompany>) hiringRepoInterface.findAll();
     }
 
     @Override

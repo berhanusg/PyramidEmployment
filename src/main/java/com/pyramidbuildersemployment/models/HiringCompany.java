@@ -1,12 +1,12 @@
 package com.pyramidbuildersemployment.models;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -30,17 +30,17 @@ public class HiringCompany {
     @Column(name = "id")
     private long hiringcompany_id;
 
-    @Column (name= "contactpersonfname")
+    @Column(name = "contactpersonfname")
     private String contactpersonfname;
-    @Column (name= "contactpersonlname")
+    @Column(name = "contactpersonlname")
     private String contactpersonlname;
-    @Column (name= "hiringcompanyemail")
+    @Column(name = "hiringcompanyemail")
     private String hiringcompanyemail;
-    @Column (name = "webSite")
+    @Column(name = "webSite")
     private String webSite;
-    @Column (name ="hiringCompanyName")
+    @Column(name = "hiringCompanyName")
     private String hiringCompanyName;
-    private String email ;
+    private String email;
     private String street;
     private String city;
     private String state;
@@ -48,30 +48,12 @@ public class HiringCompany {
     private String country;
     @ManyToOne
     @JoinColumn(name = "job_listing_id")
-    private JobListing jobListing;
+    private JobListing jobListingId;
 
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "address_id", referencedColumnName = "id")
 //    private Address address;
 
-
-
-    private String getcontactpersonfname(){
-
-        return contactpersonfname;
-
-    }
-   private void setcontactpersonfname(String contactpersonfname){
-       this.contactpersonfname =contactpersonfname;
-   }
-    private String getcontactpersonlname(){
-
-        return contactpersonlname;
-
-    }
-    private void setcontactpersonlname(String contactpersonlname){
-        this.contactpersonfname =contactpersonfname;
-    }
-
 }
+

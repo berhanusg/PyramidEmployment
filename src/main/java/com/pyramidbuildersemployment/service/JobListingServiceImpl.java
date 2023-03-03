@@ -1,6 +1,7 @@
 package com.pyramidbuildersemployment.service;
 
 //import com.pyramidbuildersemployment.models.Experience;
+import com.pyramidbuildersemployment.models.HiringCompany;
 import com.pyramidbuildersemployment.models.JobListing;
 
 import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
@@ -19,8 +20,8 @@ public class JobListingServiceImpl implements JobListingService{
         this.jobListingRepoInterface = jobListingRepoInterface;
     }
     @Override
-    public List<JobListingService> getAllAlljoblistings() {
-        return null;
+    public List<JobListing> getAlljoblistings() {
+        return (List<JobListing>) jobListingRepoInterface.findAll();
     }
 
     @Override
