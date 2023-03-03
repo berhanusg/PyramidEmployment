@@ -42,9 +42,9 @@ public class HiringCompanyController {
         return "hiringcompany-register";
     }
 
-    @PostMapping(value = "/hiringcompany-register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    //@PostMapping(value = "/hiringcompany-register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 
-    //@PostMapping("/hiringcompany-register")
+    @PostMapping("/hiringcompany-register")
     public String registerCandidate(@ModelAttribute("hiringCompanyDTO") @Valid HiringCompanyDTO hiringCompanyDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "hiringcompany-register";
@@ -68,9 +68,9 @@ public class HiringCompanyController {
         hiringCompany.setZip(hiringCompanyDTO.getZip());
         hiringCompany.setWebSite(hiringCompanyDTO.getWebSite());
         hiringCompany.setStreet(hiringCompanyDTO.getStreet());
-        Long jobListingId = hiringCompanyDTO.getJobListingId();
-        JobListing joblisting= jobListingService.getJobListingById(jobListingId);
-        hiringCompany.setJobListingId(joblisting);
+//        Long jobListingId = hiringCompanyDTO.getJobListingId();
+//        JobListing joblisting= jobListingService.getJobListingById(jobListingId);
+//        hiringCompany.setJobListingId(joblisting);
         // Call the service method to save the hiring company to the database
         model.addAttribute("hiringCompanyDTO", hiringCompanyDTO);
         hiringCompanyService.registerhiringCompany(hiringCompany);
