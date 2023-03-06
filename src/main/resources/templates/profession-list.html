@@ -38,8 +38,7 @@
             <th>ID</th>
             <th>Profession Name</th>
             <th>Industry</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -47,15 +46,13 @@
             <td th:text="${profession.id}"></td>
             <td th:text="${profession.professionName}"></td>
             <td th:text="${profession.industry}"></td>
-            <td><a th:href="@{/edit-profession/{id}(id=${profession.id})}">Edit</a></td>
-            <td><a th:href="@{/delete-profession/{id}(id=${profession.id})}">Delete</a></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/edit-profession/{id}(id=${profession.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm " th:href= "@{/delete-profession/{id}(id=${profession.id})}">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
-    <select>
-
-<!--        <option th:each="p : ${profList}"   th:text="${p.professionName}"> </option>-->
-    </select>
 
 
     <a class="btn btn-success" th:href="@{/profession-register}">Add New Profession</a>

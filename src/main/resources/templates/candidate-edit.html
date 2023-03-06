@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Candidate</title>
+</head>
+<body>
+<h1>Edit Candidate</h1>
+<form th:action="@{/candidate-edit}" th:object="${candidate}" method="post">
+    <input type="hidden" name="id" th:value="${candidate.id}"/>
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" th:field="*{firstname}" id="firstName"/>
+    </div>
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" th:field="*{lastname}" id="lastName"/>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" th:field="*{email}" id="email"/>
+    </div>
+    <div>
+        <label for="profession">Profession:</label>
+        <select th:field="*{profession.id}" id="profession">
+            <option th:each="prof : ${professions}" th:value="${prof.id}" th:text="${prof.professionName}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="yearsOfExperience">Years of Experience:</label>
+        <input type="number" th:field="*{numberOfYears}" id="yearsOfExperience"/>
+    </div>
+    <div>
+        <button type="submit">Update Candidate</button>
+    </div>
+</form>
+</body>
+</html>

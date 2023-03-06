@@ -10,6 +10,7 @@ public interface CandidateService {
 
      Candidate getCandidateById(long id);
 
+
      Candidate saveAll(Candidate candidate);
 
      Candidate updateCandidate(Candidate candidate);

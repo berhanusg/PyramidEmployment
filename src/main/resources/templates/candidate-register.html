@@ -5,7 +5,6 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
@@ -29,12 +28,14 @@
         </ul>
     </div>
 </nav>
+
+
+
 <div class="container">
     <div class="row justify-content-center">
-       <div class="col-md-8">
+        <div class="col-md-8">
             <h1>Candidate Registration</h1>
             <form th:action="@{/candidate-register}" th:object="${candidateDTO}" method="post">
-<!--                <form th:action="@{/candidate/save}" th:object="${candidateDTO}" method="post">-->
                 <div class="form-group">
                     <label for="firstname">First Name</label>
                     <input type="text" class="form-control" th:field="*{firstname}" id="firstname" required/>
@@ -68,18 +69,26 @@
                     <label for="educationLevel">Education Level</label>
                     <input type="text" class="form-control" th:field="*{educationLevel}" id="educationLevel" required/>
                 </div>
-                    <div class="form-group" >
-<!--             <select class="form-control" th:field="*{professionId}" id="professionId" >&ndash;&gt;-->
-              <div th:object="${professions}">
+
+                <div class="form-group" >
+
+<!--             <select class="form-control" th:field="*{professionId}" id="professionId" > -->
+<!--              <div th:object="${professions}">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="professionId">Profession</label>-->
+<!--                        <select class="form-control" id="professionId">-->
+<!--                            <option value="">Select Profession</option>-->
+<!--                            <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.professionName}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--              </div>-->
+
+                    <select class="form-control" id="professionId" th:field="*{professionId}">
+                        <option value="">Select Profession</option>
+                        <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.professionName}"></option>
+                    </select>
+
                     <div class="form-group">
-                        <label for="professionId">Profession</label>
-                        <select class="form-control" id="professionId">
-                            <option value="">Select Profession</option>
-                            <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.professionName}"></option>
-                        </select>
-                    </div>
-              </div>
-               <div class="form-group">
                     <label for="numberOfMonths">Number Of Months</label>
                     <input type="text" class="form-control" th:field="*{numberOfMonths}" id="numberOfMonths" required/>
                 </div>
@@ -114,7 +123,9 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save Candidate</button>
                 </div>
+                </div>
             </form>
+
         </div>
     </div>
 </div>

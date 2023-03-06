@@ -1,7 +1,9 @@
 package  com.pyramidbuildersemployment.controller;
 import com.pyramidbuildersemployment.dto.HiringCompanyDTO;
+import com.pyramidbuildersemployment.dto.ProffesionDTO;
 import com.pyramidbuildersemployment.models.HiringCompany;
 import com.pyramidbuildersemployment.models.JobListing;
+import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.service.HiringCompanyService;
 import com.pyramidbuildersemployment.service.JobListingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -33,10 +37,13 @@ public class HiringCompanyController {
        Additionally, the method retrieves a list of all JobListing objects from the database using jobListingService.getAllAlljoblistings()
         and adds it to the model so that it can be used to populate a select box in the template.
   */
-    @GetMapping("/hiringcompany-register")
-    public String showHiringCompanyRegistrationForm(Model model) {
-        List<JobListing> jobListing = jobListingService.getAlljoblistings();
-      //  model.addAttribute("joblisting", jobListing);
+
+
+
+        @GetMapping("/hiringcompany-register")
+    public String registerHiringCompanies(Model model) {
+        List<HiringCompany> hiringcompanyList = hiringCompanyService.getAllAllHiringCompanies();
+
         model.addAttribute("hiringCompanyDTO", new HiringCompanyDTO());
 
         return "hiringcompany-register";
@@ -45,7 +52,7 @@ public class HiringCompanyController {
     //@PostMapping(value = "/hiringcompany-register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 
     @PostMapping("/hiringcompany-register")
-    public String registerCandidate(@ModelAttribute("hiringCompanyDTO") @Valid HiringCompanyDTO hiringCompanyDTO, BindingResult bindingResult, Model model) {
+    public String registerHiringCompany(@ModelAttribute("hiringCompanyDTO") @Valid HiringCompanyDTO hiringCompanyDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "hiringcompany-register";
         }
@@ -79,14 +86,39 @@ public class HiringCompanyController {
     }
 
 
-
-    @GetMapping("/hiringcompany-list")
+    @RequestMapping(value = "/hiringcompany-list", method = {RequestMethod.GET, RequestMethod.POST})
+    //@GetMapping("/hiringcompany-list")
     public String hiringCompanyList(Model model) {
-        List<HiringCompany> hiringCompanyList = hiringCompanyService.getAllAllHiringCompanies();
-        model.addAttribute("hiringcompany",hiringCompanyList);
+        List<HiringCompany> hiringcompany = hiringCompanyService.getAllAllHiringCompanies();
+        model.addAttribute("hiringcompany",hiringcompany);
         return "hiringcompany-list";
     }
 
+
+//retrieve the hiring company by its ID and add it to the model for the view:
+    @RequestMapping(value = "/edit-hiring-company/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView showEditHiringCompanyForm(@PathVariable(name="id") Long id) {
+        HiringCompany hiringcompany = hiringCompanyService.getHiringCompanyById(id);
+
+        ModelAndView modelAndView = new ModelAndView("hiringcompany-edit");
+        modelAndView.addObject("id", id);
+
+        //modelAndView.addObject("hiringcompany", hiringcompany);
+        System.out.println(id);
+        return modelAndView;
+    }
+
+
+
+
+
+    @RequestMapping(value = "/update-hiringcompany", method = {RequestMethod.GET, RequestMethod.POST})
+    // @PostMapping("/update-profession")
+    public String updateHiringCompany(@ModelAttribute("hiringcompany") HiringCompany hiringCompany) {
+
+        hiringCompanyService.updateHiringCompany(hiringCompany);
+        return "redirect:/hiringcompany-list";
+    }
 
 
 

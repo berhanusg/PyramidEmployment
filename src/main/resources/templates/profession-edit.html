@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
     <title>Edit Profession</title>
 </head>
 <body>
 <h1>Edit Profession</h1>
-<form th:action="@{/update-profession}" th:object="${professionDTO}" method="post">
+
+<form th:action="@{/update-profession}" th:object="${profession}" method="post">
+    <div>
+<!--        <label for="id">Profession ID:</label>-->
+        <input type="text" name="id" readonly="readonly" th:value="${id}" />
+    </div>
     <div>
         <label for="professionName">Profession Name:</label>
-        <input type="text" th:value="${professionName}" id="professionName"/>
+        <input type="text" th:value="${professionName}" id="professionName" />
     </div>
     <div>
         <label for="industry">Industry:</label>
-        <input type="text" th:value="${industry}" id="industry"/>
+        <input type="text" th:value="${industry}" id="industry" />
     </div>
     <div>
         <button type="submit">Update Profession</button>
     </div>
 </form>
+
+
 </body>
 </html>

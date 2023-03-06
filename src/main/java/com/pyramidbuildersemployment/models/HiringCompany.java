@@ -28,7 +28,7 @@ public class HiringCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long hiringcompany_id;
+    private long id;
 
     @Column(name = "contactpersonfname")
     private String contactpersonfname;

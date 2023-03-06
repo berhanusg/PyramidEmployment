@@ -1,17 +1,17 @@
 package  com.pyramidbuildersemployment.controller;
 
 import com.pyramidbuildersemployment.dto.JobListingDTO;
-import com.pyramidbuildersemployment.dto.ProffesionDTO;
+
 import com.pyramidbuildersemployment.models.JobListing;
-import com.pyramidbuildersemployment.models.Profession;
+
 import com.pyramidbuildersemployment.service.JobListingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -82,70 +82,28 @@ and returns the Thymeleaf view name "joblistinglist". The view is expected to
     }
 
 
+    @RequestMapping(value = "/edit-joblisting/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView showEditJobListingForm(@PathVariable(name="id") Long id) {
+        JobListing jobListing = jobListingService.getJobListingById(id);
+
+        ModelAndView modelAndView = new ModelAndView("jobListing-edit");
+        modelAndView.addObject("id", id);
+        modelAndView.addObject("jobListing", jobListing);
+        System.out.println(id);
+        return modelAndView;
+    }
 
 
 
-//    @GetMapping("/joblisting/register")
-//    public String showJobSeekerRegistrationForm(Model model) {
-//        model.addAttribute("joblisting", new JobListing());
-//        return "joblisting-registration-form";
-//    }
-//
-//    @PostMapping("/joblisting/register")
-//    public String registerJoblisting(@ModelAttribute("joblisting") JobListing jobListing) {
-//        // Call the service method to save the candidate and address to the database
-//        jobListingService.registerJoblisting(jobListing);
-//
-//        // Redirect to a success page
-//        return "redirect:/success";
-//    }
-//
-//
-//    @GetMapping("/joblisting") // change this whatever you want the path to be
-//    public List<JobListing> getAllJoblistings() {
-//        return jobListingService.getAllAlljoblistings();
-//    }
-//
-//
-//    @GetMapping(path = "joblisting/{id}")
-//    public ResponseEntity<JobListing> getJoblistingById(@PathVariable long id) {
-//        JobListing jobListing = jobListingService.getJobListingById(id);
-//
-//        if (jobListing != null) {
-//            // send a 200 status code with the user object as the response body
-//            return ResponseEntity.ok(jobListing);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//    }
-//
-//
-//// THis is where Experience iD would have been useful to pull out the candidates that have relevant experience
-////    @PutMapping(path = "joblisting/{id}")
-////    public ResponseEntity<JobListing> updateProfession(@RequestBody JobListing jobListing, @PathVariable long id) {
-////
-////
-////        if (jobListing.getExperienceid().equals(id)) {
-////            jobListing = jobListingService.updateJoblisting(jobListing);
-////            if (jobListing != null) {
-////                return ResponseEntity.ok(jobListing);
-////            } else {
-////                return ResponseEntity.badRequest().build();
-////            }
-////        } else {
-////            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-////        }
-////
-////    }
-//    @DeleteMapping(path = "joblisting/{id}")
-//    public ResponseEntity<String> deleteAddress(@PathVariable long id) {
-//
-//        // delete address from DB
-//        jobListingService.deleteJobListing(id);
-//
-//        return new ResponseEntity<String>(" The Job Listed  deleted successfully!.", HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/update-jobListing", method = {RequestMethod.GET, RequestMethod.POST})
+
+    public String updateJobListing(@ModelAttribute("jobListing") JobListing jobListing) {
+        jobListingService.registerJoblisting(jobListing);
+        return "redirect:/jobListing-list";
+    }
+
+
+
 
 
 }

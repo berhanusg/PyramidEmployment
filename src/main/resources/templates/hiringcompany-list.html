@@ -40,11 +40,12 @@
             <th>Contact Person First Name</th>
             <th>Contact Person Last Name</th>
             <th>Email</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Country</th>
-            <th>Zip</th>
+<!--            <th>City</th>-->
+<!--            <th>State</th>-->
+<!--            <th>Country</th>-->
+<!--            <th>Zip</th>-->
             <th>Website</th>
+            <th>Actions</th>
 <!--            <th>Job Listing</th>-->
 <!--            <th>Edit</th>-->
 <!--            <th>Delete</th>-->
@@ -57,15 +58,16 @@
             <td th:text="${company.contactpersonfname}"></td>
             <td th:text="${company.contactpersonlname}"></td>
             <td th:text="${company.hiringcompanyemail}"></td>
-            <td th:text="${company.city}"></td>
-            <td th:text="${company.state}"></td>
-            <td th:text="${company.country}"></td>
-            <td th:text="${company.zip}"></td>
+<!--            <td th:text="${company.city}"></td>-->
+<!--            <td th:text="${company.state}"></td>-->
+<!--            <td th:text="${company.country}"></td>-->
+<!--            <td th:text="${company.zip}"></td>-->
             <td th:text="${company.webSite}"></td>
 <!--            <td th:text="${company.jobListingId}"></td>-->
-<!--           <td><a th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>&ndash;&gt;-->
-<!--           <td><a th:href="@{/delete-hiring-company/{id}(id=${company.id})}">Delete</a></td>&ndash;&gt;-->
-
+            <td><a class="btn btn-warning btn-sm" th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>
+            <!--            <td><a class="btn btn-warning btn-sm" th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit  </a>-->
+            <td> <a class="btn btn-danger btn-sm " th:href="@{/delete-hiring-company/{id}(id=${company.id})}">Delete</a>
+          </td>
 
         </tbody>
     </table>

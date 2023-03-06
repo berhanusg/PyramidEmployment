@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -46,6 +47,8 @@ It sends a POST request to /profession-save endpoint and takes a ProfessionDTO o
   using the ProfessionService. Finally, it redirects the user to "/profession-list" endpoint.
 
  */
+// With this change, the endpoint will be able to handle both GET and POST requests {RequestMethod.GET, RequestMethod.POST}
+   // @RequestMapping(value = "/profession-register", method = {RequestMethod.GET, RequestMethod.POST})
     @PostMapping("/profession-register")
     public String registerProfession(@ModelAttribute("professionDTO") @Valid ProffesionDTO professionDTO, BindingResult bindingResult,Model model) {
 
@@ -65,11 +68,8 @@ It sends a POST request to /profession-save endpoint and takes a ProfessionDTO o
         return "redirect:/profession-list";
     }
 
-
-
-
-
-    @GetMapping("/profession-list")
+    @RequestMapping(value = "/profession-list", method = {RequestMethod.GET, RequestMethod.POST})
+  //  @GetMapping("/profession-list")
     public String listProfessions(Model model)
     {
         List<Profession> professionList = professionService.getAllProffessions();
@@ -78,22 +78,29 @@ It sends a POST request to /profession-save endpoint and takes a ProfessionDTO o
 
         return  "profession-list";
     }
-    @GetMapping("/edit-profession/{id}")
-    public String showEditProfessionForm(@PathVariable("id") Long id, Model model) {
+
+    @RequestMapping(value = "/edit-profession/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView showEditProfessionForm(@PathVariable(name="id") Long id) {
         Profession profession = professionService.getProfessionById(id);
-        model.addAttribute("profession", profession);
-        return "profession-edit";
+
+        ModelAndView modelAndView = new ModelAndView("profession-edit");
+        modelAndView.addObject("id", id);
+        modelAndView.addObject("profession", profession);
+        System.out.println(id);
+        return modelAndView;
     }
 
 
-    @PostMapping("/update-profession")
 
-   // public String updateProfession(@ModelAttribute("profession") Profession profession) {
-    public String updateProfession(@ModelAttribute("professionDTO")  Long id, ProffesionDTO professionDTO) {
-//        professionService.updateProfession(profession);
-        professionService.updateProfession(id,professionDTO);
+    @RequestMapping(value = "/update-profession", method = {RequestMethod.GET, RequestMethod.POST})
+   // @PostMapping("/update-profession")
+    public String updateProfession(@ModelAttribute("profession") Profession profession) {
+        professionService.registerProfession(profession);
         return "redirect:/profession-list";
     }
+
+
+
 
 
 }

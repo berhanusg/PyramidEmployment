@@ -6,6 +6,7 @@ import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.service.*;
 import lombok.Lombok;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 @Controller
 @CrossOrigin
 public class CandidateController {
@@ -58,9 +61,28 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
  */
 
-   // WAS  @PostMapping("/candidate-register-process")
+    @Override
+    public String toString() {
+        String firstname = null;
+        String lastname =null;
+        String email =null;
+        String professionId =null;
+        String numberOfYears =null ;
+        long id =0;
+        return "CandidateDTO{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", professionId=" + professionId +
+                ", numberOfYears=" + numberOfYears +
+                '}';
+    }
+
+
+    // WAS  @PostMapping("/candidate-register-process")
     @PostMapping("/candidate-register")
-    public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model) {
+    public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model) throws ChangeSetPersister.NotFoundException {
         if (bindingResult.hasErrors()) {
             return "candidate-register";
         }
@@ -81,9 +103,32 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setEducation_level(candidateDTO.getEducationLevel());
 
-        Long professionId = candidateDTO.getProfessionId();
-        Profession profession = proffesionService.getProfessionById(professionId);
-        candidate.setProfessionId(profession);
+
+//        Long professionId = candidateDTO.getProfessionId();
+//        Profession profession = (Profession) proffesionService.getProfessionById(professionId);
+//        candidate.setProfessionId(profession);
+
+//        try {
+//            Long professionId = candidateDTO.getProfessionId();
+//
+//
+//            System.out.println(professionId);
+//            Profession profession = proffesionService.getProfessionById(professionId);
+//            candidate.setProfessionId(profession);
+//
+//
+//        } catch (NoSuchElementException e) {
+//            // handle the case where the profession is not found
+//            throw new ChangeSetPersister.NotFoundException();
+//        }
+//
+
+
+
+
+//         Long professionId = candidateDTO.getProfessionId();
+//          Profession profession = proffesionService.getProfessionById(professionId);
+//          candidate.setProfessionId(profession);
 
 
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
@@ -122,42 +167,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         }
 
 
-        @GetMapping(path = "/candidate/{id}")
-        public ResponseEntity<Candidate> getCandidateById(@PathVariable long id) {
-            Candidate candidate = candidateService.getCandidateById(id);
 
-            if (candidate != null) {
-                // send a 200 status code with the user object as the response body
-                return ResponseEntity.ok(candidate);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-
-        }
-
-        @PostMapping("/{candidates}")
-        public ResponseEntity<Candidate> registerCandidat(@RequestBody Candidate candidate) {
-
-            candidate = candidateService.saveAll(candidate);
-            return ResponseEntity.status(HttpStatus.CREATED).body(candidate);
-
-        }
-
-        @PutMapping(path = "candidate/{id}")
-        public ResponseEntity<Candidate> updateCandidate(@RequestBody Candidate candidate, @PathVariable long id) {
-
-            if (candidate.getCandidateById() == id) {
-                candidate = candidateService.updateCandidate(candidate);
-                if (candidate != null) {
-                    return ResponseEntity.ok(candidate);
-                } else {
-                    return ResponseEntity.badRequest().build();
-                }
-            } else {
-                return ResponseEntity.status(HttpStatus.CONFLICT).build();
-            }
-
-        }
         @DeleteMapping(path = "candidate/{id}")
         public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 

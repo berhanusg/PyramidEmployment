@@ -47,7 +47,7 @@ With this setup, we can add professions to a job
     @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
     private List<Profession> professions;
 
-    @OneToMany(mappedBy = "hiringcompany_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
      private List<HiringCompany>  hiringcompanyid;
 }
 
