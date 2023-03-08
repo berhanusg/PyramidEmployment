@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Job Listing Registration Form</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>Register Job Listing</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/custom.css">
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          rel="stylesheet">
 </head>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="#">Job Site</a>
@@ -17,39 +21,54 @@
                 <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Job Seekers</a>
+                <a class="nav-link" href="#">Candidates</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">Hiring Companies</a>
             </li>
         </ul>
     </div>
-    <!--</nav><form th:action="@{/profession-save}" th:object="${proffesionDTO}" method="post">-->
 </nav>
 <body>
-<h1>Job Listing Registration Form</h1>
-<form th:action="@{/joblisting-register}" th:object="${jobListingDTO}" method="post">
-    <div>
-        <label for="jobTitle">Job Title:</label>
-        <input type="text" th:field="*{jobTitle}" id="jobTitle"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>Register Job Listing</h2>
+            <form th:action="@{/joblisting-register}" th:object="${jobListingDTO}" method="post">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" class="form-control" th:field="*{jobTitle}" id="jobTitle"/>
+                </div>
+                <div class="form-group">
+                    <label for="jobDescription">Job Description:</label>
+                    <input type="text" class="form-control" th:field="*{jobDescription}" id="jobDescription"/>
+                </div>
+                <div class="form-group">
+                    <label for="location">Job Location:</label>
+                    <input type="text" class="form-control" th:field="*{location}" id="location"/>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" th:field="*{salary}" id="salary"/>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">Register Job Listing</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label for="jobDescription">Job Description:</label>
-        <input type="text" th:field="*{jobDescription}" id="jobDescription"/>
-    </div>
-    <div>
-        <label for="location">Job Location:</label>
-        <input type="text" th:field="*{location}" id="location"/>
-    </div>
-    <div>
-        <label for="salary">Salary:</label>
-        <input type="text" th:field="*{salary}" id="salary"/>
-    </div>
+</div>
+<!-- Bootstrap JS and jQuery -->
 
-    <div>
-        <button type="submit">Register Job Listing</button>
-    </div>
-</form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-JKidyWmv8C6U02X6U1ma4mD4kK8Zhehv0RY+BL/kzzvB1W0Q8lI4U6X1+4eD4oW8"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>

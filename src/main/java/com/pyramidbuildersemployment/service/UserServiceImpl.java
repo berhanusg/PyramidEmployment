@@ -64,4 +64,14 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(Long id) {
 
     }
+
+    @Override
+    public void saveUser(UserDTO registrationDto) {
+
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepoInterface.findByEmail(email);
+    }
 }

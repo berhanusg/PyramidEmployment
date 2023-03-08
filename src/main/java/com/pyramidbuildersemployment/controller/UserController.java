@@ -27,34 +27,11 @@ import java.util.Set;
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/register-user")
+    @GetMapping("/user-register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new UserDTO());
-        return "register-user";
+        return "user-register";
     }
-
-  //  @PostMapping("/register")
-//    public String registerUser(@ModelAttribute("user") @Valid UserDTO userDto, BindingResult bindingResult, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return "register";
-//        }
-//        User user = new User();
-//        user.setId(userDto.getId());
-//        user.setUsername(userDto.getUsername());
-//        user.setPassword(userDto.getPassword());
-//        Role role = roleService.getRoleById(userDto.getId());
-//
-//        model.addAttribute("userDto", userDto);
-//        userService.createUser(user);
-//        return "redirect:/login?success";
-//    }
-/*
- The User class   does not have a setRole() method.
-  Instead, it has a setRoles() method that sets a Set of Role objects.
-
- modify the code to add the role to the set of roles for the user.
- */
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userDto") @Valid UserDTO userDto, BindingResult bindingResult, Model model) {
@@ -85,3 +62,4 @@ import java.util.Set;
         return "redirect:/login?success";
     }
 }
+
