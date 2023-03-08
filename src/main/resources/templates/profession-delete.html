@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Profession</title>
+</head>
+<body>
+<h1>Delete Profession</h1>
+
+<!--<form th:action="@{/delete-profession}" th:object="${profession}" method="post">-->
+    <form method="post" th:action="@{/delete-profession/{id}(id=${profession.id})}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+
+    <div>
+<!--        <label for="id">Profession ID:</label>-->
+        <input type="text" name="id" readonly="readonly" th:value="${id}" />
+    </div>
+    <div>
+        <label for="professionName">Profession Name:</label>
+        <input type="text" th:value="${professionName}" id="professionName" readonly="readonly" />
+    </div>
+    <div>
+        <label for="industry">Industry:</label>
+        <input type="text" th:value="${industry}" id="industry" readonly="readonly" />
+    </div>
+    <div>
+        <button type="submit">Delete Profession</button>
+    </div>
+</form>
+
+</body>
+</html>

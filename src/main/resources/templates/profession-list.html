@@ -5,7 +5,7 @@
     <title>Title</title>
 
         <meta charset="UTF-8">
-        <title>Candidate List</title>
+        <title>Profession List</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
@@ -47,8 +47,11 @@
             <td th:text="${profession.professionName}"></td>
             <td th:text="${profession.industry}"></td>
             <td>
-                <a class="btn btn-warning btn-sm" th:href="@{/edit-profession/{id}(id=${profession.id})}">Edit</a>
-                <a class="btn btn-danger btn-sm " th:href= "@{/delete-profession/{id}(id=${profession.id})}">Delete</a>
+               <a class="btn btn-warning btn-sm" th:href="@{/edit-profession/{id}(id=${profession.id})}">Edit</a>
+<!--               <a class="btn btn-danger btn-sm " th:href= "@{/profession-delete(id=${profession.id})}">Delete</a> -->
+               <a class="btn btn-danger btn-sm" th:href="@{/delete-profession/{id}(id=${profession.id})}" th:method="post">Delete</a>
+
+
             </td>
         </tr>
         </tbody>

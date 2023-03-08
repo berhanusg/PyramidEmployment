@@ -61,23 +61,6 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
  */
 
-    @Override
-    public String toString() {
-        String firstname = null;
-        String lastname =null;
-        String email =null;
-        String professionId =null;
-        String numberOfYears =null ;
-        long id =0;
-        return "CandidateDTO{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
-                ", professionId=" + professionId +
-                ", numberOfYears=" + numberOfYears +
-                '}';
-    }
 
 
     // WAS  @PostMapping("/candidate-register-process")
@@ -104,32 +87,6 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setEducation_level(candidateDTO.getEducationLevel());
 
 
-//        Long professionId = candidateDTO.getProfessionId();
-//        Profession profession = (Profession) proffesionService.getProfessionById(professionId);
-//        candidate.setProfessionId(profession);
-
-//        try {
-//            Long professionId = candidateDTO.getProfessionId();
-//
-//
-//            System.out.println(professionId);
-//            Profession profession = proffesionService.getProfessionById(professionId);
-//            candidate.setProfessionId(profession);
-//
-//
-//        } catch (NoSuchElementException e) {
-//            // handle the case where the profession is not found
-//            throw new ChangeSetPersister.NotFoundException();
-//        }
-//
-
-
-
-
-//         Long professionId = candidateDTO.getProfessionId();
-//          Profession profession = proffesionService.getProfessionById(professionId);
-//          candidate.setProfessionId(profession);
-
 
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
         candidate.setNumberOfYears(candidateDTO.getNumberOfYears());
@@ -142,9 +99,10 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setCountry(candidateDTO.getCountry());
 //        model.addAttribute("candidateDTO", new CandidateDTO());
 //        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
+        candidateService.registerCandidate(candidate);
         model.addAttribute("candidateDTO", candidateDTO);
 
-        candidateService.registerCandidate(candidate);
+
         return "redirect:/candidate-list";
     }
 
@@ -167,8 +125,9 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         }
 
 
+    @RequestMapping(value = "/candidate-list", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 
-        @DeleteMapping(path = "candidate/{id}")
+      //  @DeleteMapping(path = "candidate-delete/{id}")
         public ResponseEntity<String> deleteAddress(@PathVariable long id) {
 
             // delete address from DB

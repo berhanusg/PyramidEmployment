@@ -1,13 +1,12 @@
 package  com.pyramidbuildersemployment.controller;
 import com.pyramidbuildersemployment.dto.HiringCompanyDTO;
-import com.pyramidbuildersemployment.dto.ProffesionDTO;
+
 import com.pyramidbuildersemployment.models.HiringCompany;
-import com.pyramidbuildersemployment.models.JobListing;
-import com.pyramidbuildersemployment.models.Profession;
+
 import com.pyramidbuildersemployment.service.HiringCompanyService;
 import com.pyramidbuildersemployment.service.JobListingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -107,8 +106,6 @@ public class HiringCompanyController {
         System.out.println(id);
         return modelAndView;
     }
-
-
 
 
 

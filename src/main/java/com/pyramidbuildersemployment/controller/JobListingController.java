@@ -43,7 +43,7 @@ public class JobListingController {
 
      */
     @PostMapping("/joblisting-register")
-    public String registerProfession(@ModelAttribute("jobListingDTO") @Valid JobListingDTO jobListingDTO, BindingResult bindingResult, Model model) {
+    public String registerJoblisting(@ModelAttribute("jobListingDTO") @Valid JobListingDTO jobListingDTO, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "joblisting-register";
@@ -99,7 +99,7 @@ and returns the Thymeleaf view name "joblistinglist". The view is expected to
 
     public String updateJobListing(@ModelAttribute("jobListing") JobListing jobListing) {
         jobListingService.registerJoblisting(jobListing);
-        return "redirect:/jobListing-list";
+        return "redirect:/joblisting-list";
     }
 
 

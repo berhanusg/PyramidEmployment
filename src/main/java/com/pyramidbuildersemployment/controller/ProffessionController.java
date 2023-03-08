@@ -99,7 +99,25 @@ It sends a POST request to /profession-save endpoint and takes a ProfessionDTO o
         return "redirect:/profession-list";
     }
 
+    @RequestMapping(value = "/delete-profession/{id}", method = RequestMethod.GET)
+    public String deleteProfession(@PathVariable(name="id") Long id) {
+        professionService.deleteProffession(id);
+        return "redirect:/profession-list";
+    }
 
+
+//    @RequestMapping(value = "/delete-profession", method = RequestMethod.POST)
+//    public String deleteProfession(@ModelAttribute("profession") Profession profession) {
+//        professionService.deleteProffession(profession.getId());
+//        return "redirect:/profession-list";
+//    }
+
+    //@RequestMapping(value = "/profession-delete/{id}", method = RequestMethod.POST)
+//    @RequestMapping(value = "/delete-profession/{id}", method =  RequestMethod.POST)
+//    public String deleteProfession(@PathVariable(name="id") Long id) {
+//        professionService.deleteProffession(id);
+//        return "redirect:/profession-list";
+//    }
 
 
 

@@ -13,7 +13,7 @@ import java.util.List;
 public class CandidateServiceImpl implements CandidateService{
 
     @Autowired
-    private final CandidateRepoInterface candidateReepointerface;
+    private  CandidateRepoInterface candidateReepointerface;
 
     @Autowired
     private ProffessionRepoInterface proffessionRepoInterface;

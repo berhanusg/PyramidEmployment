@@ -67,7 +67,7 @@ public class ProfessionServiceImpl implements ProffesionService {
 
     @Override
     public void deleteProffession(long id) {
-
+        proffessionRepoInterface.deleteById(id);
     }
     public Profession registerProfession(Profession profession) {
         return proffessionRepoInterface.save(profession);
