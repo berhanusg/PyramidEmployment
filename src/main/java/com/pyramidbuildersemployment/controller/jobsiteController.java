@@ -11,7 +11,7 @@ import java.util.List;
 public class jobsiteController {
 
 
-    @GetMapping("/jobsite")
+    @GetMapping("/")
     public String showCandidateRegistrationForm(Model model) {
 
             return "jobsite";

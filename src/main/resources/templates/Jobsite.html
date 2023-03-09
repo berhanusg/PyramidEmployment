@@ -6,17 +6,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Job Site</a>
+    <a class="navbar-brand" href="#">Candace Job-site</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="../jobsite">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../candidate-register">Candidates</a>
@@ -24,19 +26,19 @@
             <li class="nav-item active">
                 <a class="nav-link" href="../hiringcompany-register"> Hiring Company</a>
             </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Login
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Admin</a>
-                    <a class="dropdown-item" href="#">Hiring Company</a>
-                    <a class="dropdown-item" href="#">Candidate</a>
-                </div>
-            </li>
         </ul>
-    </div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Admin Login</a></li>
+                    <li><a class="dropdown-item" href="#">Hiring Company Login</a></li>
+                    <li><a class="dropdown-item" href="#">Candidate Login</a></li>
+                </ul>
+            </div>
+</div>
 </nav>
 <a class="dropdown-item" href=>Admin</a>
 
@@ -78,6 +80,9 @@
             </div>
         </div>
     </div>
+
+    <a th:href="@{/login-admin}"> login for Admin</a>
+    <a th:href="@{/login-client}">  login for Client</a>
     <p class="mt-5">If you have already registered, please click <a href="../login.html">here</a> to login.</p>
     <p class="mt-5">If you have not  already registered, please click here to register first before you login <a href="../user-register">here</a> to login.</p>
 </section>
