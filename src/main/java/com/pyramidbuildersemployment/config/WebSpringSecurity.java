@@ -11,48 +11,48 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-@Configuration
-@EnableWebSecurity
-public class WebSpringSecurity {
-
-    private UserDetailsService userDetailsService;
-
-    public WebSpringSecurity(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers(new AntPathRequestMatcher("/resources/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/register/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/admin/**"))
-                                .hasAnyRole("ADMIN", "GUEST")
-                                .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/post/**")).permitAll()
-                                .anyRequest().authenticated()
-                )
-                .formLogin( form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/admin/posts")
-                        .loginProcessingUrl("/login")
-                        .permitAll()
-                ).logout( logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .permitAll()
-                );
-        return http.build();
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
-}
+//
+//@Configuration
+//@EnableWebSecurity
+//public class WebSpringSecurity {
+//
+//    private UserDetailsService userDetailsService;
+//
+//    public WebSpringSecurity(UserDetailsService userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
+//
+//    @Bean
+//    public static PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .authorizeHttpRequests((authorize) ->
+//                        authorize.requestMatchers(new AntPathRequestMatcher("/resources/**")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/register/**")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/admin/**"))
+//                                .hasAnyRole("ADMIN", "GUEST")
+//                                .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/register/**")).permitAll()
+//                                .anyRequest().authenticated()
+//                )
+//                .formLogin( form -> form
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/admin/register")
+//                        .loginProcessingUrl("/login")
+//                        .permitAll()
+//                ).logout( logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                        .permitAll()
+//                );
+//        return http.build();
+//    }
+//
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
+//        builder.userDetailsService(userDetailsService)
+//                .passwordEncoder(passwordEncoder());
+//    }
+//}

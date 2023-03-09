@@ -52,7 +52,7 @@
             <td th:text="${jobListing.jobDescription}"></td>
             <td th:text="${jobListing.salary}"></td>
             <td><a th:href="@{/edit-joblisting/{id}(id=${jobListing.id})}">Edit</a></td>
-            <td><a th:href="@{/delete-joblisting/{id}(id=${jobListing.id})}">Delete</a></td>
+            <td><a th:href="@{/delete-joblisting/{id}(id=${jobListing.id})}" th:method="post">Delete</a></td>
         </tr>
         </tbody>
     </table>

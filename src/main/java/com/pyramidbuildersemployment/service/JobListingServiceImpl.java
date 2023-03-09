@@ -41,7 +41,7 @@ public class JobListingServiceImpl implements JobListingService{
 
     @Override
     public void deleteJobListing(long id) {
-
+        jobListingRepoInterface.deleteById(id);
     }
 
     public JobListing registerJoblisting(JobListing jobListing) {

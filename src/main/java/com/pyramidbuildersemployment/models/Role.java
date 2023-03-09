@@ -13,12 +13,9 @@ import lombok.Setter;
 @Table(name = "roles")
 public class Role {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
@@ -31,13 +28,9 @@ public class Role {
         ROLE_HIRING_COMPANY,
         ROLE_JOB_SEEKER,
         ROLE_ADMIN
-
     }
+
 }
-
-
-
-
     // constructors, getters, setters, etc.
 
 

@@ -13,4 +13,7 @@ public interface RoleService {
     Role createRole(Role role);
     Role updateRole(Role role);
     void deleteRole(Long id);
+    void saveRole(String roleName);
+
+
 }

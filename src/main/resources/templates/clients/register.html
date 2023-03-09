@@ -11,23 +11,19 @@
           rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Job Site</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Candidates</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Hiring Companies</a>
-            </li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Spring Boot Thymeleaf Blog App</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a aria-current="page" class="nav-link active" th:href="@{/}" >All Posts</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <br /><br /><br /><br />
@@ -45,7 +41,7 @@
             <div class="card-body">
                 <form method="post"
                       role="form"
-                      th:action="@{/user/register}"
+                      th:action="@{/register/save}"
                       th:object="${user}">
 
                     <div class="form-group mb-3">
@@ -99,15 +95,6 @@
                                 type="password"
                                 th:value="${password}"
                         />
-                        <div class="form-group mb-3">
-                            <label class="form-label">Role</label>
-                            <select class="form-control" id="role" name="role">
-                                <option value="ROLE_USER">Choose User Option  </option>
-                                <option value="ROLE_HIRING_COMPANY">Hiring Company</option>
-                                <option value="ROLE_JOBSEEKER">Job Seeker</option>
-                            </select>
-                        </div>
-
                         <p th:if="${#fields.hasErrors('password')}" class="text-danger"
                            th:errors="${password}"></p>
                     </div>

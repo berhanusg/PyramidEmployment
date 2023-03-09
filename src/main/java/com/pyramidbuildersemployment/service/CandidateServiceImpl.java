@@ -46,7 +46,7 @@ public class CandidateServiceImpl implements CandidateService{
 
     @Override
     public void deleteCandidate(long id) {
-
+       deleteCandidate(id);
     }
 
     public Candidate registerCandidate(Candidate candidate) {

@@ -30,22 +30,22 @@ import java.util.Set;
     @GetMapping("/user-register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new UserDTO());
-        return "user-register";
+        return "register";
     }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userDto") @Valid UserDTO userDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "user-register";
         }
 
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-
         Role.RoleName roleName = Role.RoleName.valueOf(String.valueOf(userDto.getRolename()));
         Role role = roleService.getRoleByName(String.valueOf(roleName));
+
       //  user.setRole(role);
         /*
       Set is useful for representing roles in the User

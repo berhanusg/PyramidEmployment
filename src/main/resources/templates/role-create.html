@@ -6,16 +6,24 @@
 </head>
 <body>
 <h1>Create Role</h1>
-
-<form th:action="@{/role-create}" th:object="${role}" method="post">
+<form th:action="@{/role-create}" th:object="${roleDTO}" method="post">
     <div>
         <label for="roleName">Role Name:</label>
-        <input type="text" th:value="${roleName}" id="roleName"/>
+        <select id="roleName" name="roleName">
+            <option value="ROLE_USER">User</option>
+            <option value="ROLE_HIRING_COMPANY">Hiring Company</option>
+            <option value="ROLE_JOB_SEEKER">Job Seeker</option>
+            <option value="ROLE_ADMIN">Admin</option>
+        </select>
     </div>
     <div>
         <button type="submit">Create Role</button>
     </div>
 </form>
 
+
 </body>
 </html>
+
+
+

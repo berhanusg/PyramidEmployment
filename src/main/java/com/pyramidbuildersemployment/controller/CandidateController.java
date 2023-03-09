@@ -3,6 +3,7 @@ package  com.pyramidbuildersemployment.controller;
 import com.pyramidbuildersemployment.dto.CandidateDTO;
 import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.Profession;
+import com.pyramidbuildersemployment.models.User;
 import com.pyramidbuildersemployment.service.*;
 import lombok.Lombok;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -29,6 +31,8 @@ public class CandidateController {
     @Autowired
     private ProffesionService proffesionService;
 
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
 
     public CandidateController(CandidateService candidateService) {
@@ -40,11 +44,18 @@ public class CandidateController {
 
 // This shows Empty form in the browser
     @GetMapping("/candidate-register")
-    public String showCandidateRegistrationForm(Model model) {
+    public String showAdminCandidateRegistrationForm(Model model) {
         List<Profession> professions = proffesionService.getAllProffessions();
         model.addAttribute("professions", professions);
         model.addAttribute("candidateDTO", new CandidateDTO());
         return "candidate-register";
+    }
+    @GetMapping("client/candidate-register")
+    public String showCandidateRegistrationForm(Model model) {
+        List<Profession> professions = proffesionService.getAllProffessions();
+        model.addAttribute("professions", professions);
+        model.addAttribute("candidateDTO", new CandidateDTO());
+        return "client/candidate-register";
     }
 
 
@@ -65,7 +76,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
     // WAS  @PostMapping("/candidate-register-process")
     @PostMapping("/candidate-register")
-    public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model) throws ChangeSetPersister.NotFoundException {
+    public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model, Principal principal ) throws ChangeSetPersister.NotFoundException {
         if (bindingResult.hasErrors()) {
             return "candidate-register";
         }
@@ -101,8 +112,12 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 //        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
         candidateService.registerCandidate(candidate);
         model.addAttribute("candidateDTO", candidateDTO);
-
-
+        User user = userServiceImpl.findByEmail(principal.getName());
+//         if (user.getRoles().contains("ROLE_ADMIN")){
+//
+//             return "redirect:/candidate-list";
+//         }
+        // return "redirect:client/candidate-register";
         return "redirect:/candidate-list";
     }
 
@@ -116,6 +131,10 @@ Finally, it saves the Candidate entity to the database and redirects the user to
     }
 
 
+//    @GetMapping("/candidate-list")
+//    public String candidateList(Model model) {
+//        return "redirect:candidate-register";
+//    }
 
 
 
@@ -125,15 +144,15 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         }
 
 
-    @RequestMapping(value = "/candidate-list", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
+    @RequestMapping(value = "/candidate-delete/{id}", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 
       //  @DeleteMapping(path = "candidate-delete/{id}")
-        public ResponseEntity<String> deleteAddress(@PathVariable long id) {
+        public ResponseEntity<String> deleteCandidate(@PathVariable long id) {
 
             // delete address from DB
             candidateService.deleteCandidate(id);
-
-            return new ResponseEntity<String>("Address deleted successfully!.", HttpStatus.OK);
+            System.out.println(id);
+            return new ResponseEntity<String>("Candidate deleted successfully!.", HttpStatus.OK);
         }
 
 

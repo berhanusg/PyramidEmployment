@@ -37,7 +37,7 @@ public class ProfessionServiceImpl implements ProffesionService {
 
     @Override
     public Profession saveAll(Profession profession) {
-        return null;
+        return proffessionRepoInterface.save(profession);
     }
 
     @Override

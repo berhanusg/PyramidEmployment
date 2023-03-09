@@ -49,14 +49,15 @@
 <!--            <td th:text="${candidate.profession?.professionName}"></td>-->
             <td th:text="${candidate.numberOfYears}"></td>
             <td>
-                <a class="btn btn-primary btn-sm" th:href="@{/candidate-detail/{id}(id=${candidate.id})}">
-                    Details
+<!--                <a class="btn btn-primary btn-sm" th:href="@{/candidate-detail/{id}(id=${candidate.id})}">-->
+<!--                    Details-->
                 </a>
                 <a class="btn btn-warning btn-sm" th:href="@{/candidate-edit/{id}(id=${candidate.id})}">
                     Edit
                 </a>
-                <a class="btn btn-danger btn-sm" th:href="@{/candidate-delete/{id}(id=${candidate.id})}">
+                <a class="btn btn-danger btn-sm" th:href="@{/candidate-delete/{id}(id=${candidate.id})}" th:method="post">Delete>
                     Delete
+
                 </a>
             </td>
         </tr>

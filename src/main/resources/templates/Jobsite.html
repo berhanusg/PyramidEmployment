@@ -25,14 +25,24 @@
                 <a class="nav-link" href="../hiringcompany-register"> Hiring Company</a>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Login Page</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Login
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="">Admin</a>
+                    <a class="dropdown-item" href="#">Hiring Company</a>
+                    <a class="dropdown-item" href="#">Candidate</a>
+                </div>
             </li>
         </ul>
     </div>
 </nav>
+<a class="dropdown-item" href=>Admin</a>
+
+
 <p>Welcome to the Job Site, a job seekers registration and hiring companies matching system.</p>
-<p>To get started, please register using the links provided below. Once you have registered, we will send you a link to create a username and password so you can log in.</p>
+<p>To get started, please register using the links provided below. Once you have registered,   create a username and password so you can log in.</p>
 <p>Our platform makes it easy for job seekers to create a profile, upload their resume, and apply to open job listings from top companies. And for hiring companies, our advanced <br>
     matching algorithms help to connect you with the most qualified candidates for your open positions.
 </p>
@@ -54,7 +64,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Job Seekers Registration</h4>
                     <p class="card-text">Click the button below to register as a job seeker and create your account.</p>
-                    <a href="../candidate-register" class="btn btn-primary">Register as Job Seeker</a>
+                    <a href="./candidate-register" class="btn btn-primary">Register as Job Seeker</a>
                 </div>
             </div>
         </div>
@@ -63,12 +73,13 @@
                 <div class="card-body">
                     <h4 class="card-title">Hiring Companies Registration</h4>
                     <p class="card-text">Click the button below to register your company and create your account.</p>
-                    <a href="../hiringcompany-register" class="btn btn-primary">Register as Hiring Company</a>
+                    <a href="./hiringcompany-register" class="btn btn-primary">Register as Hiring Company</a>
                 </div>
             </div>
         </div>
     </div>
-    <p class="mt-5">If you have already registered, please click <a href="./login.html">here</a> to login.</p>
+    <p class="mt-5">If you have already registered, please click <a href="../login.html">here</a> to login.</p>
+    <p class="mt-5">If you have not  already registered, please click here to register first before you login <a href="../user-register">here</a> to login.</p>
 </section>
 
 <!-- Bootstrap JS and jQuery -->
