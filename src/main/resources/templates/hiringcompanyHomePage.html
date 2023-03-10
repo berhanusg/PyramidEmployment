@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hiring Company Home Page</title>
+</head>
+<body>
+    <h1>Welcome, Hiring Company!</h1>
+    <ul>
+        <li><a th:href="@{/joblisting}">List a Job</a></li>
+<!--        <li><a th:href="@{/joblisting-list}">View Job Listings</a></li>-->
+        <li><a th:href="@{/hiringcompany/edit}">Edit Profile</a></li>
+
+
+
+    </ul>
+    <hr>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

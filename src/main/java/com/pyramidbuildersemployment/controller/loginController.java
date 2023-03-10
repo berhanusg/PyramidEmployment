@@ -7,16 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class loginController {
 
-    @GetMapping("/login-admin")
-    public String showAdminLogin1(Model model) {
+//    @GetMapping("/admin/loginadmin")
+//    public String showAdminLogin1(Model model) {
+//
+//        return "loginadmin";
+//    }
 
-        return "loginadmin";
-    }
-
-    @GetMapping("/login-client")
+    @GetMapping("/user/login-client")
     public String showclientLogin(Model model) {
 
         return "loginclient";
+    }
+
+    @GetMapping("/user/home")
+    public String userHome(Model model) {
+
+        return "home";
     }
 }
 

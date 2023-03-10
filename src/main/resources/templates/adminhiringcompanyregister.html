@@ -35,44 +35,44 @@
     <table class="table">
         <thead>
         <tr>
-<!--            <th>ID</th>-->
+            <!--            <th>ID</th>-->
             <th>Company Name</th>
             <th>Contact Person First Name</th>
             <th>Contact Person Last Name</th>
             <th>Email</th>
-<!--            <th>City</th>-->
-<!--            <th>State</th>-->
-<!--            <th>Country</th>-->
-<!--            <th>Zip</th>-->
+            <!--            <th>City</th>-->
+            <!--            <th>State</th>-->
+            <!--            <th>Country</th>-->
+            <!--            <th>Zip</th>-->
             <th>Website</th>
             <th>Actions</th>
-<!--            <th>Job Listing</th>-->
-<!--            <th>Edit</th>-->
-<!--            <th>Delete</th>-->
+            <!--            <th>Job Listing</th>-->
+            <!--            <th>Edit</th>-->
+            <!--            <th>Delete</th>-->
         </tr>
         </thead>
         <tbody>
         <tr th:each="company : ${hiringcompany}">
-<!--            <td th:text="${company.id}"></td>-->
+            <!--            <td th:text="${company.id}"></td>-->
             <td th:text="${company.hiringCompanyName}"></td>
             <td th:text="${company.contactpersonfname}"></td>
             <td th:text="${company.contactpersonlname}"></td>
             <td th:text="${company.hiringcompanyemail}"></td>
-<!--            <td th:text="${company.city}"></td>-->
-<!--            <td th:text="${company.state}"></td>-->
-<!--            <td th:text="${company.country}"></td>-->
-<!--            <td th:text="${company.zip}"></td>-->
+            <!--            <td th:text="${company.city}"></td>-->
+            <!--            <td th:text="${company.state}"></td>-->
+            <!--            <td th:text="${company.country}"></td>-->
+            <!--            <td th:text="${company.zip}"></td>-->
             <td th:text="${company.webSite}"></td>
-<!--            <td th:text="${company.jobListingId}"></td>-->
+            <!--            <td th:text="${company.jobListingId}"></td>-->
             <td><a class="btn btn-warning btn-sm" th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit</a></td>
             <!--            <td><a class="btn btn-warning btn-sm" th:href="@{/edit-hiring-company/{id}(id=${company.id})}">Edit  </a>-->
             <td> <a class="btn btn-danger btn-sm " th:href="@{/delete-hiring-company/{id}(id=${company.id})}"   th:method="post">Delete ></a>
-          </td>
+            </td>
 
         </tbody>
     </table>
 
-    <a class="btn btn-success" th:href="@{/hiringcompany-register}">Add New Hiring Company</a>
+    <a class="btn btn-success" th:href="@{/admin/hiringcompany-register}">Add New Hiring Company</a>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

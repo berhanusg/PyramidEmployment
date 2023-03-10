@@ -6,10 +6,13 @@ import com.pyramidbuildersemployment.models.JobListing;
 
 import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 @Service
+@Transactional
 public class JobListingServiceImpl implements JobListingService{
 
 
@@ -45,6 +48,10 @@ public class JobListingServiceImpl implements JobListingService{
     }
 
     public JobListing registerJoblisting(JobListing jobListing) {
+
         return jobListingRepoInterface.save(jobListing);
     }
+
+
+
 }

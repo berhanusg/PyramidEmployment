@@ -2,13 +2,17 @@ package com.pyramidbuildersemployment.service;
 
 import com.pyramidbuildersemployment.dto.UserDTO;
 import com.pyramidbuildersemployment.models.Role;
+import com.pyramidbuildersemployment.models.RoleName;
 import com.pyramidbuildersemployment.models.User;
 import com.pyramidbuildersemployment.repository.RoleRepoInterface;
 import com.pyramidbuildersemployment.repository.UserRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 
     @Autowired
@@ -32,9 +36,10 @@ public class UserServiceImpl implements UserService{
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
 
-        Role.RoleName roleName = Role.RoleName.valueOf(String.valueOf(userDto.getRolename()));
+       /* Role.RoleName roleName = Role.RoleName.valueOf(String.valueOf(userDto.getRolename()));
         Role role = roleRepointerface.findByName(roleName);
-        user.setRoleId(String.valueOf(role));
+        user.setRoleId(String.valueOf(role));*/
+        user.setRoleId(RoleName.valueOf("USER").toString());
 
         userRepoInterface.save(user);
 
@@ -47,7 +52,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUserByUsername(String username) {
-        return null;
+        return userRepoInterface.findByEmail(username);
     }
 
     @Override

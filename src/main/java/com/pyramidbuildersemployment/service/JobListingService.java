@@ -2,6 +2,7 @@ package com.pyramidbuildersemployment.service;
 
 //import com.pyramidbuildersemployment.models.Experience;
 import com.pyramidbuildersemployment.models.JobListing;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface JobListingService {
 
     void deleteJobListing(long id);
      JobListing registerJoblisting(JobListing jobListing);
+
 }

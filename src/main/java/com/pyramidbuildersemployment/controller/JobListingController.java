@@ -42,7 +42,7 @@ public class JobListingController {
      It then adds the hiringCompanyDTO object to the model and redirects to the "joblisting-list" view to display a list of all registered hiring companies.
 
      */
-    @PostMapping("/joblisting-register")
+    @PostMapping("/joblisting-registerprocess")
     public String registerJoblisting(@ModelAttribute("jobListingDTO") @Valid JobListingDTO jobListingDTO, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
@@ -61,7 +61,7 @@ public class JobListingController {
 
         jobListingService.registerJoblisting(jobListing);
 
-        return "redirect:/joblisting-list";
+        return "joblisting-list";
     }
 /*
 This code creates a GET endpoint at the URL path "/joblisting-list"
@@ -71,7 +71,7 @@ This code creates a GET endpoint at the URL path "/joblisting-list"
 and returns the Thymeleaf view name "joblistinglist". The view is expected to
  render the list of joblisting
  */
-    @GetMapping("/joblisting-list")
+    @GetMapping("/user/joblisting-list")
     public String listJobs(Model model)
     {
         List<JobListing> listOfJobs = jobListingService.getAlljoblistings();

@@ -43,19 +43,19 @@ public class CandidateController {
 
 
 // This shows Empty form in the browser
-    @GetMapping("/candidate-register")
+   /* @GetMapping("/user/candidate-register")
     public String showAdminCandidateRegistrationForm(Model model) {
         List<Profession> professions = proffesionService.getAllProffessions();
         model.addAttribute("professions", professions);
         model.addAttribute("candidateDTO", new CandidateDTO());
         return "candidate-register";
-    }
-    @GetMapping("client/candidate-register")
+    }*/
+    @GetMapping("/user/candidate-register")
     public String showCandidateRegistrationForm(Model model) {
         List<Profession> professions = proffesionService.getAllProffessions();
         model.addAttribute("professions", professions);
         model.addAttribute("candidateDTO", new CandidateDTO());
-        return "client/candidate-register";
+        return "candidate-register";
     }
 
 
@@ -75,7 +75,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
 
     // WAS  @PostMapping("/candidate-register-process")
-    @PostMapping("/candidate-register")
+    @PostMapping("/user/candidate-register-process")
     public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model, Principal principal ) throws ChangeSetPersister.NotFoundException {
         if (bindingResult.hasErrors()) {
             return "candidate-register";
@@ -123,7 +123,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
 
 
-    @GetMapping("/candidate-list")
+    @GetMapping("/user/candidate-list")
     public String candidateList(Model model) {
         List<Candidate> candidatesList = candidateService.getAllCandidates();
         model.addAttribute("candidates",candidatesList);

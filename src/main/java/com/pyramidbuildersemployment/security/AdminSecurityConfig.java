@@ -30,15 +30,15 @@ public class AdminSecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
-    @Bean
+   @Bean
     public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests().antMatchers("/").permitAll();
         http.antMatcher("/admin/**").authorizeHttpRequests().anyRequest().hasAuthority("ADMIN")
                 .and().formLogin()
-                .loginPage("/admin-login")
+                .loginPage("/admin/loginadmin")
                 .usernameParameter("email")
-                .loginProcessingUrl("/admin-login")
-                .defaultSuccessUrl("/admin/home").permitAll();
+                .loginProcessingUrl("/admin/loginadmin")
+                .defaultSuccessUrl("/admin/adminhome").permitAll();
 
         return http.build();
 

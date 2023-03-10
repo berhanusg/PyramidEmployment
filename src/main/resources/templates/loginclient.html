@@ -1,5 +1,8 @@
 <head>
     <meta charset="UTF-8">
+    <html lang="en"
+          xmlns:th="http://www.thymeleaf.org"
+    >
     <title>Edit Candidate</title>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/custom.css">
@@ -43,7 +46,7 @@
             <div class="card-body">
                 <form
                         method="post"
-                        th:action="@{/login}"
+                        th:action="@{/user/login-client}"
                         class="form-horizontal"
                         role="form"
                 >
@@ -52,7 +55,7 @@
                         <input
                                 type="text"
                                 id="username"
-                                name="username"
+                                name="email"
                                 class="form-control"
                                 placeholder="Enter email address"
                         />
@@ -70,7 +73,7 @@
                     <div class="form-group mb-3">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <span> Not registered yet?
-                            <a th:href="@{/register}">Register/SignUp Here</a>
+                            <a th:href="@{/user-register}">Register/SignUp Here</a>
                         </span>
                     </div>
                 </form>

@@ -14,9 +14,9 @@ public class UserSecurityConfig {
         http.authorizeHttpRequests().antMatchers("/").permitAll();
         http.antMatcher("/user/**").authorizeHttpRequests().anyRequest().hasAuthority("USER")
                 .and().formLogin()
-                .loginPage("/user/login")
+                .loginPage("/user/login-client")
                 .usernameParameter("email")
-                .loginProcessingUrl("/user/login")
+                .loginProcessingUrl("/user/login-client")
                 .defaultSuccessUrl("/user/home").permitAll();
 
         return http.build();

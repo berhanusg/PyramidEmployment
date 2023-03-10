@@ -4,10 +4,13 @@ package com.pyramidbuildersemployment.controller;
 import com.pyramidbuildersemployment.dto.UserDTO;
 import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.models.Role;
+import com.pyramidbuildersemployment.models.RoleName;
 import com.pyramidbuildersemployment.models.User;
+import com.pyramidbuildersemployment.repository.UserRepoInterface;
 import com.pyramidbuildersemployment.service.RoleService;
 import com.pyramidbuildersemployment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +26,10 @@ import java.util.Set;
 @Controller
     public class UserController {
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepoInterface userRepoInterface;
     @Autowired
     private UserService userService;
     @Autowired
@@ -33,33 +41,27 @@ import java.util.Set;
         return "register";
     }
 
+
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("userDto") @Valid UserDTO userDto, BindingResult bindingResult, Model model) {
+    public String registerUser(@ModelAttribute("user") User user,
 
-        if (bindingResult.hasErrors()) {
-            return "user-register";
-        }
+                               Model model,
+                               HttpSession session
+                              )
+    {
 
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        Role.RoleName roleName = Role.RoleName.valueOf(String.valueOf(userDto.getRolename()));
-        Role role = roleService.getRoleByName(String.valueOf(roleName));
 
-      //  user.setRole(role);
-        /*
-      Set is useful for representing roles in the User
-      entity because each role can only be assigned to a user once.
-     Using a List could allow duplicate roles to be added to the user,
-     which could cause issues with role-based access control or other business logic.
-         */
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
+        //for terms and conditions in registration page
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoleId(RoleName.valueOf("USER").toString());
+        userRepoInterface.save(user);
 
-        user.setRoles(roles);
-        userService.createUser(user);
+        //if the terms and conditions are checked
 
-        return "redirect:/login?success";
+       return "redirect:/user-register";
+
     }
+
+
 }
 

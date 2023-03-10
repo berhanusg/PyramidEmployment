@@ -45,8 +45,9 @@
             <div class="card-body">
                 <form method="post"
                       role="form"
-                      th:action="@{/user/register}"
-                      th:object="${user}">
+                      th:action="@{/register}"
+                      th:object="${user}"
+                action="#">
 
                     <div class="form-group mb-3">
                         <label class="form-label"> First Name</label>
@@ -56,10 +57,10 @@
                                 name="firstName"
                                 placeholder="Enter first name"
                                 type="text"
-                                th:value="${firstName}"
+                                th:value="${user.firstName}"
                         />
-                        <p th:if="${#fields.hasErrors('firstName')}" class="text-danger"
-                           th:errors="${firstName}"></p>
+                       <!-- <p th:if="${#fields.hasErrors('firstName')}" class="text-danger"
+                           th:errors="${userDto.firstName}"></p>-->
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label"> Last Name</label>
@@ -69,10 +70,10 @@
                                 name="lastName"
                                 placeholder="Enter last name"
                                 type="text"
-                                th:value="${lastName}"
+                                th:value="${user.lastName}"
                         />
-                        <p th:if="${#fields.hasErrors('lastName')}" class="text-danger"
-                           th:errors="${'lastName'}"></p>
+                        <!--<p th:if="${#fields.hasErrors('lastName')}" class="text-danger"
+                           th:errors="${userDto.lastName}"></p>-->
 
                     </div>
                     <div class="form-group mb-3">
@@ -83,10 +84,10 @@
                                 name="email"
                                 placeholder="Enter email address"
                                 type="email"
-                                th:value="${email}"
+                                th:value="${user.email}"
                         />
-                        <p th:if="${#fields.hasErrors('email')}" class="text-danger"
-                           th:errors="${email}"></p>
+                       <!-- <p th:if="${#fields.hasErrors('email')}" class="text-danger"
+                           th:errors="${userDto.email}"></p>-->
                     </div>
 
                     <div class="form-group mb-3">
@@ -97,7 +98,7 @@
                                 name="password"
                                 placeholder="Enter password"
                                 type="password"
-                                th:value="${password}"
+                                th:value="${user.password}"
                         />
 <!--                        <div class="form-group mb-3">-->
 <!--                            <label class="form-label">Role</label>-->
@@ -108,13 +109,13 @@
 <!--                            </select>-->
 <!--                        </div>-->
 
-                        <p th:if="${#fields.hasErrors('password')}" class="text-danger"
-                           th:errors="${password}"></p>
+                       <!-- <p th:if="${#fields.hasErrors('password')}" class="text-danger"
+                           th:errors="${userDto.password}"></p>-->
                     </div>
                     <div class="form-group mb-3">
                         <button type="submit" class="btn btn-primary">Register</button>
                         <span> Already registered?
-                            <a th:href="@{/login}"> Login Here</a>
+                            <a th:href="@{/user/login-client}">Login Here</a>
                         </span>
                     </div>
                 </form>

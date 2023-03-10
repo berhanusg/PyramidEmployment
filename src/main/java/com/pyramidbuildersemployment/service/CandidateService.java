@@ -1,6 +1,7 @@
 package com.pyramidbuildersemployment.service;
 
 import com.pyramidbuildersemployment.models.Candidate;
+import com.pyramidbuildersemployment.models.JobListing;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface CandidateService {
      Candidate updateCandidate(Candidate candidate);
      void deleteCandidate(long id);
      Candidate registerCandidate(Candidate candidate);
+     List<JobListing> searchJobListings(String searchCriteria, String searchValue);
 }

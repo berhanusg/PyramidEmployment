@@ -46,7 +46,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="jobListing : ${"user-joblisting-list"}">
+        <tr th:each="jobListing :${joblistingList}">
             <td th:text="${jobListing.id}"></td>
             <td th:text="${jobListing.jobTitle}"></td>
             <td th:text="${jobListing.jobDescription}"></td>

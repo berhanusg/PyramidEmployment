@@ -16,43 +16,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SpringSecurity {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll();
-        http
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/register/**").permitAll()
-
-
-                .antMatchers("/register/candidate-register").access("hasRole('ROLE_GUEST')")
-                .antMatchers("/register/hiring-company").access("hasRole('ROLE_GUEST')")
-
-                .antMatchers("/admin/**").hasAnyRole("ADMIN", "GUEST")
-                .and()
-                .formLogin(
-                        form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/admin/posts")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                );
-        return http.build();
-    }
 
 //    @Bean
 //    @Autowired

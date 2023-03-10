@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<h1>Welcome, Admin!</h1>
+
+
+<ul>
+    <li><a th:href="@{/admin/hiring-company}">Manage Hiring Companies</a></li>
+    <li><a th:href="@{/admin/candidate}">Manage Candidates</a></li>
+    <li><a th:href="@{/admin/profession}">Manage Professions</a></li>
+    <li><a th:href="@{/admin/user}">Manage Users</a></li>
+    <li><a th:href="@{/admin/role}">Manage Roles</a></li>
+</ul>
+</body>
+</html>

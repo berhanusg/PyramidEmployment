@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h2>Register Job Listing</h2>
-            <form th:action="@{/joblisting-register}" th:object="${jobListingDTO}" method="post">
+            <form th:action="@{/joblisting-registerprocess}" th:object="${jobListingDTO}" method="post">
                 <div class="form-group">
                     <label for="jobTitle">Job Title:</label>
                     <input type="text" class="form-control" th:field="*{jobTitle}" id="jobTitle"/>

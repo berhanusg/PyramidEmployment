@@ -1,12 +1,10 @@
-package  com.pyramidbuildersemployment.controller;
+package com.pyramidbuildersemployment.controller;
+
 import com.pyramidbuildersemployment.dto.HiringCompanyDTO;
-
 import com.pyramidbuildersemployment.models.HiringCompany;
-
 import com.pyramidbuildersemployment.service.HiringCompanyService;
 import com.pyramidbuildersemployment.service.JobListingService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,16 +16,55 @@ import java.util.List;
 
 
 @Controller
-@CrossOrigin
-public class HiringCompanyController {
+@RequestMapping("/admin")
+public class AdminController {
+
+
+    @GetMapping("/loginadmin")
+    public String showAdminLogin() {
+        return "loginadmin";
+    }
+    @GetMapping("/adminhome")
+    public String showDashboard() {
+        return "adminhome";
+    }
+
+    @GetMapping("/hiring-company")
+    public String showHiringCompanyManagement() {
+        // code to show hiring company management page
+        return "hiringcompany-list";
+    }
+
+    @GetMapping("/candidate")
+    public String showCandidateManagement() {
+        // code to show candidate management page'
+        return "candidate-list";
+    }
+
+    @GetMapping("/profession")
+    public String showProfessionManagement() {
+        // code to show profession management page
+        return "proffession-register";
+    }
+
+    @GetMapping("/user-register")
+    public String showUserManagement() {
+        // code to show user management page
+        return "";
+    }
+
+    @GetMapping("/role-create")
+    public String showRoleManagement() {
+        // code to show role management page
+        return "";
+    }
+
     @Autowired
-   // private HiringCompanyServiceImpl hiringCompanyServiceImpl;
+    // private HiringCompanyServiceImpl hiringCompanyServiceImpl;
     private HiringCompanyService hiringCompanyService;
     @Autowired
     private JobListingService jobListingService;
-    public HiringCompanyController(HiringCompanyService hiringCompanyService) {
-        this.hiringCompanyService = hiringCompanyService;
-    }
+
       /*
 
       This code defines a controller method showHiringCompanyRegistrationForm()
@@ -39,7 +76,7 @@ public class HiringCompanyController {
 
 
 
-        @GetMapping("/hiringcompany-register")
+    @GetMapping("/hiringcompany-register")
     public String registerHiringCompanies(Model model) {
         List<HiringCompany> hiringcompanyList = hiringCompanyService.getAllAllHiringCompanies();
 
@@ -81,7 +118,7 @@ public class HiringCompanyController {
         model.addAttribute("hiringCompanyDTO", hiringCompanyDTO);
         hiringCompanyService.registerhiringCompany(hiringCompany);
         // Redirect to a success page
-        return "joblisting";
+        return "hiringcompany-list";
     }
 
 
@@ -94,7 +131,7 @@ public class HiringCompanyController {
     }
 
 
-//retrieve the hiring company by its ID and add it to the model for the view:
+    //retrieve the hiring company by its ID and add it to the model for the view:
     @RequestMapping(value = "/edit-hiring-company/{id}", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showEditHiringCompanyForm(@PathVariable(name="id") Long id) {
         HiringCompany hiringcompany = hiringCompanyService.getHiringCompanyById(id);
@@ -120,6 +157,5 @@ public class HiringCompanyController {
 
 
 
-
-
 }
+
