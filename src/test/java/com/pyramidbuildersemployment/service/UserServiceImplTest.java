@@ -22,9 +22,9 @@ class UserServiceImplTest {
     @Test
     public void save() {
         User user = new User();
-        user.setEmail("suresh@gmail.com");
-        user.setFirstName("suresh");
-        user.setLastName("moole");
+        user.setEmail("berhanu@gmail.com");
+        user.setFirstName("berhanu");
+        user.setLastName("seyoum");
         user.setPassword(passwordEncoder.encode("1234"));
         user.setRoleId(RoleName.valueOf("ADMIN").toString());
 

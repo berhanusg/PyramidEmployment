@@ -26,6 +26,10 @@ public class CandidateServiceImpl implements CandidateService{
         this.candidateReepointerface = candidateReepointerface;
     }
 
+    public CandidateServiceImpl() {
+
+    }
+
     @Override
     public List<Candidate> getAllCandidates() {
         return (List<Candidate>) candidateReepointerface.findAll();
