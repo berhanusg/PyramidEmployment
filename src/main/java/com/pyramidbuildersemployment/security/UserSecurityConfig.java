@@ -12,9 +12,9 @@ public class UserSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain2(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests().antMatchers("/").permitAll();
-        http.antMatcher("/user/**").authorizeHttpRequests().anyRequest().hasAuthority("USER")
+        http.antMatcher("/user/user/**").authorizeHttpRequests().anyRequest().hasAuthority("USER")
                 .and().formLogin()
-                .loginPage("/user/login-client")
+                .loginPage("/user/user/login-client")
                 .usernameParameter("email")
                 .loginProcessingUrl("/user/login-client")
                 .defaultSuccessUrl("/user/home").permitAll();
@@ -22,4 +22,6 @@ public class UserSecurityConfig {
         return http.build();
 
     }
+
+
 }

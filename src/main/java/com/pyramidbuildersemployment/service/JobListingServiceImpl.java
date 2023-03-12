@@ -1,15 +1,14 @@
 package com.pyramidbuildersemployment.service;
 
 //import com.pyramidbuildersemployment.models.Experience;
-import com.pyramidbuildersemployment.models.HiringCompany;
 import com.pyramidbuildersemployment.models.JobListing;
 
 import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
@@ -52,6 +51,25 @@ public class JobListingServiceImpl implements JobListingService{
         return jobListingRepoInterface.save(jobListing);
     }
 
+    public List<JobListing> searchJobListings(String searchCriteria, String searchValue, Double salary) {
+        List<JobListing> jobListings = new ArrayList<>();
 
+        switch (searchCriteria) {
+            case "jobTitle":
+                jobListings = jobListingRepoInterface.findByJobTitleContainingIgnoreCase((String) searchValue);
+                break;
+            case "salary":
+                jobListings = jobListingRepoInterface.findBySalaryGreaterThanEqual(Double.parseDouble(searchValue));
+                break;
+            case "location":
+                jobListings = jobListingRepoInterface.findByLocationContainingIgnoreCase((String) searchValue);
+                break;
+            default:
+                // handle unknown search criteria
+                break;
+        }
+
+        return jobListings;
+    }
 
 }

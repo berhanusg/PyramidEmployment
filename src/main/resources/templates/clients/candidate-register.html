@@ -36,7 +36,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1>Candidate Registration</h1>
-            <form th:action="@{/user/candidate-register-process}" th:object="${candidateDTO}" method="post">
+            <form th:action="@{user/user/candidate-register-process}" th:object="${candidateDTO}" method="post">
                 <div class="form-group">
                     <label for="firstname">First Name</label>
                     <input type="text" class="form-control" th:field="*{firstname}" name="firstname" id="firstname" required/>

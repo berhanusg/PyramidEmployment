@@ -85,7 +85,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Job Seekers Registration</h4>
                     <p class="card-text">Click the button below to register as a job seeker and create your account.</p>
-                    <a href="./candidate-register" class="btn btn-primary">Register as Job Seeker</a>
+                    <a th:href="@{/user/login-client}" class="btn btn-primary">Register as Job Seeker</a>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
     </div>
 
     <a th:href="@{/admin/loginadmin}"> login for Admin</a>
-    <a th:href="@{/login-client}">  login for Client</a>
+    <a th:href="@{/user/login-client}">  login for Client</a>
     <p class="mt-5">If you have already registered, please click <a href="../login.html">here</a> to login.</p>
     <p class="mt-5">If you have not  already registered, please click here to register first before you login <a href="../user-register">here</a> to login.</p>
 </section>

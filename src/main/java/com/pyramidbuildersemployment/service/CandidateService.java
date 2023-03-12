@@ -17,5 +17,5 @@ public interface CandidateService {
      Candidate updateCandidate(Candidate candidate);
      void deleteCandidate(long id);
      Candidate registerCandidate(Candidate candidate);
-     List<JobListing> searchJobListings(String searchCriteria, String searchValue);
+
 }

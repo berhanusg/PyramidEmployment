@@ -59,27 +59,7 @@ public class CandidateServiceImpl implements CandidateService{
     @Autowired
     private JobListingRepoInterface jobListingRepoInterface;
 
-    @Override
-    public List<JobListing> searchJobListings(String searchCriteria, String searchValue) {
-        List<JobListing> jobListings = new ArrayList<>();
 
-        switch (searchCriteria) {
-            case "jobTitle":
-                jobListings = jobListingRepoInterface.findByJobTitleContainingIgnoreCase(searchValue);
-                break;
-            case "salary":
-                jobListings = jobListingRepoInterface.findBySalaryGreaterThanEqual(Double.parseDouble(searchValue));
-                break;
-            case "location":
-                jobListings = jobListingRepoInterface.findByLocationContainingIgnoreCase(searchValue);
-                break;
-            default:
-                // handle unknown search criteria
-                break;
-        }
-
-        return jobListings;
-    }
 }
 
 

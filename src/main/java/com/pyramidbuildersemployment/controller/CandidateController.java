@@ -2,6 +2,7 @@ package  com.pyramidbuildersemployment.controller;
 
 import com.pyramidbuildersemployment.dto.CandidateDTO;
 import com.pyramidbuildersemployment.models.Candidate;
+import com.pyramidbuildersemployment.models.JobListing;
 import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.models.User;
 import com.pyramidbuildersemployment.service.*;
@@ -72,10 +73,10 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 
  */
 
-
+///user/candidate-register-process
 
     // WAS  @PostMapping("/candidate-register-process")
-    @PostMapping("/user/candidate-register-process")
+    @PostMapping("/user/candidate-register")
     public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model, Principal principal ) throws ChangeSetPersister.NotFoundException {
         if (bindingResult.hasErrors()) {
             return "candidate-register";
@@ -96,9 +97,6 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setTelephone(candidateDTO.getTelephone());
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setEducation_level(candidateDTO.getEducationLevel());
-
-
-
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
         candidate.setNumberOfYears(candidateDTO.getNumberOfYears());
         candidate.setExperiencedescription(candidateDTO.getExperiencedescription());
@@ -110,17 +108,25 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setCountry(candidateDTO.getCountry());
 //        model.addAttribute("candidateDTO", new CandidateDTO());
 //        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
-        candidateService.registerCandidate(candidate);
-        model.addAttribute("candidateDTO", candidateDTO);
-        User user = userServiceImpl.findByEmail(principal.getName());
-//         if (user.getRoles().contains("ROLE_ADMIN")){
-//
-//             return "redirect:/candidate-list";
-//         }
-        // return "redirect:client/candidate-register";
-        return "redirect:/candidate-list";
-    }
 
+        model.addAttribute("candidateDTO", candidateDTO);
+         User user = userServiceImpl.findByEmail(principal.getName());
+        candidateService.registerCandidate(candidate);
+
+        //return "redirect:/candidate-list";
+        // for clients are allowed to see list of jobs NOT the candidate List so in this case we have to return
+        return "redirect:/user/user-joblisting-list";
+    }
+    @Autowired
+   private JobListingService jobListingService;
+   @GetMapping("/user/user-joblisting-list")
+    public String listJobs(Model model)
+    {
+     List<JobListing> listOfJobs = jobListingService.getAlljoblistings();
+
+    model.addAttribute("joblistingList", listOfJobs);
+      return  "user-joblisting-list";
+    }
 
 
     @GetMapping("/user/candidate-list")
