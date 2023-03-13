@@ -55,8 +55,9 @@ UserServiceImpl userServiceImpl;
 
             case "candidate-register":
                 return "redirect:/user/candidate-register";
-            case "user-joblisting-list":
-                return "redirect:/user/user-joblisting-list";
+            case "/joblistingList":
+                return "redirect:/user/jobListings";
+//            "redirect:/user/user-joblisting-list";
 
             case "candidate/search":
                 return "redirect: /candidate/search"  ;
@@ -64,7 +65,7 @@ UserServiceImpl userServiceImpl;
                 return "home";
         }
     }
-
+//user-joblisting-list
 
 //  //"redirect:/search?jobTitle=" + jobTitle + "&location=" + location;
 //    @GetMapping("/user/jobListings")
