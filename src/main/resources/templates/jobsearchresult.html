@@ -5,20 +5,20 @@
 </head>
 <body>
 <h1>Search Job Listings</h1>
-<!--<form th:action="@{/user/jobListings}" method="get">-->
+<!-- <form th:action="@{/user/jobListings}" method="get">-->
     <form th:action="@{/user/jobsearch}" method="post">
 
     <div>
         <label for="jobTitle">Job Title:</label>
-        <input type="text" id="jobTitle" name="jobTitle"/>
+        <input type="text" id="jobTitle" th:field="*{jobTitle}" name="jobTitle"/>
     </div>
     <div>
         <label for="salary">Salary:</label>
-        <input type="text" id="salary" name="salary"/>
+        <input type="text" id="salary"th:field="*{salary}" name="salary"/>
     </div>
     <div>
         <label for="location">Location:</label>
-        <input type="text" id="location" name="location"/>
+        <input type="text" id="location" th:field= "*{location}" name="location"/>
     </div>
     <div>
         <button type="submit">Search</button>
@@ -38,7 +38,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="jobListing : ${jobListings}">
+    <tr th:each="jobListing : ${jobListing}">
         <td th:text="${jobListing.id}"></td>
         <td th:text="${jobListing.jobTitle}"></td>
         <td th:text="${jobListing.jobDescription}"></td>

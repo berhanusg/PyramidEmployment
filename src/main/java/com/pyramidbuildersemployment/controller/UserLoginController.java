@@ -28,6 +28,7 @@ UserServiceImpl userServiceImpl;
     @Autowired
  JobListingService jobListingService;
 
+   JobListingDTO jobListingDTO;
 
    @GetMapping("/user/login-client")
    public String showClientLogin(Model model) {
@@ -41,9 +42,13 @@ UserServiceImpl userServiceImpl;
 
     @GetMapping("/jobsearch")
     public String lookUpForJob(Model model) {
-        model.addAttribute("professionDTO", new ProffesionDTO());
+//      JobListing jobListing = new JobListing();
+//       jobListing.setJobTitle( jobListingDTO.getJobTitle());
+//       jobListing.setSalary(jobListingDTO.getSalary());
+//       jobListing.setLocation(jobListingDTO.getLocation());
+//      model.addAttribute("jobListing", jobListing);
 
-        return "/jobsearch";
+        return "jobsearch";
     }
 
 
@@ -59,30 +64,34 @@ UserServiceImpl userServiceImpl;
                 return "redirect:/user-joblisting-list";
 
             case "/user/jobsearch":   // "candidate/search":
-                return "redirect: /candidate/jobsearch " ;
+                return "redirect: /user/jobsearch " ;
             default:
                 return "home";
         }
     }
 
 
-    @PostMapping("/jobsearch")
-   // @RequestMapping(value = "/jobsearch", method = {RequestMethod.GET, RequestMethod.POST})
+    //@PostMapping("user/jobsearch")
+    @RequestMapping(value = "user/jobsearch", method = {RequestMethod.GET, RequestMethod.POST})
     public String lookUpForJob(@RequestParam(required = false) String jobTitle,
                                @RequestParam(required = false) String location,
                                @RequestParam(required = false) Double salary,
                                Model model) {
 
-        if (jobTitle != null || location != null || salary != null) {
-            // Search was submitted, so process the search request
-            List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
+//        if (jobTitle != null || location != null || salary != null) {
+//            // Search was submitted, so process the search request
+//            List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
+//            model.addAttribute("jobListings", jobListings);
+//            return "jobsearchresult"; //  the name of search results template
+//        } else {
+//            // Search form is being displayed
+//         //   model.addAttribute("professionDTO", new ProffesionDTO());
+//            return "/jobsearch";
+//        }
+
+        List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
             model.addAttribute("jobListings", jobListings);
             return "jobsearchresult"; //  the name of search results template
-        } else {
-            // Search form is being displayed
-            model.addAttribute("professionDTO", new ProffesionDTO());
-            return "/jobsearch";
-        }
     }
 
 
