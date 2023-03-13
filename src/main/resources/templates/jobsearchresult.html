@@ -5,7 +5,9 @@
 </head>
 <body>
 <h1>Search Job Listings</h1>
-<form th:action="@{/user/jobListings}" method="get">
+<!--<form th:action="@{/user/jobListings}" method="get">-->
+    <form th:action="@{/user/jobsearch}" method="post">
+
     <div>
         <label for="jobTitle">Job Title:</label>
         <input type="text" id="jobTitle" name="jobTitle"/>

@@ -43,7 +43,7 @@ UserServiceImpl userServiceImpl;
     public String lookUpForJob(Model model) {
         model.addAttribute("professionDTO", new ProffesionDTO());
 
-        return "/user/jobsearch";
+        return "/jobsearch";
     }
 
 
@@ -58,38 +58,33 @@ UserServiceImpl userServiceImpl;
             case "user-joblisting-list":
                 return "redirect:/user/user-joblisting-list";
 
-            case "candidate/search":
-                return "redirect: /candidate/search"  ;
+            case "/user/jobsearch":   // "candidate/search":
+                return "redirect: /candidate/jobsearch " ;
             default:
                 return "home";
         }
     }
 
 
-  //"redirect:/search?jobTitle=" + jobTitle + "&location=" + location;
-    @GetMapping("/user/jobListings")
-    public String searchJobListings(@RequestParam String jobTitle, @RequestParam String location, @RequestParam Double salary, Model model) {
-        List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
-        model.addAttribute("jobListings", jobListings);
-        return "/candidate/search";
+    @PostMapping("/jobsearch")
+   // @RequestMapping(value = "/jobsearch", method = {RequestMethod.GET, RequestMethod.POST})
+    public String lookUpForJob(@RequestParam(required = false) String jobTitle,
+                               @RequestParam(required = false) String location,
+                               @RequestParam(required = false) Double salary,
+                               Model model) {
+
+        if (jobTitle != null || location != null || salary != null) {
+            // Search was submitted, so process the search request
+            List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
+            model.addAttribute("jobListings", jobListings);
+            return "jobsearchresult"; //  the name of search results template
+        } else {
+            // Search form is being displayed
+            model.addAttribute("professionDTO", new ProffesionDTO());
+            return "/jobsearch";
+        }
     }
 
-
-   // @PostMapping("/candidate/search")
-  /* @RequestMapping(value = "/candidate/jobsearch", method = {RequestMethod.GET, RequestMethod.POST})
-    public String showSerachJobListings(
-            @RequestParam(name = "jobTitle", required = false) String jobTitle,
-            @RequestParam(name = "location", required = false) String location,
-            @RequestParam(name = "salary", required = false) Double salary,
-            Model model) {
-
-        List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
-        model.addAttribute("jobListings", jobListings);
-
-        return "user-candidate/joblisting-list";
-    } */
-
-//
 
 }
 
