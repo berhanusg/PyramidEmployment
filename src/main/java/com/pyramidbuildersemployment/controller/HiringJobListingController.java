@@ -34,6 +34,15 @@ public class HiringJobListingController {
 
         return "/clients/hiringcompany-register";
     }
+
+    @GetMapping("/home")
+    public String homecandidate(Model model) {
+//        List<HiringCompany> hiringcompanyList = hiringCompanyService.getAllAllHiringCompanies();
+//
+//        model.addAttribute("hiringCompanyDTO", new HiringCompanyDTO());
+
+        return "home";
+    }
     @GetMapping("/clientsjoblisting-register")
     public String listJobs(Model model)
     {

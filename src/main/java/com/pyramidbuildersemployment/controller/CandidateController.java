@@ -136,6 +136,12 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         return "candidate-list";
     }
 
+//    @GetMapping("/admin/candidate-list")
+//    public String adminCandidateList(Model model) {
+//        List<Candidate> candidatesList = candidateService.getAllCandidates();
+//        model.addAttribute("candidates",candidatesList);
+//        return "candidate-list";
+//    }
 
 //    @GetMapping("/candidate-list")
 //    public String candidateList(Model model) {

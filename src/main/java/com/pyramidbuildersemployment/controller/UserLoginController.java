@@ -33,11 +33,11 @@ UserServiceImpl userServiceImpl;
    public String showClientLogin(Model model) {
      return "loginclient";
   }
-//
-//    @GetMapping("/home")
-//    public String userHome(Model model) {
-//        return "home";
-//    }
+
+//  @GetMapping("/home")
+//   public String userHome(Model model) {
+//      return "home";
+//   }
 
     @GetMapping("/jobsearch")
     public String lookUpForJob(Model model) {
@@ -55,8 +55,8 @@ UserServiceImpl userServiceImpl;
 
             case "candidate-register":
                 return "redirect:/user/candidate-register";
-            case "user-joblisting-list":
-                return "redirect:/user/user-joblisting-list";
+            case "/user-joblisting-list":
+                return "redirect:/user-joblisting-list";
 
             case "/user/jobsearch":   // "candidate/search":
                 return "redirect: /candidate/jobsearch " ;

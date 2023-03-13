@@ -52,6 +52,8 @@ public class AdminController {
             case "candidate":
 
                 return "redirect:/admin/candidate-list";
+            case "candidate-register":
+                return "redirect:/admin/candidate-register";
             case "hiring-company":
                 return "redirect:/admin/hiring-company-list";
             case "hiring-job-listing":
