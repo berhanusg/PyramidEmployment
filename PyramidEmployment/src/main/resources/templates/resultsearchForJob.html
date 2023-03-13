@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Job Listings</title>
+</head>
+<body>
+<h1>Search Job Listings</h1>
+<form th:action="@{/user/jobListings}" method="get">
+    <div>
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" name="jobTitle"/>
+    </div>
+    <div>
+        <label for="salary">Salary:</label>
+        <input type="text" id="salary" name="salary"/>
+    </div>
+    <div>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location"/>
+    </div>
+    <div>
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+<hr />
+<h2>Search Results</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Job Title</th>
+        <th>Job Description</th>
+        <th>Salary</th>
+        <th>Location</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="jobListing : ${jobListings}">
+        <td th:text="${jobListing.id}"></td>
+        <td th:text="${jobListing.jobTitle}"></td>
+        <td th:text="${jobListing.jobDescription}"></td>
+        <td th:text="${jobListing.salary}"></td>
+        <td th:text="${jobListing.location}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

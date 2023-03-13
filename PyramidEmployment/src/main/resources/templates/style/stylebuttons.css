@@ -1,0 +1,29 @@
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .dashboard .button {
+            display: block;
+            width: 200px;
+            height: 80px;
+            background-color: #2e384d;
+            color: #fff;
+            text-align: center;
+            line-height: 80px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dashboard .button:hover {
+            transform: scale(1.05);
+            background-color: #6d7993;
+        }

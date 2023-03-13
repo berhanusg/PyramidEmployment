@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Job Listing List</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="color:#f3f6f4">
+    <div class="container-fluid">
+        <!-- logo-->
+        <a class="navbar-brand" href="#"><img src="/images/CandaceLOGO - Copy.png" height="30"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase" >
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}" href="jobsite.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item">
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    LOGIN
+                                </a>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link "href="#" th:href="@{/user-register}" >SignUp</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1> Look up Job Listing List</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Job Title</th>
+            <th>Job Description</th>
+            <th>Job Category</th>
+<!--            <th>Edit</th>-->
+<!--            <th>Delete</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="jobListing :${joblistingList}">
+            <td th:text="${jobListing.id}"></td>
+            <td th:text="${jobListing.jobTitle}"></td>
+            <td th:text="${jobListing.jobDescription}"></td>
+            <td th:text="${jobListing.salary}"></td>
+<!--            <td><a th:href="@{/edit-joblisting/{id}(id=${jobListing.id})}">Edit</a></td>-->
+<!--            <td><a th:href="@{/delete-joblisting/{id}(id=${jobListing.id})}" th:method="post">Delete</a></td>-->
+        </tr>
+        </tbody>
+    </table>
+<!--    <a class="btn btn-success" th:href="@{/joblisting-register}">Add New Job Listing</a>-->
+</div>
+
+</body>
+</html>
