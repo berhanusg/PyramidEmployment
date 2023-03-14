@@ -55,7 +55,7 @@ public class AdminCandidateController {
 
 
     //@PostMapping("/user/candidate-register-process")
-    @PostMapping("/candidate-register")
+    @PostMapping("/admincandidate-register")
     public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model, Principal principal ) throws ChangeSetPersister.NotFoundException {
         if (bindingResult.hasErrors()) {
             return "candidate-register";

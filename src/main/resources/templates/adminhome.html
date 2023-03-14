@@ -34,9 +34,10 @@
         }
     </style>
 </head>
+
 <body>
 <h1>Welcome, Admin!</h1>
-
+<a th:href="@{/logout}">Sign Out</a>
 <div class="dashboard">
     <a th:href="@{/admin/hiringcompany-list}" class="button">Manage Hiring Companies</a>
     <a th:href="@{/admin/candidate-list}" class="button">Manage Candidates</a>

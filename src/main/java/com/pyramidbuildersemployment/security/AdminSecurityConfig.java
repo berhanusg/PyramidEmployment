@@ -38,7 +38,20 @@ public class AdminSecurityConfig {
                 .loginPage("/admin/loginadmin")
                 .usernameParameter("email")
                 .loginProcessingUrl("/admin/loginadmin")
-                .defaultSuccessUrl("/admin/adminhome").permitAll();
+
+                .defaultSuccessUrl("/admin/adminhome").permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
+
+             //   .and().logout().logoutSuccessUrl("/jobsite.html").permitAll();
+//                .and().logout().logoutSuccessHandler((request, response, authentication) ->
+//                        response.sendRedirect("/admin/loginadmin"));
+
+               // .and().logout().logoutSuccessUrl("/admin/loginadmin").permitAll();
+            //    .and().logout().permitAll();
+
+
+
+
 
         return http.build();
 
