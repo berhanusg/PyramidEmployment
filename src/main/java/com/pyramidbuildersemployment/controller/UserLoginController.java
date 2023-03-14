@@ -19,44 +19,29 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserLoginController {
-@Autowired
- CandidateService candidateService;
-@Autowired
-ProffesionService proffesionService;
     @Autowired
-UserServiceImpl userServiceImpl;
+    CandidateService candidateService;
     @Autowired
- JobListingService jobListingService;
+    ProffesionService proffesionService;
+    @Autowired
+    UserServiceImpl userServiceImpl;
+    @Autowired
+    JobListingService jobListingService;
 
-   JobListingDTO jobListingDTO;
+    JobListingDTO jobListingDTO;
 
-   @GetMapping("/user/login-client")
-   public String showClientLogin(Model model) {
-     return "loginclient";
-  }
-
-//  @GetMapping("/home")
-//   public String userHome(Model model) {
-//      return "home";
-//   }
-
-    @GetMapping("/jobsearch")
-    public String lookUpForJob(Model model) {
-//      JobListing jobListing = new JobListing();
-//       jobListing.setJobTitle( jobListingDTO.getJobTitle());
-//       jobListing.setSalary(jobListingDTO.getSalary());
-//       jobListing.setLocation(jobListingDTO.getLocation());
-//      model.addAttribute("jobListing", jobListing);
-
-        return "jobsearch";
+    @GetMapping("/user/login-client")
+    public String showClientLogin(Model model) {
+        return "loginclient";
     }
+
 
 
     @GetMapping("/{controller}")
     public String redirectToController(@PathVariable String controller, @RequestParam(required = false)
-       String jobTitle, @RequestParam(required = false) String location) {
+    String jobTitle, @RequestParam(required = false) String location) {
         System.out.println(controller);
-        switch ("THis is the value passed " +controller) {
+        switch ("THis is the value passed " + controller) {
 
             case "candidate-register":
                 return "redirect:/user/candidate-register";
@@ -64,37 +49,49 @@ UserServiceImpl userServiceImpl;
                 return "redirect:/user-joblisting-list";
 
             case "/user/jobsearch":   // "candidate/search":
-                return "redirect: /user/jobsearch " ;
+                return "redirect: /user/jobsearch ";
             default:
                 return "home";
         }
     }
+    @GetMapping("/jobsearch")
+  //@PostMapping ("/jobsearch")
 
-
-    //@PostMapping("user/jobsearch")
-    @RequestMapping(value = "user/jobsearch", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/jobsearch", method = {RequestMethod.GET, RequestMethod.POST})
     public String lookUpForJob(@RequestParam(required = false) String jobTitle,
                                @RequestParam(required = false) String location,
                                @RequestParam(required = false) Double salary,
                                Model model) {
+        if (jobTitle != null || location != null || salary != null) {
 
-//        if (jobTitle != null || location != null || salary != null) {
-//            // Search was submitted, so process the search request
-//            List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
-//            model.addAttribute("jobListings", jobListings);
-//            return "jobsearchresult"; //  the name of search results template
-//        } else {
-//            // Search form is being displayed
-//         //   model.addAttribute("professionDTO", new ProffesionDTO());
-//            return "/jobsearch";
-//        }
+            // Search was submitted, so process the search request
+            List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
+            model.addAttribute("jobListing", jobListings);
+            return "jobsearchresult"; // the name of search results template
+        } else {
+            // Search form is being displayed
+            model.addAttribute("joblistingDTO", new JobListingDTO());
+            return "/jobsearch";
+        }
+    }
 
+    @PostMapping("/jobListings")
+    public String searchJobListings(@RequestParam(required = false) String jobTitle,
+                                    @RequestParam(required = false) String location,
+                                    @RequestParam(required = false) Double salary,
+                                    Model model) {
         List<JobListing> jobListings = jobListingService.searchJobListings(jobTitle, location, salary);
-            model.addAttribute("jobListings", jobListings);
-            return "jobsearchresult"; //  the name of search results template
+        model.addAttribute("jobListings", jobListings);
+        model.addAttribute("jobTitle", jobTitle);
+        model.addAttribute("location", location);
+        model.addAttribute("salary", salary);
+        return "jobsearchresult"; // the name of search results template
     }
 
 
 }
+
+
+
 
 

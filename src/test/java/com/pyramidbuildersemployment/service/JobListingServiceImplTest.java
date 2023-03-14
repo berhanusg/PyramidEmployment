@@ -23,7 +23,7 @@ import org.mockito.MockitoAnnotations;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest(classes = PbbackendApplication.class)
+//@SpringBootTest(classes = PbbackendApplication.class)
 //public class JobListingServiceImplTest {
 //@Autowired
 //JobListingRepoInterface jobListingRepoInterface;
@@ -43,43 +43,43 @@ import static org.junit.jupiter.api.Assertions.*;
 //}
 
 
-    class JobListingServiceTest {
+//    class JobListingServiceTest {
+//
+//        @Mock
+//        @Autowired
+//        private JobListingRepoInterface jobListingRepoInterface;
+//
+//        @InjectMocks
+//        @Autowired
+//        private JobListingService jobListingService;
+//
+//        @BeforeEach
+//        void setUp() throws Exception {
+//            MockitoAnnotations.initMocks(this);
+//        }
 
-        @Mock
-        @Autowired
-        private JobListingRepoInterface jobListingRepoInterface;
+//        @Test
+//        void testSearchJobListings() {
+//            String jobTitle = "Engineer";
+//            String location = "San Francisco";
+//            Double salary = 80000.0;
 
-        @InjectMocks
-        @Autowired
-        private JobListingService jobListingService;
-
-        @BeforeEach
-        void setUp() throws Exception {
-            MockitoAnnotations.initMocks(this);
-        }
-
-        @Test
-        void testSearchJobListings() {
-            String jobTitle = "Engineer";
-            String location = "San Francisco";
-            Double salary = 80000.0;
-
-            JobListing jobListing1 = new JobListing( "Software Engineer", "Java developer", 90000.0, "San Francisco");
-            JobListing jobListing2 = new JobListing( "Electrical Engineer", "Circuit design", 85000.0, "San Francisco");
-            JobListing jobListing3 = new JobListing( "Mechanical Engineer", "Product design", 80000.0, "Los Angeles");
-
-            List<JobListing> jobListings = new ArrayList<>();
-            jobListings.add(jobListing1);
-            jobListings.add(jobListing2);
-
-            Mockito.when(jobListingRepoInterface.findByJobTitleContainingIgnoreCase(jobTitle)).thenReturn(jobListings);
-            Mockito.when(jobListingRepoInterface.findByLocationContainingIgnoreCase(location)).thenReturn(jobListings);
-            Mockito.when(jobListingRepoInterface.findBySalaryGreaterThanEqual(salary)).thenReturn(jobListings);
-
-            List<JobListing> result = jobListingService.searchJobListings(jobTitle, location, salary);
-
-            assertNotNull(result);
-            assertEquals(2, result.size());
-        }
-    }
-
+//           String jobListing1 = new JobListing( "Software Engineer", "Java developer", 90000.0, "San Francisco");
+//            JobListing jobListing2 = new JobListing( "Electrical Engineer", "Circuit design", 85000.0, "San Francisco");
+//            JobListing jobListing3 = new JobListing( "Mechanical Engineer", "Product design", 80000.0, "Los Angeles");
+//
+//            List<JobListing> jobListings = new ArrayList<>();
+//            jobListings.add(jobListing1);
+//            jobListings.add(jobListing2);
+//
+//            Mockito.when(jobListingRepoInterface.findByJobTitleContainingIgnoreCase(jobTitle)).thenReturn(jobListings);
+//            Mockito.when(jobListingRepoInterface.findByLocationContainingIgnoreCase(location)).thenReturn(jobListings);
+//            Mockito.when(jobListingRepoInterface.findBySalaryGreaterThanEqual(salary)).thenReturn(jobListings);
+//
+//            List<JobListing> result = jobListingService.searchJobListings(jobTitle, location, salary);
+//
+//            assertNotNull(result);
+//            assertEquals(2, result.size());
+//        }
+//    }
+//

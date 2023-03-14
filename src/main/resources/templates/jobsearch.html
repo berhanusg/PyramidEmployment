@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1>Search Job Listings</h1>
-<form method="get" th:action="@{/user/jobsearch}">
+<form method="get" th:action="@{/user/jobsearch}" th:object="${joblistingDTO}">
+<!--<form method="get" th:action="@{/user/jobsearch}">-->
     <div class="form-group">
         <label for="jobTitle">Job Title</label>
         <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="Enter job title">
@@ -26,3 +27,4 @@
 </body>
 
 </html>
+

@@ -51,50 +51,27 @@ public class JobListingServiceImpl implements JobListingService{
         return jobListingRepoInterface.save(jobListing);
     }
 
-//    public List<JobListing> searchJobListings(String searchCriteria, String searchValue, Double salary) {
-//        List<JobListing> jobListings= new ArrayList<>();
-//
-//        switch (searchCriteria) {
-//            case "jobTitle":
-//                 jobListings=jobListingRepoInterface.findByJobTitleContainingIgnoreCase((String) searchValue);
-//                //jobListings.add(jobListingRepoInterface.findByJobTitleContainingIgnoreCase((String) searchValue));
-//                break;
-//            case "salary":
-//                jobListings = jobListingRepoInterface.findBySalaryGreaterThanEqual(Double.parseDouble(searchValue));
-//                break;
-//            case "location":
-//                jobListings = jobListingRepoInterface.findByLocationContainingIgnoreCase((String) searchValue);
-//                break;
-//            default:
-//                // handle unknown search criteria
-//                break;
-//        }
-//
-//        return jobListings;
-//    }
-public List<JobListing> searchJobListings(String jobTitle, String location, Double salary) {
-    List<JobListing> jobListings = new ArrayList<>();
 
-    // Build the query based on the selected search criteria
-    if (jobTitle != null && !jobTitle.isEmpty()) {
-        jobListings = jobListingRepoInterface.findByJobTitleContainingIgnoreCase(jobTitle);
-    }
-    if (location != null && !location.isEmpty()) {
-        if (jobListings.isEmpty()) {
-            jobListings = jobListingRepoInterface.findByLocationContainingIgnoreCase(location);
-        } else {
-            jobListings.retainAll(jobListingRepoInterface.findByLocationContainingIgnoreCase(location));
+
+
+    @Override
+    public List<JobListing> searchJobListings(String jobTitle, String location, Double salary) {
+        List<JobListing> jobListings = new ArrayList<>();
+
+        // Build the query based on the selected search criteria
+        if (jobTitle != null && !jobTitle.isEmpty()) {
+            jobListings.addAll(jobListingRepoInterface.findByJobTitleContainingIgnoreCase(jobTitle));
         }
-    }
-    if (salary != null) {
-        if (jobListings.isEmpty()) {
-            jobListings = jobListingRepoInterface.findBySalaryGreaterThanEqual(salary);
-        } else {
-            jobListings.retainAll(jobListingRepoInterface.findBySalaryGreaterThanEqual(salary));
+        if (location != null && !location.isEmpty()) {
+            jobListings.addAll(jobListingRepoInterface.findByLocationContainingIgnoreCase(location));
         }
+        if (salary != null) {
+            jobListings.addAll(jobListingRepoInterface.findBySalaryGreaterThanEqual(salary));
+        }
+
+        return jobListings;
     }
 
-    return jobListings;
 }
 
-}
+
