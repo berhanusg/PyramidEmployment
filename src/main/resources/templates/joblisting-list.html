@@ -40,9 +40,11 @@
             <th>ID</th>
             <th>Job Title</th>
             <th>Job Description</th>
-            <th>Job Category</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th> Salary </th>
+<!--            <th>Job Category</th>-->
+
+<!--            <th>Edit</th>-->
+<!--            <th>Delete</th>-->
         </tr>
         </thead>
         <tbody>
@@ -51,13 +53,21 @@
             <td th:text="${jobListing.jobTitle}"></td>
             <td th:text="${jobListing.jobDescription}"></td>
             <td th:text="${jobListing.salary}"></td>
-            <td><a th:href="@{/edit-joblisting/{id}(id=${jobListing.id})}">Edit</a></td>
-            <td><a th:href="@{/delete-joblisting/{id}(id=${jobListing.id})}" th:method="post">Delete</a></td>
+<!--            <td><a th:href="@{/edit-joblisting/{id}(id=${jobListing.id})}">Edit</a></td>-->
+<!--            <td><a th:href="@{/delete-joblisting/{id}(id=${jobListing.id})}" th:method="post">Delete</a></td>-->
         </tr>
         </tbody>
     </table>
     <a class="btn btn-success" th:href="@{/joblisting-register}">Add New Job Listing</a>
 </div>
-
+<footer class="footer-copyright text-center bg-dark py-3"
+        style="position:fixed; width:100%; bottom:0; color:white">
+    <div>
+        <strong>
+            Copyright &copy; 2023 <a href="https://www.candacetrading.com">Candace  </a>
+            All rights reserved.
+        </strong>
+    </div>
+</footer>
 </body>
 </html>

@@ -5,8 +5,10 @@ import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.JobListing;
 import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.models.User;
-import com.pyramidbuildersemployment.service.*;
-import lombok.Lombok;
+import com.pyramidbuildersemployment.service.CandidateService;
+import com.pyramidbuildersemployment.service.JobListingService;
+import com.pyramidbuildersemployment.service.ProffesionService;
+import com.pyramidbuildersemployment.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Controller
 @CrossOrigin
@@ -96,7 +97,7 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setGender(candidateDTO.getGender());
         candidate.setTelephone(candidateDTO.getTelephone());
         candidate.setEmail(candidateDTO.getEmail());
-        candidate.setEducation_level(candidateDTO.getEducationLevel());
+        candidate.setEducationLevel(candidateDTO.getEducationLevel());
         candidate.setNumberOfMonths(candidateDTO.getNumberOfMonths());
         candidate.setNumberOfYears(candidateDTO.getNumberOfYears());
         candidate.setExperiencedescription(candidateDTO.getExperiencedescription());

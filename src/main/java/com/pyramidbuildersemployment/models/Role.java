@@ -1,11 +1,10 @@
 package com.pyramidbuildersemployment.models;
 
-import org.hibernate.annotations.NaturalId;
-
-import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,8 +18,8 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private RoleName name;
-
+    private RoleName name1;
+    private String name;
     // Getters and setters
 
     public enum RoleName {

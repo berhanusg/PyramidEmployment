@@ -46,6 +46,12 @@ public class HiringCompany {
     private String state;
     private String zip;
     private String country;
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     @ManyToOne
     @JoinColumn(name = "job_listing_id")
     private JobListing jobListingId;

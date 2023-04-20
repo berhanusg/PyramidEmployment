@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminCandidateController {
+public class CandidateAdminController {
 
     @Autowired
     private CandidateService candidateService;
@@ -75,7 +75,7 @@ public class AdminCandidateController {
         candidate.setGender(candidateDTO.getGender());
         candidate.setTelephone(candidateDTO.getTelephone());
         candidate.setEmail(candidateDTO.getEmail());
-        candidate.setEducation_level(candidateDTO.getEducationLevel());
+        //candidate.setEducation_level(candidateDTO.getEducationLevel());
 
 
 

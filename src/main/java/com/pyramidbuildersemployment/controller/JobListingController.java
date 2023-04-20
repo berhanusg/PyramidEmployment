@@ -70,6 +70,7 @@ This code creates a GET endpoint at the URL path "/joblisting-list"
  the list to the model with the attribute name "joblisting",
 and returns the Thymeleaf view name "joblistinglist". The view is expected to
  render the list of joblisting
+ joblisting-list
  */
     @GetMapping("/user/joblisting-list")
     public String listJobs(Model model)

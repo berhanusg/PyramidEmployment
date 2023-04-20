@@ -52,7 +52,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="company : ${hiringcompany}">
+<!--        hiringCompanyDTO        hiringcompany-->
+        <tr th:each="company : ${hiringCompanyDTO }">
             <!--            <td th:text="${company.id}"></td>-->
             <td th:text="${company.hiringCompanyName}"></td>
             <td th:text="${company.contactpersonfname}"></td>
@@ -78,5 +79,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

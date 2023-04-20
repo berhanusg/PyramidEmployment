@@ -3,13 +3,14 @@ package com.pyramidbuildersemployment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminLoginController {
 
     @Autowired
     private CandidateController candidateController;
@@ -55,7 +56,7 @@ public class AdminController {
             case "candidate-register":
                 return "redirect:/admin/candidate-register";
             case "hiring-company":
-                return "redirect:/admin/hiring-company-list";
+                return "redirect:/admin/hiringcompany-register";
             case "hiring-job-listing":
                 return "redirect:/admin/hiring-job-listing-list";
             case "job-listing":
@@ -64,7 +65,7 @@ public class AdminController {
 
                 return "redirect:/admin/profession-list";
             case "role":
-                return "redirect:/admin/role-list";
+                return "redirect:/admin/role-create";
             case "user":
                 return "redirect:/admin/user-list";
             default:

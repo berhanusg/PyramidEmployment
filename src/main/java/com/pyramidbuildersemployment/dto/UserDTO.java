@@ -26,6 +26,20 @@ public class UserDTO {
     private Long id;
     private String username;
     //private String password;
-    private RoleDTO rolename;
-   // private String email;
+    private String rolename;
+
+    public UserDTO(Long id, String email) {
+    }
+
+
+        public UserDTO(Long id, String username, String firstName, String lastName, String email, String role) {
+            this.id = id;
+            this.username = username;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.rolename = role;
+        }
+
+    // private String email;
 }

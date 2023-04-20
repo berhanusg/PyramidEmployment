@@ -1,10 +1,7 @@
 package com.pyramidbuildersemployment.controller;
 
-import com.pyramidbuildersemployment.dto.ProffesionDTO;
 import com.pyramidbuildersemployment.dto.RoleDTO;
-import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.models.Role;
-import com.pyramidbuildersemployment.repository.RoleRepoInterface;
 import com.pyramidbuildersemployment.service.RoleService;
 import com.pyramidbuildersemployment.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -54,7 +50,7 @@ public class RoleController {
     }
     Role role = new Role();
     role.setId(roleDTO.getId());
-    role.setName(Role.RoleName.valueOf(roleDTO.getRoleName()));
+    role.setName(roleDTO.getName());
     System.out.println(roleDTO.getRoleName());
     model.addAttribute("roleDTO", roleDTO);
     roleService.createRole(role); // save role in the database

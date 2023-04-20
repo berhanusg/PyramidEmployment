@@ -5,13 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "tblcandidate")
+@Table(name = "candidates")
 public class Candidate {
 
     @Id
@@ -36,35 +34,31 @@ public class Candidate {
     private String state;
     private String zip;
     private String country;
+    private String educationLevel;
+    // Add latitude and longitude fields
+    @Column(name = "latitude")
+    private Double latitude;
 
-    public String getEducation_level() {
-        return education_level;
+    @Column(name = "longitude")
+    private Double longitude;
+
+    // Add getters and setters for the new fields
+
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setEducation_level(String education_level) {
-        this.education_level = education_level;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    private String education_level;
-
-    @ManyToOne
-    @JoinColumn(name = "profession_id")
-    private Profession professionId;
-
-    public Profession getProfessionId() {
-        return professionId;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setProfessionId(Profession professionId) {
-        this.professionId = professionId;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-
-    public long getCandidateById() {
-        return id;
-    }
-
-
-    }
-
-
+    // ... (existing getters and setters)
+}

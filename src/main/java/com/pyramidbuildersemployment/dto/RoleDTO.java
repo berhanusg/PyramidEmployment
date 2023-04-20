@@ -9,10 +9,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class RoleDTO {
+    private Long id;
+    private String name;
 
-        private Long id;
-        private String roleName;
+    public RoleDTO(Long id, String roleName) {
+        this.id = id;
+        this.name = roleName;
+    }
 
+    public String getRoleName() {
+        return name;
     }
 
 
+}

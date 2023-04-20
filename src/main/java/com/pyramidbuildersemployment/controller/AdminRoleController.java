@@ -50,7 +50,7 @@ public class AdminRoleController {
         }
         Role role = new Role();
         role.setId(roleDTO.getId());
-        role.setName(Role.RoleName.valueOf(roleDTO.getRoleName()));
+        role.setName(roleDTO.getName());
         System.out.println(roleDTO.getRoleName());
         model.addAttribute("roleDTO", roleDTO);
         roleService.createRole(role); // save role in the database

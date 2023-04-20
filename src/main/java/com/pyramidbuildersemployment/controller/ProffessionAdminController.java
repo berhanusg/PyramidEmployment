@@ -16,12 +16,12 @@ import java.util.List;
 @Controller
 @CrossOrigin
 @RequestMapping("/admin")
-public class AdminProffessionController {
+public class ProffessionAdminController {
     @Autowired
 
     private ProffesionService professionService;
 
-    public AdminProffessionController(ProffesionService professionService) {
+    public ProffessionAdminController(ProffesionService professionService) {
         this.professionService = professionService;
     }
 

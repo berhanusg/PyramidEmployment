@@ -1,6 +1,5 @@
 package com.pyramidbuildersemployment.service;
 
-import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.models.Role;
 import com.pyramidbuildersemployment.repository.RoleRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +52,10 @@ public class RoleServiceImpl implements RoleService {
         roleRepoInterface.deleteById(id);
     }
 
-    @Override
-    public void saveRole(String roleName) {
+   // @Override
+   // public void saveRole(String roleName) {
 
-    }
+
 
 //    @Override
 //    public void saveRole(String roleName){
@@ -73,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
 //        roleRepoInterface.save(role);
 //    }
 
-    public void saveRole(Role.RoleName roleName) {
+    public void saveRole(String roleName) {
         Role role = new Role();
         role.setName(roleName);
         roleRepoInterface.save(role);

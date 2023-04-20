@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>User Candidate Home Page</title>
+    <title>User Candidate Home Page</title>
 
-<style>
+    <style>
   .dashboard {
   display: flex;
   flex-wrap: wrap;
@@ -33,26 +33,26 @@
   background-color: #6d7993;
   }
 </style>
-  </head>
+</head>
 <body>
-  <!--  <link rel="stylesheet" type="text/css" th:href="/style/stylebuttons.css">-->
-  <a th:href="@{/logout}">Sign Out</a>
-<h1>Welcome, to the  Candidate Portal !</h1>
+<!--  <link rel="stylesheet" type="text/css" th:href="/style/stylebuttons.css">-->
+<a th:href="@{/logout}">Sign Out</a>
+<h1>Welcome, to the  Hiring Company Portal !</h1>
 <div class="dashboard">
-  <a th:href="@{/user/candidate-register}" class="button"> Register</a>
-  <br>
-  <a th:href="@{/user/joblisting-list}" class="button">List of Jobs</a>
-  <br>
-  <a th:href="@{/user/jobsearch}" class="button">Search for Jobs</a>
+    <a th:href="@{ }" class="button"> Register</a>
+    <br>
+    <a th:href="@{ }" class="button">List of Candidates</a>
+    <br>
+    <a th:href="@{ }" class="button">Search for candidates </a>
 </div>
 <footer class="footer-copyright text-center bg-dark py-3"
         style="position:fixed; width:100%; bottom:0; color:white">
-  <div>
-    <strong>
-      Copyright &copy; 2023 <a href="https://www.candacetrading.com">Candace  </a>
-      All rights reserved.
-    </strong>
-  </div>
+    <div>
+        <strong>
+            Copyright &copy; 2023 <a href="https://www.candacetrading.com">Candace  </a>
+            All rights reserved.
+        </strong>
+    </div>
 </footer>
 </body>
 </html>

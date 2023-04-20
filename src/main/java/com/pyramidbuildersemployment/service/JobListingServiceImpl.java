@@ -14,9 +14,11 @@ import java.util.List;
 @Transactional
 public class JobListingServiceImpl implements JobListingService{
 
-
     @Autowired
-    public JobListingRepoInterface jobListingRepoInterface;
+    private JobListingRepoInterface jobListingRepoInterface;
+
+//    @Autowired
+//    public JobListingRepoInterface jobListingRepoInterface;
 
     public JobListingServiceImpl(JobListingRepoInterface jobListingRepoInterface) {
         this.jobListingRepoInterface = jobListingRepoInterface;
@@ -50,7 +52,6 @@ public class JobListingServiceImpl implements JobListingService{
 
         return jobListingRepoInterface.save(jobListing);
     }
-
 
 
 

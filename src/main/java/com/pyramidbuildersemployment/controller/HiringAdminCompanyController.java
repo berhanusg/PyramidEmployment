@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @CrossOrigin
 @RequestMapping("/admin")
-public class AdminHiringCompanyController {
+public class HiringAdminCompanyController {
 
 
 
@@ -25,7 +25,7 @@ public class AdminHiringCompanyController {
     private HiringCompanyService hiringCompanyService;
     @Autowired
     private JobListingService jobListingService;
-    public AdminHiringCompanyController(HiringCompanyService hiringCompanyService) {
+    public HiringAdminCompanyController(HiringCompanyService hiringCompanyService) {
         this.hiringCompanyService = hiringCompanyService;
     }
       /*
@@ -50,7 +50,7 @@ public class AdminHiringCompanyController {
 
     //@PostMapping(value = "/hiringcompany-register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 
-    @PostMapping("/hiringcompany-register")
+    @PostMapping("/admin/hiringcompany-register")
     public String registerHiringCompany(@ModelAttribute("hiringCompanyDTO") @Valid HiringCompanyDTO hiringCompanyDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "hiringcompany-register";

@@ -1,52 +1,73 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>Admin Dashboard</title>
     <style>
-        .dashboard {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            align-items: center;
-            margin-top: 3rem;
-        }
+    /* Sidebar styling */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      background-color: #000;
+      color: #fff;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .dashboard .button {
-            display: block;
-            width: 400px;
-            height: 80px;
-            background-color: #2e384d;
-            color: #fff;
-            text-align: center;
-            line-height: 80px;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease-in-out;
-        }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
 
-        .dashboard .button:hover {
-            transform: scale(1.05);
-            background-color: #6d7993;
-        }
-    </style>
+    /* Button styling */
+    .button {
+      display: block;
+      width: 100%;
+      height: 80px;
+      background-color: #2e384d;
+      color: #fff;
+      text-align: center;
+      line-height: 80px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      margin-bottom: 1rem;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      background-color: #6d7993;
+    }
+
+    /* Main content styling */
+    .main {
+      margin-left: 200px;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #000;
+    }
+
+  </style>
 </head>
-
 <body>
-<h1>Welcome, Admin!</h1>
-<a th:href="@{/logout}">Sign Out</a>
-<div class="dashboard">
-    <a th:href="@{/admin/hiringcompany-list}" class="button">Manage Hiring Companies</a>
-    <a th:href="@{/admin/candidate-list}" class="button">Manage Candidates</a>
-    <a th:href="@{/admin/profession}" class="button">Manage Professions</a>
-    <a th:href="@{/admin/user-register}" class="button">Manage Users</a>
-    <a th:href="@{/admin/role}" class="button">Manage Roles</a>
+<div class="sidebar">
+    <a href="#"class="button">Admin-Manage </a>
+    <a th:href="@{/admin/hiringcompany-list}" class="button" onclick="showForm()">Hiring Companies</a>
 
-
+    <a th:href="@{/admin/candidate-list}"class="button"onclick="showForm()">Candidates</a>
+    <a th:href="@{/admin/profession}"class="button"onclick="showForm()">Professions</a>
+    <a th:href="@{/admin/user-list}"class="button"onclick="showForm()">Users</a>
+    <a th:href="@{/admin/role}"class="button"onclick="showForm()">Roles</a>
 </div>
-
 </body>
 </html>
