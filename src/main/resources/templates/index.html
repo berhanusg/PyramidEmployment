@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>Bootstrap with Thymeleaf</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-DmS9S1dN15S1356nzyb5zKQw2Qd4WJGUr5OHK8uIcPNI9gS9bG1gKkXuYjMVE1" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-<h1>Bootstrap with Thymeleaf</h1>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Job Site Application</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Wellness and Beauty</h4>
+            <!-- Card for Hair Dressing -->
+            <div class="card mb-3">
+                <a href="#">
+                    <img th:src="@{/static/images/hairdresser.png}" class="card-img-top" alt="Hair Dressing" style="width: 100%; height: auto;">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Hair Dressing</h5>
+                </div>
+            </div>
+            <!-- Card for Barber -->
+            <div class="card mb-3">
+                <a href="#">
+                    <img th:src="@{/static/images/barber.png}" class="card-img-top" alt="Barber" style="width: 100%; height: auto;">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Barber</h5>
+                </div>
+            </div>
+            <!-- Card for Wax -->
+            <div class="card mb-3">
+                <a href="#">
+                    <img th:src="@{/static/images/wax.png}" class="card-img-top" alt="Wax" style="width: 100%; height: auto;">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Wax</h5>
+                </div>
+            </div>
+            <!-- Add more cards for other professions in this category -->
+        </div>
+    </div>
+</div>
 
-<!-- Your HTML markup with Bootstrap classes -->
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-        integrity="sha384-3pztq3/6l5wC70Gc5jKp5y3iFflnBxX9P9WQLJjZvBnHMs4a4Q4dWzgMvTFjKRD/"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
 </body>
 </html>

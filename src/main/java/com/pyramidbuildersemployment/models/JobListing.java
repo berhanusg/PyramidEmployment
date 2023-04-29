@@ -4,7 +4,7 @@ This feature allows recruiters to post job vacancies on the site,
 including job descriptions, requirements, and contact information.
 
  */
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,22 +43,18 @@ With this setup, we can add professions to a job
 //    @ManyToOne
 //    @JoinColumn(name = "experience_id")
 //    private Experience experienceid;
-public JobListing( String jobTitle, String jobDescription, Double salary, String location){
+@OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
+private List<Profession> professions;
 
+    @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
+    private List<HiringCompany> hiringcompanyid;
 
+    public JobListing(String jobTitle, String jobDescription, Double salary, String location) {
         this.jobTitle = jobTitle;
         this.jobDescription = jobDescription;
         this.salary = salary;
         this.location = location;
     }
-
-
-    @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
-    private List<Profession> professions;
-
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-     private List<HiringCompany>  hiringcompanyid;
 }
-
     // constructor, getters and setters
 

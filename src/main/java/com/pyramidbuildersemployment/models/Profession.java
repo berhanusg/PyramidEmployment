@@ -1,6 +1,5 @@
 package com.pyramidbuildersemployment.models;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,9 +33,14 @@ public class Profession {
      @ManyToOne annotation to specify the relationship:
      */
     @ManyToOne
-   @JoinColumn(name = "joblisting_id")
-  private JobListing jobListing;
+    @JoinColumn(name = "joblisting_id")
+    private JobListing jobListing;
 
+
+
+
+    @OneToMany(mappedBy = "profession", cascade = CascadeType.ALL)
+    private List<Candidate> candidates;
 
 }
 

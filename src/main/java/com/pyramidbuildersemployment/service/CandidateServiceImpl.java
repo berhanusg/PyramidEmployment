@@ -4,12 +4,16 @@ import com.google.maps.DistanceMatrixApi;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.LatLng;
 import com.pyramidbuildersemployment.models.Candidate;
+import com.pyramidbuildersemployment.models.JobListing;
+import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.repository.CandidateRepoInterface;
 import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
 import com.pyramidbuildersemployment.repository.ProffessionRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -93,6 +97,38 @@ public class CandidateServiceImpl implements CandidateService{
     }
 
 
+    public List<Candidate> getCandidatesWithJobQualification(Long jobListingId) {
+
+
+        // Retrieve the JobListing entity using the jobListingId
+        Optional<JobListing> jobListingOptional = jobListingRepoInterface.findById(jobListingId);
+
+        List<Profession> professions;
+        if (jobListingOptional.isPresent()) {
+            JobListing jobListing = jobListingOptional.get();
+
+            // Your logic for getting candidates with job qualification goes here
+            professions = jobListing.getProfessions();
+
+        } else {
+            // Handle the case when the job listing is not found
+            return new ArrayList<>();
+        }
+
+
+        // Get the professions associated with the job listing
+        //   List<Profession> professions = jobListing.getProfessions();
+
+        // Create a list to store the candidates with the specific job qualification
+        List<Candidate> candidates = new ArrayList<>();
+
+        // Iterate over the professions and add their candidates to the list
+        for (Profession profession : professions) {
+            candidates.addAll(profession.getCandidates());
+        }
+
+        return candidates;
+    }
 
 
 }

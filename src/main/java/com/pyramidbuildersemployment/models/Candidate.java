@@ -44,6 +44,11 @@ public class Candidate {
 
     // Add getters and setters for the new fields
 
+
+    @ManyToOne
+    @JoinColumn(name = "profession_id")
+    private Profession profession;
+
     public Double getLatitude() {
         return latitude;
     }

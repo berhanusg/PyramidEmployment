@@ -4,7 +4,9 @@ import com.pyramidbuildersemployment.dto.JobListingDTO;
 
 import com.pyramidbuildersemployment.models.JobListing;
 
+import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.service.JobListingService;
+import com.pyramidbuildersemployment.service.ProffesionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class JobListingController {
     @Autowired
     private JobListingService jobListingService;
 
+    @Autowired
+    private ProffesionService professionService;
     public JobListingController(JobListingService jobListingService) {
         this.jobListingService = jobListingService;
     }
@@ -103,6 +107,15 @@ and returns the Thymeleaf view name "joblistinglist". The view is expected to
         return "redirect:/joblisting-list";
     }
 
+    @GetMapping("/joblisting-candidates/{id}")
+    public String getJobListingCandidates(@PathVariable("id") Long jobListingId, Model model) {
+        // Retrieve job listing from the database using jobListingId
+        JobListing jobListing = jobListingService.getJobListingById(jobListingId);
+        // Retrieve the list of candidates with the specific job qualification
+       Profession profession = professionService.getProfessionById(jobListingId);
+        model.addAttribute("candidates" /* List of candidates with the specific job qualification */);
+        return "candidates_list";
+    }
 
 
 

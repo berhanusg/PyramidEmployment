@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Site Application</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Job Site Application</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Wellness and Beauty</h4>
+            <div class="card" style="width: 100%;">
+                <a href="#">
+                    <img src="/static/images/hairdresser.png" class="card-img-top" alt="Hair Dressing" style="max-width: 50%; height: auto;">
+
+<!--                    <img th src="@{static/images/hairdresser.png}" class="card-img-top" alt="Hair Dressing" style="max-width: 50%; height: auto;">-->
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Hair Dressing</h5>
+                </div>
+            </div>
+                <a href="#" class="list-group-item list-group-item-action">Barber</a>
+                <a href="#" class="list-group-item list-group-item-action">Wax</a>
+                <a href="#" class="list-group-item list-group-item-action">Manicure</a>
+                <a href="#" class="list-group-item list-group-item-action">Make Up</a>
+                <a href="#" class="list-group-item list-group-item-action">Pedicure</a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h4>Domestic Help</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Home Cook</a>
+                <a href="#" class="list-group-item list-group-item-action">Gardening</a>
+                <a href="#" class="list-group-item list-group-item-action">Nanny</a>
+                <a href="#" class="list-group-item list-group-item-action">Event Security</a>
+                <a href="#" class="list-group-item list-group-item-action">Waiting Server</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h4>Home Repair</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Dish Installation</a>
+                <a href="#" class="list-group-item list-group-item-action">Plumbing</a>
+                <a href="#" class="list-group-item list-group-item-action">Electrician</a>
+                <a href="#" class="list-group-item list-group-item-action">Paint</a>
+                <a href="#" class="list-group-item list-group-item-action">Carpentry</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h4>Education and Creativity</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Photography</a>
+                <a href="#" class="list-group-item list-group-item-action">Tutor</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

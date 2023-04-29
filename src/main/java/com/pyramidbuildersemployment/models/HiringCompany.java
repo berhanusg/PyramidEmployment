@@ -52,10 +52,13 @@ public class HiringCompany {
     @Column(name = "longitude")
     private Double longitude;
 
-    @ManyToOne
-    @JoinColumn(name = "job_listing_id")
-    private JobListing jobListingId;
+//    @ManyToOne
+//    @JoinColumn(name = "job_listing_id")
+//    private JobListing jobListingId;
 
+    @ManyToOne
+    @JoinColumn(name = "joblisting_id")
+    private JobListing jobListing;
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "address_id", referencedColumnName = "id")
