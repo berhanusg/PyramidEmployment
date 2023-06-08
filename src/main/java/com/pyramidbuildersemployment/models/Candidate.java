@@ -42,6 +42,19 @@ public class Candidate {
     @Column(name = "longitude")
     private Double longitude;
 
+//    @Column(name = "resume_link")
+    @Lob
+    private byte[] resume;// The @Lob annotation tells Hibernate that the field should be mapped to a BLOB column in the database.
+    @Column(name = "linkedin")
+    private String linkedin;
+
+    @Column(name = "facebook")
+    private String facebook;
+
+    @Column(name = "youtube")
+    private String youtube;
+
+
     // Add getters and setters for the new fields
 
 

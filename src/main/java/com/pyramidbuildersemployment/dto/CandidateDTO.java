@@ -3,8 +3,7 @@ package com.pyramidbuildersemployment.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
+import org.springframework.web.multipart.MultipartFile;
 
  /*
  This DTO includes all of the fields from the
@@ -34,8 +33,13 @@ public class CandidateDTO {
         private String state;
         private String zip;
         private String country;
+        //private String resumeLink; // Path or link to the resume file
+        private MultipartFile resumeFile;
+        private String linkedin;
+        private String facebook;
+        private String youtube;
 
-        // getters and setters
+
     }
 
 

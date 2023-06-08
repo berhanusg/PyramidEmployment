@@ -112,9 +112,38 @@
                     <label for="country">Country</label>
                     <input type="text" class="form-control" th:field="*{country}" id="country" required/>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save Candidate</button>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <button type="submit" class="btn btn-primary">Save Candidate</button>-->
+<!--                </div>-->
+<!--                    &lt;!&ndash; ... rest of your form above ... &ndash;&gt;-->
+
+                    <div class="form-group">
+                        <label for="resumeFile">Upload Resume (Optional)</label>
+                        <input type="file" class="form-control-file" th:field="*{resumeFile}" id="resumeFile" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn Profile (Optional)</label>
+                        <input type="text" class="form-control" th:field="*{linkedin}" id="linkedin" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="facebook">Facebook Profile (Optional)</label>
+                        <input type="text" class="form-control" th:field="*{facebook}" id="facebook" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="youtube">YouTube Channel (Optional)</label>
+                        <input type="text" class="form-control" th:field="*{youtube}" id="youtube" />
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save Candidate</button>
+                    </div>
+
+                    <!-- ... rest of your form below ... -->
+
                 </div>
             </form>
 

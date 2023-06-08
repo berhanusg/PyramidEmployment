@@ -5,6 +5,7 @@ import com.pyramidbuildersemployment.models.Candidate;
 import com.pyramidbuildersemployment.models.JobListing;
 import com.pyramidbuildersemployment.models.Profession;
 import com.pyramidbuildersemployment.models.User;
+import com.pyramidbuildersemployment.repository.CandidateRepoInterface;
 import com.pyramidbuildersemployment.service.CandidateService;
 import com.pyramidbuildersemployment.service.JobListingService;
 import com.pyramidbuildersemployment.service.ProffesionService;
@@ -17,15 +18,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
 @Controller
 @CrossOrigin
 public class CandidateController {
-
 
 
     @Autowired
@@ -42,9 +46,7 @@ public class CandidateController {
     }
 
 
-
-
-// This shows Empty form in the browser
+    // This shows Empty form in the browser
    /* @GetMapping("/user/candidate-register")
     public String showAdminCandidateRegistrationForm(Model model) {
         List<Profession> professions = proffesionService.getAllProffessions();
@@ -77,20 +79,29 @@ Finally, it saves the Candidate entity to the database and redirects the user to
 ///user/candidate-register-process
 
     // WAS  @PostMapping("/candidate-register-process")
+
     @PostMapping("/user/candidate-register")
-    public String registerCandidate(@ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO, BindingResult bindingResult, Model model, Principal principal ) throws ChangeSetPersister.NotFoundException {
+    public String registerCandidate(
+            @ModelAttribute("candidateDTO") @Valid CandidateDTO candidateDTO,
+            BindingResult bindingResult,
+            Model model,
+            Principal principal,
+            RedirectAttributes redirectAttributes) throws ChangeSetPersister.NotFoundException, IOException {
+
         if (bindingResult.hasErrors()) {
             return "candidate-register";
         }
 
-        // add null check for address
         if (candidateDTO.getFirstname() == null) {
-            // handle null name error
             return "candidate-register";
         }
-        // create new Candidate entity
-        Candidate candidate = new Candidate();
-      //  candidate.setId(candidateDTO.getId());
+
+        Candidate candidate = handleFileUpload(candidateDTO, redirectAttributes);
+
+        if (candidate == null) {
+            return "candidate-register";
+        }
+
         candidate.setFirstname(candidateDTO.getFirstname());
         candidate.setMiddlename(candidateDTO.getMiddlename());
         candidate.setLastname(candidateDTO.getLastname());
@@ -107,71 +118,90 @@ Finally, it saves the Candidate entity to the database and redirects the user to
         candidate.setState(candidateDTO.getState());
         candidate.setZip(candidateDTO.getZip());
         candidate.setCountry(candidateDTO.getCountry());
-//        model.addAttribute("candidateDTO", new CandidateDTO());
-//        model.addAttribute("candidates", candidateService.registerCandidate(candidate));
+        candidate.setLinkedin(candidateDTO.getLinkedin());
+        candidate.setFacebook(candidateDTO.getFacebook());
+        candidate.setYoutube(candidateDTO.getYoutube());
 
-        model.addAttribute("candidateDTO", candidateDTO);
-         User user = userServiceImpl.findByEmail(principal.getName());
+        User user = userServiceImpl.findByEmail(principal.getName());
         candidateService.registerCandidate(candidate);
 
-        //return "redirect:/candidate-list";
-        // for clients are allowed to see list of jobs NOT the candidate List so in this case we have to return
+        model.addAttribute("candidateDTO", candidateDTO);
+
         return "redirect:/user/user-joblisting-list";
     }
-    @Autowired
-   private JobListingService jobListingService;
-   @GetMapping("/user/user-joblisting-list")
-    public String listJobs(Model model)
-    {
-     List<JobListing> listOfJobs = jobListingService.getAlljoblistings();
 
-    model.addAttribute("joblistingList", listOfJobs);
-      return  "user-joblisting-list";
+    @Autowired
+    private JobListingService jobListingService;
+    @Autowired
+    private CandidateRepoInterface candidateRepoInterface;
+
+    @GetMapping("/user/user-joblisting-list")
+    public String listJobs(Model model) {
+        List<JobListing> listOfJobs = jobListingService.getAlljoblistings();
+
+        model.addAttribute("joblistingList", listOfJobs);
+        return "user-joblisting-list";
     }
 
 
     @GetMapping("/user/candidate-list")
     public String candidateList(Model model) {
         List<Candidate> candidatesList = candidateService.getAllCandidates();
-        model.addAttribute("candidates",candidatesList);
+        model.addAttribute("candidates", candidatesList);
         return "candidate-list";
     }
 
-//    @GetMapping("/admin/candidate-list")
-//    public String adminCandidateList(Model model) {
-//        List<Candidate> candidatesList = candidateService.getAllCandidates();
-//        model.addAttribute("candidates",candidatesList);
-//        return "candidate-list";
-//    }
-
-//    @GetMapping("/candidate-list")
-//    public String candidateList(Model model) {
-//        return "redirect:candidate-register";
-//    }
 
 
 
     @GetMapping("/candidates-all") // change this whatever you want the path to be
-        public List<Candidate> getAllCandidates() {
-            return candidateService.getAllCandidates();
-        }
+    public List<Candidate> getAllCandidates() {
+        return candidateService.getAllCandidates();
+    }
 
 
     @RequestMapping(value = "/candidate-delete/{id}", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 
-      //  @DeleteMapping(path = "candidate-delete/{id}")
-        public ResponseEntity<String> deleteCandidate(@PathVariable long id) {
+    //  @DeleteMapping(path = "candidate-delete/{id}")
+    public ResponseEntity<String> deleteCandidate(@PathVariable long id) {
 
-            // delete address from DB
-            candidateService.deleteCandidate(id);
-            System.out.println(id);
-            return new ResponseEntity<String>("Candidate deleted successfully!.", HttpStatus.OK);
-        }
-
-
+        // delete address from DB
+        candidateService.deleteCandidate(id);
+        System.out.println(id);
+        return new ResponseEntity<String>("Candidate deleted successfully!.", HttpStatus.OK);
+    }
 
 
+  //  @PostMapping("/user/candidate-register")
+  @Transactional
+  public Candidate handleFileUpload(@ModelAttribute CandidateDTO candidateDTO,
+                                    RedirectAttributes redirectAttributes) throws IOException {
+      MultipartFile resumeFile = candidateDTO.getResumeFile();
 
+      if (resumeFile.isEmpty()) {
+          redirectAttributes.addFlashAttribute("message", "Please select a file to upload.");
+          return null;
+      }
+
+      String originalFilename = resumeFile.getOriginalFilename().toLowerCase();
+      if (!originalFilename.endsWith(".pdf") && !originalFilename.endsWith(".doc") && !originalFilename.endsWith(".docx")) {
+          redirectAttributes.addFlashAttribute("message", "Invalid file type. Please upload a PDF or Word file.");
+          return null;
+      }
+
+      if (resumeFile.getSize() > 5000000) {
+          redirectAttributes.addFlashAttribute("message", "File is too large. Please upload a file of size less than 5 MB.");
+          return null;
+      }
+
+      byte[] bytes = resumeFile.getBytes();
+
+      Candidate candidate = new Candidate();
+      candidate.setResume(bytes);
+
+      return candidate;
+  }
 
 }
+
 

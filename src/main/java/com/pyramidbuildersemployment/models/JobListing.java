@@ -46,8 +46,9 @@ With this setup, we can add professions to a job
 @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
 private List<Profession> professions;
 
-    @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
-    private List<HiringCompany> hiringcompanyid;
+    @ManyToOne
+    @JoinColumn(name = "hiringcompany_id", nullable = false)
+    private HiringCompany hiringCompany;
 
     public JobListing(String jobTitle, String jobDescription, Double salary, String location) {
         this.jobTitle = jobTitle;

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -56,9 +57,9 @@ public class HiringCompany {
 //    @JoinColumn(name = "job_listing_id")
 //    private JobListing jobListingId;
 
-    @ManyToOne
-    @JoinColumn(name = "joblisting_id")
-    private JobListing jobListing;
+// a HiringCompany can be associated with multiple JobListing
+    @OneToMany(mappedBy = "hiringCompany", cascade = CascadeType.ALL)
+    private List<JobListing> jobListings;
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "address_id", referencedColumnName = "id")

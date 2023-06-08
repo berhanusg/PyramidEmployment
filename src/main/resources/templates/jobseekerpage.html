@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <title>Job Seeker Dashboard</title>
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1>Job Search</h1>
+      <form th:action="@{/user/job-search}" method="post">
+        <div class="form-group">
+          <label for="jobSearch">Job Title</label>
+          <input type="text" class="form-control" id="jobSearch" placeholder="Enter Job Title" />
+        </div>
+        <div class="form-group">
+          <label for="locationSearch">Location or Remote</label>
+          <input type="text" class="form-control" id="locationSearch" placeholder="Enter Location or Remote" />
+        </div>
+        <div class="form-group">
+          <label for="jobType">Job Type</label>
+          <select class="form-control" id="jobType">
+            <option value="">Select Job Type</option>
+            <option value="part-time">Part Time</option>
+            <option value="full-time">Full Time</option>
+            <option value="temporary">Temporary</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="salaryRange">Salary Range</label>
+          <input type="text" class="form-control" id="salaryRange" placeholder="Enter Salary Range" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search Jobs</button>
+      </form>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#suggestedJobs">Suggested Jobs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#appliedJobs">Applied Jobs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#savedJobs">Saved Jobs</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="suggestedJobs" class="tab-pane fade show active">
+      <!-- loop over suggested jobs and create a card for each -->
+      <div th:each="job : ${suggestedJobs}" class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${job.title}"></h5>
+          <p class="card-text" th:text="${job.description}"></p>
+          <a href="#" class="btn btn-primary">Apply Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="appliedJobs" class="tab-pane fade">
+      <!-- loop over applied jobs and create a card for each -->
+      <div th:each="job : ${appliedJobs}" class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${job.title}"></h5>
+          <p class="card-text" th:text="${job.description}"></p>
+          <a href="#" class="btn btn-primary">View Job</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="savedJobs" class="tab-pane fade">
+      <!-- loop over saved jobs and create a card for each -->
+      <div th:each="job : ${savedJobs}" class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${job.title}"></h5>
+          <p class="card-text" th:text="${job.description}"></p>
+          <a href="#" class="btn btn-primary">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
