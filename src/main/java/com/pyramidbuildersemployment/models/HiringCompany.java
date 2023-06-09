@@ -65,5 +65,10 @@ public class HiringCompany {
 //    @JoinColumn(name = "address_id", referencedColumnName = "id")
 //    private Address address;
 
+
+    public void addJobListing(JobListing jobListing) {
+        jobListings.add(jobListing);
+        jobListing.setHiringCompany(this);
+    }
 }
 

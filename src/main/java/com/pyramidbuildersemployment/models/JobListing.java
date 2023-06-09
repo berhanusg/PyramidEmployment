@@ -56,6 +56,23 @@ private List<Profession> professions;
         this.salary = salary;
         this.location = location;
     }
+
+    public void setHiringCompany(HiringCompany hiringCompany) {
+        this.hiringCompany = hiringCompany;
+        if (hiringCompany != null) {
+            hiringCompany.addJobListing(this);
+        }
+    }
+
 }
     // constructor, getters and setters
 
+/*
+when having an issue with managing bi-directional associations between HiringCompany and JobListing entities.
+
+When creating a JobListing, you must ensure that the JobListing is added to the HiringCompany's
+jobListings collection and that the JobListing's hiringCompany reference points back to the HiringCompany.
+ Both ends of the association must be coordinated correctly, otherwise, Hibernate
+might not be able to resolve the references and could default the hiringCompany id to 0 in the database.
+
+ */
