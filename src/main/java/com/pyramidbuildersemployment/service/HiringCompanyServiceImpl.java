@@ -3,23 +3,35 @@ package com.pyramidbuildersemployment.service;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.LatLng;
+import com.pyramidbuildersemployment.HiringCompanyNullException;
 import com.pyramidbuildersemployment.models.HiringCompany;
+import com.pyramidbuildersemployment.models.JobListing;
 import com.pyramidbuildersemployment.repository.HiringRepoInterface;
+import com.pyramidbuildersemployment.repository.JobListingRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class HiringCompanyServiceImpl implements HiringCompanyService{
-
+public class HiringCompanyServiceImpl implements HiringCompanyService {
+    private final String hiringCompanyId = null;
     @Autowired
     private GoogleMapsService googleMapsService;
 
     @Autowired
-    private  HiringRepoInterface hiringRepoInterface;;
+    private HiringRepoInterface hiringRepoInterface;
 
+
+//    @Autowired
+//   private JobListing jobListing; // assume a new JobListing is created, replace with actual code if different
+
+
+
+    @Autowired
+    private JobListingRepoInterface jobListingRepoInterface;
     public HiringCompanyServiceImpl(HiringRepoInterface hiringRepoInterface) {
         this.hiringRepoInterface = hiringRepoInterface;
     }
@@ -47,13 +59,14 @@ public class HiringCompanyServiceImpl implements HiringCompanyService{
         long distanceInMeters = distanceMatrix.rows[0].elements[0].distance.inMeters;
         return distanceInMeters <= radiusInMeters;
     }
+
     @Override
     public List<HiringCompany> getAllAllHiringCompanies() {
-         return (List<HiringCompany>) hiringRepoInterface.findAll();
+        return (List<HiringCompany>) hiringRepoInterface.findAll();
     }
 
     @Override
-    public HiringCompany getHiringCompanyById(long id) {
+    public HiringCompany getHiringCompanyById() {
         return null;
     }
 
@@ -77,8 +90,30 @@ public class HiringCompanyServiceImpl implements HiringCompanyService{
         return hiringRepoInterface.save(hiringCompany);
     }
 
+
+    public void CreateJobListing(Long hiringCompanyID ) throws HiringCompanyNullException  {
+       // Long hiringCompanyId1 = getHiringCompanyById().getId(); // replace this with the actual code for getting the id
+        JobListing jobListing = new JobListing();
+        Optional<HiringCompany> optionalHiringCompany = hiringRepoInterface.findById(hiringCompanyID);
+
+        if (optionalHiringCompany.isPresent()) {
+            HiringCompany hiringCompany = optionalHiringCompany.get();
+            jobListing.setHiringCompany(hiringCompany);
+        } else {
+            throw new HiringCompanyNullException("Hiring company with ID: " + hiringCompanyID + " is null.");
+        }
+
+        jobListingRepoInterface.save(jobListing);
+
+
     }
+}
 
 
 
+/*
 
+Click on the "File" menu.
+Click on "Invalidate Caches / Restart..."
+Click on "Invalidate and Restart"
+ */

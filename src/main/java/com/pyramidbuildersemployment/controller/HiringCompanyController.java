@@ -95,7 +95,7 @@ public class HiringCompanyController {
 //retrieve the hiring company by its ID and add it to the model for the view:
     @RequestMapping(value = "/edit-hiring-company/{id}", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showEditHiringCompanyForm(@PathVariable(name="id") Long id) {
-        HiringCompany hiringcompany = hiringCompanyService.getHiringCompanyById(id);
+        HiringCompany hiringcompany = hiringCompanyService.getHiringCompanyById();
 
         ModelAndView modelAndView = new ModelAndView("hiringcompany-edit");
         modelAndView.addObject("id", id);

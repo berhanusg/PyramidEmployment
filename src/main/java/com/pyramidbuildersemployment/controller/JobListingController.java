@@ -1,14 +1,15 @@
 package  com.pyramidbuildersemployment.controller;
 
+import com.pyramidbuildersemployment.HiringCompanyNullException;
 import com.pyramidbuildersemployment.dto.JobListingDTO;
-
 import com.pyramidbuildersemployment.models.JobListing;
-
 import com.pyramidbuildersemployment.models.Profession;
+import com.pyramidbuildersemployment.service.HiringCompanyServiceImpl;
 import com.pyramidbuildersemployment.service.JobListingService;
 import com.pyramidbuildersemployment.service.ProffesionService;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,8 @@ public class JobListingController {
     @Autowired
     private JobListingService jobListingService;
 
+    @Autowired
+    HiringCompanyServiceImpl hiringCompanyServiceImpl;
     @Autowired
     private ProffesionService professionService;
     public JobListingController(JobListingService jobListingService) {
@@ -42,8 +45,10 @@ public class JobListingController {
 // which is annotated with @Valid to enable data validation, and with @ModelAttribute to bind the data to the model.
     // It also receives a BindingResult object to store any validation errors that occur during the data binding process.
     /*
-    Finally, the method calls the jobListingService method of the HiringCompanyService to save the HiringCompany entity to the database.
-     It then adds the hiringCompanyDTO object to the model and redirects to the "joblisting-list" view to display a list of all registered hiring companies.
+    Finally, the method calls the jobListingService method of the HiringCompanyService
+    to save the HiringCompany entity to the database.
+     It then adds the hiringCompanyDTO object to the model and redirects
+     to the "joblisting-list" view to display a list of all registered hiring companies.
 
      */
     @PostMapping("/joblisting-registerprocess")
@@ -119,5 +124,17 @@ and returns the Thymeleaf view name "joblistinglist". The view is expected to
 
 
 
+        @PostMapping("/create")
+        public ResponseEntity<JobListing> createJobListing(@RequestParam Long hiringCompanyId) {
+            try {
+                hiringCompanyServiceImpl.CreateJobListing(hiringCompanyId);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            } catch (HiringCompanyNullException ex) {
+                // handle exception...
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+    }
 
-}
+
+
